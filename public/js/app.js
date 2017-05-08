@@ -8,8 +8,15 @@ angular.module('inwardApp', [
     'app.controller',
     'patient.controller',
     'patient.service',
+    'doctor.controller',
+    'doctor.service',
     'drug.controller',
-    'drug.service'
+    'drug.service',
+    'test.controller',
+    'test.service'
 ]).run(['$rootScope', function($rootScope) {
     $rootScope.loggedinUser = '';
+    $rootScope.goBack = function() {
+        window.history.back();
+    };
 }]);

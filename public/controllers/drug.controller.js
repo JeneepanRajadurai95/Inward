@@ -27,8 +27,8 @@ angular.module('drug.controller', []).controller('DrugController', [
             });
         };
 
-        $scope.addDrug = function(ccdrug) {
-            DrugService.addDrug(ccdrug).then((newDrug) => {
+        $scope.addDrug = function(cdrug) {
+            DrugService.addDrug(cdrug).then((newDrug) => {
                 $scope.rdrugs.push(newDrug);
                 $scope.cdrug = {};
             }, (err) => {

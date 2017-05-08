@@ -8,29 +8,27 @@ angular.module('patient.service', []).factory('PatientService', [
     function($http, $q) {
         return {
             getPatients: function() {
-                var deferred = $q.defer();
+                let deferred = $q.defer();
                 $http.get('/api/patient').then((results) => {
                     deferred.resolve(results.data);
                 }, (err) => {
                     deferred.reject(err);
                 });
-
                 return deferred.promise;
             },
 
             getPatient: function(bht) {
-                var deferred = $q.defer();
+                let deferred = $q.defer();
                 $http.get('/api/patient/' + bht).then((results) => {
                     deferred.resolve(results.data);
                 }, (err) => {
                     deferred.reject(err);
                 });
-
                 return deferred.promise;
             },
 
             addPatient: function(newPatient) {
-                var deferred = $q.defer();
+                let deferred = $q.defer();
                 $http({
                     method: 'POST',
                     url: '/api/patient',
@@ -41,9 +39,8 @@ angular.module('patient.service', []).factory('PatientService', [
                 }, (err) => {
                     deferred.reject(err);
                 });
-
                 return deferred.promise;
             }
         }
     }
-])
+]);

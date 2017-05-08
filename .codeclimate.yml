@@ -1,0 +1,28 @@
+engines:
+  eslint:
+    enabled: true
+  csslint:
+    enabled: true
+    checks:
+      qualified-headings:
+        enabled: false
+  fixme:
+    enabled: true
+  duplication:
+  	enabled: true
+    checks:
+      Similar code:
+        enabled: false
+    config:
+    	languages:
+      - javascript
+ratings:
+  paths:
+  - app/**
+  - public/**
+  - "**.js"
+  - "**.css"
+exclude_paths:
+- public/libs/
+- node_modules/
+- test/

@@ -27,8 +27,8 @@ angular.module('patient.controller', []).controller('PatientController', [
             });
         };
 
-        $scope.addPatient = function(ccpatient) {
-            PatientService.addPatient(ccpatient).then((newPatient) => {
+        $scope.addPatient = function(cpatient) {
+            PatientService.addPatient(cpatient).then((newPatient) => {
                 $scope.rpatients.push(newPatient);
                 $scope.cpatient = {};
             }, (err) => {

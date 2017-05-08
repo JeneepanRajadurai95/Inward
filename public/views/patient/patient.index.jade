@@ -2,17 +2,12 @@
     button.btn.btn-success(ng-click="partialForm='addPatientForm'") 
         | Add Patient
 
-.col-md-12.padding--top--10px
-    form(role="form", ng-submit="addPatient(cpatient)", ng-show="partialForm=='addPatientForm'")
-        .form-group
-            input.form-control(type="text", placeholder="Enter BHT #", ng-model="cpatient.bht")
-        .form-group
-            input.form-control(type="text", placeholder="Enter Name", ng-model="cpatient.name")
-        button.btn.btn-default(type="submit") Add
-        a.btn(ng-click="partialForm='null'") Cancel
+include patient.add.jade
 
-.col-md-12.padding--top--10px.padding--bottom--10px                
-    .table-responsive
+.col-md-12.padding--top--10px.padding--bottom--10px
+    .col-md-12.no-padding--left(ng-if="rpatients.length <= 0")
+        h4.montserrat No Patients Data Available                
+    .table-responsive(ng-if="rpatients.length>0")
         table.table
             thead.thead-default
                 tr
@@ -23,14 +18,14 @@
             tbody(ng-repeat="patient in rpatients")
                 tr
                     td {{$index + 1}}
-                    td {{patient.bht}}
-                    td {{patient.name}}
+                    td {{patient.Inward.bhtNumber}}
+                    td {{patient.Name.firstName}}
                     td.no_padding
-                        a.btn.btn-link(href="#", ng-click="getPatient(patient.bht)")
+                        a.btn.btn-link(href="#", ng-click="getPatient(patient.Inward.bhtNumber)")
                             i.fa.fa-plus
-                tr(ng-show="patient.bht===dpatient.bht")
+                tr(ng-show="patient.Inward.bhtNumber==dpatient.Inward.bhtNumber")
                     td(colspan="4") 
                         .col-md-12.padding--right--50px.text-align--right
-                            a.btn.btn-link(href="#", ng-click="dpatient.bht='null'")
+                            a.btn.btn-link(href="#", ng-click="dpatient.Inward.bhtNumber='null'")
                                 i.fa.fa-minus
-                        h1 Patient Details
+                        h4.montserrat {{dpatient.Name.firstName}} {{dpatient.Name.lastName}}

@@ -1,0 +1,51 @@
+.col-md-8
+    h2 Doctor Details
+    div.table-responsive
+        table.table.table-hover.table-striped
+            thead
+                tr
+                    td Name
+                    td Gender
+                    td Address
+                    td Phone
+                    td Department
+                    td Designation
+            tbody
+                tr(ng-repeat="doctor in rdoctors")
+                    td {{doctor.name}}
+                    td {{doctor.gender}}
+                    td {{doctor.address}}
+                    td {{doctor.phone}}
+                    td {{doctor.department}}
+                    td {{doctor.designation}}
+.col-md-4
+    br
+    h2 Add Doctors
+    form(role="form", ng-submit="addDoctor(cdoctor)")
+        .form-group
+            input.form-control(type="text", placeholder="Name", ng-model="cdoctor.name")
+        .form-group
+            span Male
+            &nbsp; &nbsp; &nbsp;
+            input(type="radio", value="Male", ng-model="cdoctor.gender")
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+            span Female
+            &nbsp; &nbsp; &nbsp;
+            input(type="radio", value="Female", ng-model="cdoctor.gender")
+        .from-group
+            input.form-control(type="text", placeholder="Address", ng-model="cdoctor.address")
+        &nbsp;
+        .form-group
+            input.form-control(type="number", placeholder="Phone", ng-model="cdoctor.phone")
+        .form-group
+            input.form-control(type="text", placeholder="Department", ng-model="cdoctor.department")
+        .form-group
+            input.form-control(type="text", placeholder="Designation", ng-model="cdoctor.designation")
+        button.btn.btn-default(type="submit") Add
+
+
+
+        
+
+

@@ -9,28 +9,28 @@ const Router = express.Router();
 const PatientModel = mongoose.model('Patient');
 
 Router.get('/', (req, res) => {
-    PatientModel.find().exec().then(patients => {
+    PatientModel.find().exec().then((patients) => {
         res.json(patients);
-    }).catch(err => {
+    }).catch((err) => {
         console.error(err);
         res.sendStatus(500);
     });
 });
 
 Router.get('/:bht', (req, res) => {
-    PatientModel.findOne({ 'bht': req.params.bht }).exec().then(patient => {
+    PatientModel.findOne({ 'Inward.bhtNumber': req.params.bht }).exec().then((patient) => {
         res.json(patient);
-    }).catch(err => {
+    }).catch((err) => {
         console.error(err);
         res.sendStatus(500);
     });
 });
 
 Router.post('/', (req, res) => {
-    var newPatient = new PatientModel(req.body);
-    newPatient.save().then(patient => {
+    let newPatient = new PatientModel(req.body);
+    newPatient.save().then((patient) => {
         res.json(patient);
-    }).catch(err => {
+    }).catch((err) => {
         console.error(err);
         res.sendStatus(500);
     });

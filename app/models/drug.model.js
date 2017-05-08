@@ -8,7 +8,7 @@ const drugSchema = mongoose.Schema({
     name: String,
     serial: String,
     mfd: String,
-    exp: String,
+    exp: String
 });
 
 module.exports = mongoose.model('Drug', drugSchema);

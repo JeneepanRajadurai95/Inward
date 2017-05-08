@@ -16,6 +16,10 @@ angular.module('appRoutes', []).config([
                 templateUrl: 'template/patient/patient.index',
                 controller: 'PatientController'
             })
+            .when('/doctor', {
+                templateUrl: 'template/doctor/doctor.index',
+                controller: 'DoctorController'
+            })
             .when('/drug', {
                 templateUrl: 'template/drug/drug.index',
                 controller: 'DrugController'
@@ -23,6 +27,18 @@ angular.module('appRoutes', []).config([
             .when('/summa', { // routing to another jade template for ng-view partial render
                 templateUrl: 'template/summa',
                 controller: 'AppController'
+            })
+            .when('/test', {
+                templateUrl: 'template/test/test.index',
+                controller: 'TestController'
+            })
+            .when('/report', {
+                templateUrl: 'template/test/report.index',
+                controller: 'TestController'
+            })
+            .when('/ward', {
+                templateUrl: 'template/ward/ward.index',
+                controller: 'WardController'
             })
             .otherwise({ // otherwise redirection
                 redirectTo: '/'

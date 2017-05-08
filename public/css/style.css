@@ -107,3 +107,35 @@ body {
 .padding--right--50px {
     padding-right: 50px !important;
 }
+
+.no-padding--left {
+    padding-left: 0px !important;
+}
+
+.montserrat {
+    font-family: 'Montserrat', sans-serif !important;
+}
+
+.border--none {
+    border: none !important;
+}
+
+.light {
+    font-weight: normal !important;
+}
+
+.size-12 {
+    font-size: 12px !important;
+}
+
+.width--100 {
+    width: 100% !important;
+}
+
+.background--red {
+    background-color: red !important;
+}
+
+.background--green {
+    background-color: green !important;
+}

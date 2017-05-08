@@ -1,0 +1,191 @@
+h1.text-center.text-primary Test Details
+br
+.col-md-2.padding--bottom--10px
+    button.btn.btn-primary(ng-click="partialForm='addBloodTestForm'") 
+        | Blood Test
+
+.col-md-2.padding--bottom--10px
+    button.btn.btn-primary(ng-click="partialForm='addUrineTestForm'") 
+        | Urine Test
+
+.col-md-2.padding--bottom--10px
+    button.btn.btn-primary(ng-click="partialForm='addStoolTestForm'") 
+        | Stool Test
+
+.col-md-2.padding--bottom--10px
+    button.btn.btn-primary(ng-click="partialForm='addSputumTestForm'") 
+        | Sputum Test
+
+.col-md-2.padding--bottom--10px
+    button.btn.btn-primary(ng-click="partialForm='addMRITestForm'") 
+        | MRI Test
+
+.col-md-2.padding--bottom--10px
+    button.btn.btn-primary(ng-click="partialForm='addCardiogramTestForm'") 
+        | Cardiogram Test
+
+.col-md-12.padding--top--10px
+    form(role="form", ng-submit="addTest(ctest)", ng-show="partialForm=='addBloodTestForm'")
+        h3.text-success.text-center Add Blood Test
+        .form-group.col-md-6.col-md-offset-3
+            input.form-control(type="text", placeholder="Patient Number", ng-model="ctest.patientNo")
+        .form-group.col-md-4
+            input.form-control(type="text", placeholder="Blood volume", ng-model="ctest.bloodTest.volume")
+        .form-group.col-md-4
+            input.form-control(type="text", placeholder="Collected Time", ng-model="ctest.bloodTest.collected")
+        .form-group.col-md-4
+            input.form-control(type="text", placeholder="Tested Time", ng-model="ctest.bloodTest.tested")
+        .form-group.col-md-4
+            input.form-control(type="text", placeholder="RBC", ng-model="ctest.bloodTest.redBloodCells")
+        .form-group.col-md-4
+            input.form-control(type="text", placeholder="WBC", ng-model="ctest.bloodTest.whiteBloodCells")
+        .form-group.col-md-4
+            input.form-control(type="text", placeholder="Platelets", ng-model="ctest.bloodTest.platelets")
+        .form-group.col-md-4
+            input.form-control(type="text", placeholder="Hemo Globin", ng-model="ctest.bloodTest.hemoglobin")
+        .form-group.col-md-4
+            input.form-control(type="text", placeholder="Hematocrit", ng-model="ctest.bloodTest.hematocrit")
+        .form-group.col-md-4
+            input.form-control(type="text", placeholder="Plasma Glugose Level", ng-model="ctest.bloodTest.plasmaGlugoseLevel")
+        .form-group.col-md-4
+            input.form-control(type="text", placeholder="Total Cholesterol Level", ng-model="ctest.bloodTest.totalCholesterolLevel")
+        .form-group.col-md-4
+            input.form-control(type="text", placeholder="IDL Cholesterol Level", ng-model="ctest.bloodTest.lDLCholesterolLevel")
+        .form-group.col-md-4
+            input.form-control(type="text", placeholder="PHDL Cholesterol Level", ng-model="ctest.bloodTest.hDLCholesterolLevel")                           
+        button.col-md-2.col-md-offset-3.btn.btn-info.btn-default(type="submit") Add
+        a.col-md-2.col-md-offset-2.btn-warning.btn(ng-click="partialForm='null'") Cancel
+
+.col-md-12
+    form(role="form", ng-submit="addTest(ctest)", ng-show="partialForm=='addUrineTestForm'")
+        h3.text-success.text-center Add Urine Test
+        .form-group.col-md-6.col-md-offset-3
+            input.form-control(type="text", placeholder="Patient Number", ng-model="ctest.patientNo")
+        .form-group.col-md-4
+            input.form-control(type="text", placeholder="Urine volume", ng-model="ctest.urineTest.volume")
+        .form-group.col-md-4
+            input.form-control(type="text", placeholder="Collected Time", ng-model="ctest.urineTest.collected")
+        .form-group.col-md-4
+            input.form-control(type="text", placeholder="Tested Time", ng-model="ctest.urineTest.tested")
+        .form-group.col-md-4
+            input.form-control(type="text", placeholder="Color", ng-model="ctest.urineTest.color")
+        .form-group.col-md-4
+            input.form-control(type="text", placeholder="Clarity", ng-model="ctest.urineTest.clarity")
+        .form-group.col-md-4
+            input.form-control(type="text", placeholder="pH", ng-model="ctest.urineTest.pH")
+        .form-group.col-md-4
+            input.form-control(type="text", placeholder="Specific Gravity", ng-model="ctest.urineTest.specificGravity")
+        .form-group.col-md-4
+            input.form-control(type="text", placeholder="Protein", ng-model="ctest.urineTest.protein")
+        .form-group.col-md-4
+            input.form-control(type="text", placeholder="Glucode", ng-model="ctest.urineTest.glucose")
+        .form-group.col-md-4
+            input.form-control(type="text", placeholder="Ketones", ng-model="ctest.urineTest.ketones")
+        .form-group.col-md-4
+            input.form-control(type="text", placeholder="RBC", ng-model="ctest.urineTest.redBloodCells")
+        .form-group.col-md-4
+            input.form-control(type="text", placeholder="WBC", ng-model="ctest.urineTest.whiteBloodCells")                           
+        button.col-md-2.col-md-offset-3.btn.btn-info.btn-default(type="submit") Add
+        a.col-md-2.col-md-offset-2.btn-warning.btn(ng-click="partialForm='null'") Cancel
+
+.col-md-12
+    form(role="form", ng-submit="addTest(ctest)", ng-show="partialForm=='addStoolTestForm'")
+        h3.text-success.text-center Add Stool Test
+        .form-group.col-md-6.col-md-offset-3
+            input.form-control(type="text", placeholder="Patient Number", ng-model="ctest.patientNo")
+        .form-group.col-md-4
+            input.form-control(type="text", placeholder="Stool volume", ng-model="ctest.stoolTest.volume")
+        .form-group.col-md-4
+            input.form-control(type="text", placeholder="Collected Time", ng-model="ctest.stoolTest.collected")
+        .form-group.col-md-4
+            input.form-control(type="text", placeholder="Tested Time", ng-model="ctest.stoolTest.tested")
+        .form-group.col-md-4.col-md-offset-2
+            input.form-control(type="text", placeholder="Penta Chloro Phenol", ng-model="ctest.pentachlorophenol")
+        .form-group.col-md-4
+            input.form-control(type="text", placeholder="Phthalates", ng-model="ctest.phthalates")
+        .form-group.col-md-4.col-md-offset-2
+            input.form-control(type="text", placeholder="RBC", ng-model="ctest.redBloodCells")
+        .form-group.col-md-4
+            input.form-control(type="text", placeholder="WBC", ng-model="ctest.whiteBloodcells")
+        h3.col-md-6.col-md-offset-5.text-info Additives
+        .form-group.col-md-4
+            input.form-control(type="text", placeholder="Sodium Meta Bi Sulphite", ng-model="ctest.stoolTest.additives.sodiumMetaBiSulphite")
+        .form-group.col-md-4
+            input.form-control(type="text", placeholder="Sodium Benzoate", ng-model="ctest.stoolTest.additives.sodiumBenzoate")
+        .form-group.col-md-4
+            input.form-control(type="text", placeholder="Mono Sodium Glutamate", ng-model="ctest.stoolTest.additives.monoSodiumGlutamate")
+        h3.col-md-6.col-md-offset-4.text-info Environmental Chemicals
+        .form-group.col-md-4
+            input.form-control(type="text", placeholder="Formal Dehyde", ng-model="ctest.stoolTest.environmentalChemicals.formaldehyde")
+        .form-group.col-md-4
+            input.form-control(type="text", placeholder="Diesel Exhaust Fumes", ng-model="ctest.stoolTest.environmentalChemicals.dieselExhaustfumes")
+        .form-group.col-md-4
+            input.form-control(type="text", placeholder="Natural gas", ng-model="ctest.environmentalChemicals.naturalGas")
+        button.col-md-2.col-md-offset-3.btn.btn-info.btn-default(type="submit") Add
+        a.col-md-2.col-md-offset-2.btn-warning.btn(ng-click="partialForm='null'") Cancel
+
+.col-md-12
+    form(role="form", ng-submit="addTest(ctest)", ng-show="partialForm=='addSputumTestForm'")
+        h3.text-success.text-center Add Sputum Test
+        .form-group.col-md-6.col-md-offset-3
+            input.form-control(type="text", placeholder="Patient Number", ng-model="ctest.patientNo")
+        .form-group.col-md-4
+            input.form-control(type="text", placeholder="Blood volume", ng-model="ctest.sputumTest.volume")
+        .form-group.col-md-4
+            input.form-control(type="text", placeholder="Collected Time", ng-model="ctest.sputumTest.collected")
+        .form-group.col-md-4
+            input.form-control(type="text", placeholder="Tested Time", ng-model="ctest.sputumTest.tested")
+        .form-group.col-md-4
+            input.form-control(type="text", placeholder="Race", ng-model="ctest.sputumTest.race")
+        .form-group.col-md-4
+            input.form-control(type="text", placeholder="Respiratory Symtoms", ng-model="ctest.sputumTest.respiratorySymtoms")
+        .form-group.col-md-4
+            input.form-control(type="text", placeholder="Tuber Culin Skin Test Induration", ng-model="ctest.sputumTest.tuberculinSkinTestInduration")
+        .form-group.col-md-4
+            input.form-control(type="text", placeholder="Spontaneous Sputum Production", ng-model="ctest.sputumTest.spontaneousSputumProduction")
+        .form-group.col-md-4
+            input.form-control(type="text", placeholder="HIV Serology", ng-model="ctest.sputumTest.hivSerology")
+        .form-group.col-md-4
+            input.form-control(type="text", placeholder="RBC", ng-model="ctest.sputumTest.redBloodCells")
+        .form-group.col-md-4.col-md-offset-4
+            input.form-control(type="text", placeholder="WBC", ng-model="ctest.sputumTest.whiteBloodCells")
+        button.col-md-2.col-md-offset-3.btn.btn-info.btn-default(type="submit") Add
+        a.col-md-2.col-md-offset-2.btn-warning.btn(ng-click="partialForm='null'") Cancel       
+
+.col-md-12
+    form(role="form", ng-submit="addTest(ctest)", ng-show="partialForm=='addMRITestForm'")
+        h3.text-success.text-center Add MRI Test
+        .form-group
+            input.form-control(type="text", placeholder="Enter MRI", ng-model="ctest.patientNo")
+        button.col-md-2.col-md-offset-3.btn.btn-info.btn-default(type="submit") Add
+        a.col-md-2.col-md-offset-2.btn-warning.btn(ng-click="partialForm='null'") Cancel
+
+.col-md-12
+    form(role="form", ng-submit="addTest(ctest)", ng-show="partialForm=='addCardiogramTestForm'")
+        h3.text-success.text-center Add Echo Cardiogram Test
+        .form-group
+            input.form-control(type="text", placeholder="Enter Cardio", ng-model="ctest.patientNo")
+        button.col-md-2.col-md-offset-3.btn.btn-info.btn-default(type="submit") Add
+        a.col-md-2.col-md-offset-2.btn-warning.btn(ng-click="partialForm='null'") Cancel
+
+.col-md-12.padding--top--10px.padding--bottom--10px                
+    .table-responsive(ng-if="rtests.length > 0")
+        table.table
+            thead.thead-default
+                tr
+                    td #
+                    td PatientNo
+                    td
+            tbody(ng-repeat="test in rtests")
+                tr
+                    td {{$index + 1}}
+                    td {{test.patientNo}}                                        
+                    td.no_padding
+                        a.btn.btn-link(href="#", ng-click="getTest(test.patientNo)")
+                            i.fa.fa-plus
+                tr(ng-show="test.patientNo===dtest.patientNo")
+                    td(colspan="6") 
+                        .col-md-12.padding--right--50px.text-align--right
+                            a.btn.btn-link(href="#", ng-click="dtest.patientNo='null'")
+                                i.fa.fa-minus
+                        h1 Test Details

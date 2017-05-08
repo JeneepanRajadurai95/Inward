@@ -1,25 +1,23 @@
-// app/api.routes/drug.api.routes.js
-
 'use strict';
 
 const express = require('express');
 const mongoose = require('mongoose');
 
 const Router = express.Router();
-const DrugModel = mongoose.model('Drug');
+const TestModel = mongoose.model('Test');
 
 Router.get('/', (req, res) => {
-    DrugModel.find().exec().then((drugs) => {
-        res.json(drugs);
+    TestModel.find().exec().then((tests) => {
+        res.json(tests);
     }).catch((err) => {
         console.error(err);
         res.sendStatus(500);
     });
 });
 
-Router.get('/:serial', (req, res) => {
-    DrugModel.findOne({ 'serial': req.params.serial }).exec().then((drug) => {
-        res.json(drug);
+Router.get('/:id', (req, res) => {
+    TestModel.findOne({ '_id': req.params.id }).exec().then((test) => {
+        res.json(test);
     }).catch((err) => {
         console.error(err);
         res.sendStatus(500);
@@ -27,9 +25,9 @@ Router.get('/:serial', (req, res) => {
 });
 
 Router.post('/', (req, res) => {
-    let newDrug = new DrugModel(req.body);
-    newDrug.save().then((drug) => {
-        res.json(drug);
+    var newTest = new TestModel(req.body);
+    newTest.save().then((test) => {
+        res.json(test);
     }).catch((err) => {
         console.error(err);
         res.sendStatus(500);
