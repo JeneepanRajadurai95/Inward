@@ -14,7 +14,7 @@
             input.form-control(type="text", placeholder="Enter Expiry Date", ng-model="cdrug.exp")
         button.btn.btn-default(type="submit") Add
         a.btn(ng-click="partialForm='null'") Cancel
-
+        
 .col-md-12.padding--top--10px.padding--bottom--10px                
     .table-responsive(ng-if="rdrugs.length > 0")
         table.table
@@ -34,9 +34,9 @@
                     td {{drug.mfd}}
                     td {{drug.exp}}                                        
                     td.no_padding
-                        a.btn.btn-link(href="#", ng-click="getdrug(drug.serial)")
+                        a.btn.btn-link(href="#", ng-click="getDrug(drug.serial)")
                             i.fa.fa-plus
-                tr(ng-show="drug.serial===ddrug.serial")
+                tr(ng-show="drug.serial==ddrug.serial")
                     td(colspan="6") 
                         .col-md-12.padding--right--50px.text-align--right
                             a.btn.btn-link(href="#", ng-click="ddrug.serial='null'")

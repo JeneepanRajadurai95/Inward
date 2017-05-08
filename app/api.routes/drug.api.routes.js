@@ -1,4 +1,4 @@
-// app/api.routes/patient.api.routes.js
+// app/api.routes/drug.api.routes.js
 
 'use strict';
 
