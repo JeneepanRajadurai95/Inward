@@ -18,8 +18,8 @@ Router.get('/', (req, res) => {
 });
 
 Router.get('/:serial', (req, res) => {
-    DrugModel.findOne({ 'serial': req.params.serial }).exec().then(serial => {
-        res.json(serial);
+    DrugModel.findOne({ 'serial': req.params.serial }).exec().then(drug => {
+        res.json(drug);
     }).catch(err => {
         console.error(err);
         res.sendStatus(500);
