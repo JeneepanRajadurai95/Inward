@@ -25,26 +25,32 @@ br
         | Cardiogram Test
 
 .col-md-12.padding--top--10px
-    form(role="form", ng-submit="addTest(ctest)", ng-show="partialForm=='addBloodTestForm'")
+    form(role="form", ng-submit="addTest(ctest)", ng-show="partialForm=='addBloodTestForm'", name="bloodForm")
         h3.text-success.text-center Add Blood Test
         .form-group.col-md-6.col-md-offset-3
             input.form-control(type="text", placeholder="Patient Number", ng-model="ctest._id")
         .form-group.col-md-4
-            input.form-control(type="text", placeholder="Blood volume (ml)", ng-model="ctest.bloodTest.volume")
+            input.form-control(type="text", placeholder="Blood volume (ml)", ng-model="ctest.bloodTest.volume",name="bloodVolumeC",ng-pattern='/^[0-9]{1,7}$/')
+            span(ng-show='bloodForm.bloodVolumeC.$error.pattern', style='color:red') Invalid
         .form-group.col-md-4
             input.form-control(type="text", placeholder="Collected Time", ng-model="ctest.bloodTest.collected")
         .form-group.col-md-4
             input.form-control(type="text", placeholder="Tested Time", ng-model="ctest.bloodTest.tested")
+        .form-group.col-md-4a
+            input.form-control(type="text", placeholder="RBC (cells/mcl)", ng-model="ctest.bloodTest.redBloodCells",name="rbcC",ng-pattern='/^[0-9]{1,7}$/')
+            span(ng-show='bloodForm.rbcC.$error.pattern', style='color:red') Invalid
         .form-group.col-md-4
-            input.form-control(type="text", placeholder="RBC (cells/mcl)", ng-model="ctest.bloodTest.redBloodCells")
+            input.form-control(type="text", placeholder="WBC (cells/mcl)", ng-model="ctest.bloodTest.whiteBloodCells",name="wbcC",ng-pattern='/^[0-9]{1,7}$/')
+            span(ng-show='bloodForm.wbcC.$error.pattern', style='color:red') Invalid
         .form-group.col-md-4
-            input.form-control(type="text", placeholder="WBC (cells/mcl)", ng-model="ctest.bloodTest.whiteBloodCells")
+            input.form-control(type="text", placeholder="Platelets (cells/mcl)", ng-model="ctest.bloodTest.platelets",name="plateletsC",ng-pattern='/^[0-9]{1,7}$/')
+            span(ng-show='bloodForm.plateletsC.$error.pattern', style='color:red') Invalid
         .form-group.col-md-4
-            input.form-control(type="text", placeholder="Platelets (cells/mcl)", ng-model="ctest.bloodTest.platelets")
+            input.form-control(type="text", placeholder="Hemo Globin (gm/dl)", ng-model="ctest.bloodTest.hemoglobin",name="hemoglophineC",ng-pattern='/^[0-9]{1,7}$/')
+            span(ng-show='bloodForm.hemoglophineC.$error.pattern', style='color:red') Invalid
         .form-group.col-md-4
-            input.form-control(type="text", placeholder="Hemo Globin (gm/dl)", ng-model="ctest.bloodTest.hemoglobin")
-        .form-group.col-md-4
-            input.form-control(type="text", placeholder="Hematocrit (%)", ng-model="ctest.bloodTest.hematocrit")
+            input.form-control(type="text", placeholder="Hematocrit (%)", ng-model="ctest.bloodTest.hematocrit",name="hematocritC",ng-pattern='/^[0-9]{1,2}$/')
+         span(ng-show='bloodForm.hematocritC.$error.pattern', style='color:red') Invalid   
         .form-group.col-md-4
             input.form-control(type="text", placeholder="Plasma Glugose Level", ng-model="ctest.bloodTest.plasmaGlugoseLevel")
         .form-group.col-md-4

@@ -113,4 +113,17 @@ const TestSchema = mongoose.Schema({
 //     });
 // });
 
+
+TestSchema.pre('save', function(next) {
+    let doc = this;
+    Counter.findByIdAndUpdate({ _id: 'test' }, { $inc: { seq: 1 } }, function(error, counter) {
+        if (error) {
+            return next(error);
+        }
+        doc._id = "T-00" + counter.seq;
+        doc.Inward.history.push(h);
+        next();
+    });
+});
+
 module.exports = mongoose.model('Test', TestSchema);
