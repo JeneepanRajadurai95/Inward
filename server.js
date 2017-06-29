@@ -36,6 +36,7 @@ require('./app/models/drug.model'); // Drug Model
 require('./app/models/test.model'); // Test Model
 require('./app/models/ward.model'); // Ward Model
 require('./app/models/ward.bed.model') // Ward Bed Model
+require('./app/models/schedule.model'); //shedule model
 
 const app = express(); // Creating App from Express()
 const port = process.env.port || 3000; // Server Port

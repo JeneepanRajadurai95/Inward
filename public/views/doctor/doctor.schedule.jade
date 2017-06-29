@@ -1,0 +1,34 @@
+.col-md-12.col-sm-12.col-xs-12(name="addScheduleForm")
+    form.col-md-12.col-sm-12.col-xs-12.border-top--2px(role="form", ng-submit="scheduleAppointment()", ng-show="partialForm=='addScheduleForm'", name="addScheduleForm")
+        span.col-md-12.col-sm-12.col-xs-12.text-align--right.padding-top--10px.form-group(ng-click="partialForm='null';clearAll();", name="closeScheduleForm")
+            label.btn.btn-default.btn-circle
+                i.fa.fa-times
+        div.col-md-12.col-sm-12.col-xs-12.no_padding
+            h5.col-md-12.col-sm-12.col-xs-12.content-heading 
+                | Schedule
+            .form-group.col-md-2.col-sm-12.col-xs-12
+                label.content-label 
+                    | Patient
+                    span.red *
+                select.form-control.input-sm(ng-model="schedule.patientID", required)
+                    option(ng-repeat="patient in rpatient" value="{{patient.ID}}") {{patient.Name.firstName}}
+            .form-group.col-md-3.col-sm-12.col-xs-12
+                label.content-label 
+                    | Doctor
+                    span.red *
+                select.form-control.input-sm(ng-model="schedule.doctorID", required)
+                    option(ng-repeat="doctor in rdoctors" value="{{doctor.ID}}") {{doctor.Name.Firstname}} 
+            .form-group.col-md-3.col-sm-12.col-xs-12
+                label.content-label 
+                    | Date & Time
+                    span.red *
+                div.dropdown
+                    a.dropdown-toggle#dLabel(role="button" data-toggle="dropdown" data-target=".dropdown" href="#")
+                        div.input-group
+                            input.form-control.input-sm#date(type="text", name="date", ng-model="schedule.date", placeholder="Date", required)
+                            span.input-group-addon
+                                i.glyphicon.glyphicon-calendar
+                    ul.dropdown-menu(role="menu" aria-labelledby="dLabel")
+                        datetimepicker(ng-model="schedule.date", data-datetimepicker-config="{ dropdownSelector: '.dropdown-toggle' }")
+            .form-group.col-md-12.col-sm-12.col-xs-12
+                button.btn.btn-success.input-sm(type="submit") Schedule
