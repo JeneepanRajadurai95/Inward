@@ -1,0 +1,29 @@
+.col-md-12.col-sm-12.col-xs-12.margin-bottom--30px.padding-bottom--30px(ng-show="archivePDF", style="border-bottom: 1px solid #e1e1e1;")
+    .col-md-12.col-sm-12.col-xs-12.margin-bottom--10px
+        span.col-md-2.col-sm-6.col-xs-6.top-selection.float-right.text-align--right(ng-click="archivePDF=false", style="padding-right: 0px !important;")
+            label.btn.btn-default.btn-circle
+                i.fa.fa-times
+        span.col-md-2.col-sm-6.col-xs-6.top-selection
+            button.btn(pdf-save-button="patientArchive" pdf-name="{{dpatient.ID}}__{{dpatient.Name.firstName}}_{{dpatient.Name.lastName}}.pdf")
+                i.fa.fa-print
+            span.top-selection--inner  Print
+
+    .col-md-12.col-sm-12.col-xs-12(pdf-save-content="patientArchive", name="patientArchivePDF")
+        .col-md-12.col-sm-12.col-xs-12.pdf-header
+            span.montserrat(style="font-weight: 700 !important;") code19 
+            span.montserrat(style="font-weight: lighter !important;color: #F44336 !important;") | Inward
+        h4.col-md-12.col-sm-12.col-xs-12.pdf-name 
+            | {{dpatient.Name.firstName}} {{dpatient.Name.lastName}} &nbsp;&nbsp;
+            i.fa(ng-class="(dpatient.Sex == 'Male') ? 'fa-mars' : ((dpatient.Sex == 'Female') ? 'fa-venus' : '')")
+        span.col-md-3.col-sm-12.col-xs-12.pdf-span-sm
+            b BHT : &nbsp;
+            | {{dpatient.Inward.bhtNumber}}
+        span.col-md-2.col-sm-12.col-xs-12.pdf-span-sm
+            b Ward : &nbsp;
+            | {{dpatient.Inward.wardNumber}}
+        span.col-md-2.col-sm-12.col-xs-12.pdf-span-sm
+            b Bed : &nbsp;
+            | {{dpatient.Inward.bedNumber}}
+        span.col-md-5.col-sm-12.col-xs-12.pdf-span-sm
+            b Admitted : &nbsp;
+            | &nbsp; {{dpatient.Inward.admittedDateTime | date:'yyyy-MM-dd HH:mm:ss Z'}}

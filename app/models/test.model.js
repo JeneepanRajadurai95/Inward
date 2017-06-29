@@ -8,13 +8,17 @@ const Counter = mongoose.model('Counter');
 const TestSchema = mongoose.Schema({
     _id: {
         type: String,
-        required: true
+        //required: true
     },
     bloodTest: [{
+        patientNo: {
+            type: String,
+            //ref : 'Patient'
+        },
         reportNo: Number,
         volume: Number, //ml
-        collected: { type: Date, defualt: Date.now },
-        tested: { type: Date, defualt: Date.now },
+        collected: { type: Date, default: Date.now },
+        tested: { type: Date, default: Date.now },
         redBloodCells: Number, //5 to 6 million cells/mcL
         whiteBloodCells: Number, //4500 - 10000 cells/mcl
         platelets: Number, //140000 - 450000 cells/mcl
@@ -26,10 +30,14 @@ const TestSchema = mongoose.Schema({
         hDLCholesterolLevel: String // a major risk factor for heart disease <40 mg/dl,  The higher, the better 40 - 59, Consideed protective against heart disease >60
     }],
     urineTest: [{
+        patientNo: {
+            type: String,
+            //ref : 'Patient'
+        },
         reportNo: Number,
         volume: Number, //ml
-        collected: { type: Date, defualt: Date.now },
-        tested: { type: Date, defualt: Date.now },
+        collected: { type: Date, default: Date.now },
+        tested: { type: Date, default: Date.now },
         color: String, //clear , Pale Straw Yellow, Honey, Orange, Blue, Green, Fizzy, Transparent yellow, Dark yellow, brown , pink
         clarity: String, //clarity or cloudy
         pH: Number, // 4.5 - 8
@@ -41,10 +49,14 @@ const TestSchema = mongoose.Schema({
         whiteBloodcells: Number
     }],
     stoolTest: [{
+        patientNo: {
+            type: String,
+            //ref : 'Patient'
+        },
         reportNo: Number,
         volume: Number, //gram
-        collected: { type: Date, defualt: Date.now },
-        tested: { type: Date, defualt: Date.now },
+        collected: { type: Date, default: Date.now },
+        tested: { type: Date, default: Date.now },
         additives: {
             sodiumMetaBiSulphite: Number,
             sodiumBenzoate: Number,
@@ -61,10 +73,14 @@ const TestSchema = mongoose.Schema({
         whiteBloodcells: Number
     }],
     sputumTest: [{
+        patientNo: {
+            type: String,
+            //ref : 'Patient'
+        },
         reportNo: Number,
         volume: Number,
-        collected: { type: Date, defualt: Date.now },
-        tested: { type: Date, defualt: Date.now },
+        collected: { type: Date, default: Date.now },
+        tested: { type: Date, default: Date.now },
         race: String, // White , non-White, unKnown
         respiratorySymtoms: String, // yes, No, unKnown
         tuberculinSkinTestInduration: Number, //1-10 mm
@@ -80,8 +96,12 @@ const TestSchema = mongoose.Schema({
 
     // }],
     echoCardiogramTest: [{
+        patientNo: {
+            type: String,
+            //ref : 'Patient'
+        },
         reportNo: Number,
-        tested: { type: Date, defualt: Date.now },
+        tested: { type: Date, default: Date.now },
         aorta: Number,
         leftAtrium: Number,
         ivsd: Number,
@@ -103,25 +123,12 @@ const TestSchema = mongoose.Schema({
     time: { type: Date, default: Date.now }
 });
 
-// TestSchema.pre('save', function(next) {
-//     let doc = this;
-//     Counter.findByIdAndUpdate({ _id: 'test' }, { $inc: { seq: 1 } }, function(error, counter) {
-//         if (error)
-//             return next(error);
-//         doc.bloodTest[0].reportNo = "T-0" + counter.seq;
-//         next();
-//     });
-// });
-
-
 TestSchema.pre('save', function(next) {
     let doc = this;
     Counter.findByIdAndUpdate({ _id: 'test' }, { $inc: { seq: 1 } }, function(error, counter) {
-        if (error) {
+        if (error)
             return next(error);
-        }
-        doc._id = "T-00" + counter.seq;
-        doc.Inward.history.push(h);
+        doc._id = "T-0" + counter.seq;
         next();
     });
 });

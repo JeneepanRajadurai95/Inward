@@ -1,54 +1,64 @@
-.col-md-12.padding--top--10px.padding--bottom--10px
-    h3.text-info.col-md-offset-4 Generate Test Reports               
-    .table-responsive(ng-if="rtests.length > 0")
-        table.table
-            thead.thead-default
-                tr
-                    td #
-                    td PatientNo
-                    td ReportNo
-                    td Collected
-                    td Tested
-            tbody(ng-repeat="test in rtests")
-                tr
-                    td {{$index + 1}}
-                    td {{test._id}}
-                    td {{test.bloodTest.reportNo}}
-                    td {{test.bloodTest.collected}}
-                    td {{test.bloodTest.tested}}                                      
-                    td.no_padding
-                        a.btn.btn-link(href="#", ng-click="getTest(test.patientNo)")
-                            i.fa.fa-plus
-                tr(ng-show="test._id===dtest._id")
-                    td(colspan="6") 
-                        .col-md-12.padding--right--50px.text-align--right
-                            a.btn.btn-link(href="#", ng-click="dtest._id='null'")
-                                i.fa.fa-minus
-                        h1 Test Details
-.col-md-12.padding--top--10px.padding--bottom--10px
-    h3.text-info.col-md-offset-4 Urine Test Details               
-    .table-responsive(ng-if="rtests.length > 0")
-        table.table
-            thead.thead-default
-                tr
-                    td #
-                    td PatientNo
-                    td ReportNo
-                    td Collected
-                    td Tested
-            tbody(ng-repeat="test in rtests")
-                tr
-                    td {{$index + 1}}
-                    td {{test._id}}
-                    td {{test.urineTest.reportNo}}
-                    td {{test.urineTest.collected}}
-                    td {{test.urineTest.tested}}                                      
-                    td.no_padding
-                        a.btn.btn-link(href="#", ng-click="getTest(test.patientNo)")
-                            i.fa.fa-plus
-                tr(ng-show="test._id===dtest._id")
-                    td(colspan="6") 
-                        .col-md-12.padding--right--50px.text-align--right
-                            a.btn.btn-link(href="#", ng-click="dtest._id='null'")
-                                i.fa.fa-minus
-                        h1 Test Details
+
+
+
+
+
+
+
+
+
+
+//- .col-md-12.padding--top--10px.padding--bottom--10px
+//-     h3.text-info.col-md-offset-4 Generate Test Reports               
+//-     .table-responsive(ng-if="rtests.length > 0")
+//-         table.table
+//-             thead.thead-default
+//-                 tr
+//-                     td #
+//-                     td PatientNo
+//-                     td ReportNo
+//-                     td Collected
+//-                     td Tested
+//-             tbody(ng-repeat="test in rtests")
+//-                 tr
+//-                     td {{$index + 1}}
+//-                     td {{test._id}}
+//-                     td {{test.bloodTest.reportNo}}
+//-                     td {{test.bloodTest.collected}}
+//-                     td {{test.bloodTest.tested}}                                      
+//-                     td.no_padding
+//-                         a.btn.btn-link(href="#", ng-click="getTest(test.patientNo)")
+//-                             i.fa.fa-plus
+//-                 tr(ng-show="test._id===dtest._id")
+//-                     td(colspan="6") 
+//-                         .col-md-12.padding--right--50px.text-align--right
+//-                             a.btn.btn-link(href="#", ng-click="dtest._id='null'")
+//-                                 i.fa.fa-minus
+//-                         h1 Test Details
+//- .col-md-12.padding--top--10px.padding--bottom--10px
+//-     h3.text-info.col-md-offset-4 Urine Test Details               
+//-     .table-responsive(ng-if="rtests.length > 0")
+//-         table.table
+//-             thead.thead-default
+//-                 tr
+//-                     td #
+//-                     td PatientNo
+//-                     td ReportNo
+//-                     td Collected
+//-                     td Tested
+//-             tbody(ng-repeat="test in rtests")
+//-                 tr
+//-                     td {{$index + 1}}
+//-                     td {{test._id}}
+//-                     td {{test.urineTest.reportNo}}
+//-                     td {{test.urineTest.collected}}
+//-                     td {{test.urineTest.tested}}                                      
+//-                     td.no_padding
+//-                         a.btn.btn-link(href="#", ng-click="getTest(test.patientNo)")
+//-                             i.fa.fa-plus
+//-                 tr(ng-show="test._id===dtest._id")
+//-                     td(colspan="6") 
+//-                         .col-md-12.padding--right--50px.text-align--right
+//-                             a.btn.btn-link(href="#", ng-click="dtest._id='null'")
+//-                                 i.fa.fa-minus
+//-                         h1 Test Details

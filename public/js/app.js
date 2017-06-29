@@ -23,6 +23,7 @@ angular.module('inwardApp', [
     'drug.controller',
     'drug.service',
     'test.controller',
+    'test.archive.controller',
     'test.service',
     'ward.controller',
     'ward.service',
