@@ -1,0 +1,11 @@
+.col-md-12.col-sm-12.col-xs-12(name="addWardForm")
+    form.col-md-12.col-sm-12.col-xs-12.border-top--2px(role="form", ng-submit="addWard(cward)", ng-show="partialForm=='addWardForm'", name="addWardForm")
+        span.col-md-12.col-sm-12.col-xs-12.text-align--right.padding-top--10px.form-group(ng-click="partialForm='null'", name="closeWardForm")
+            label.btn.btn-default.btn-circle
+                i.fa.fa-times
+        .form-group.col-md-2.col-sm-12.col-xs-12
+            label.content-label 
+                | Ward Name
+                span.red *
+            input.form-control.input-sm(type="text", placeholder="Ward Name", ng-model="cward.name", required)
+            button.btn.btn-success(type="submit", name="finish") Add

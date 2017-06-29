@@ -28,23 +28,23 @@ br
     form(role="form", ng-submit="addTest(ctest)", ng-show="partialForm=='addBloodTestForm'")
         h3.text-success.text-center Add Blood Test
         .form-group.col-md-6.col-md-offset-3
-            input.form-control(type="text", placeholder="Patient Number", ng-model="ctest.patientNo")
+            input.form-control(type="text", placeholder="Patient Number", ng-model="ctest._id")
         .form-group.col-md-4
-            input.form-control(type="text", placeholder="Blood volume", ng-model="ctest.bloodTest.volume")
+            input.form-control(type="text", placeholder="Blood volume (ml)", ng-model="ctest.bloodTest.volume")
         .form-group.col-md-4
             input.form-control(type="text", placeholder="Collected Time", ng-model="ctest.bloodTest.collected")
         .form-group.col-md-4
             input.form-control(type="text", placeholder="Tested Time", ng-model="ctest.bloodTest.tested")
         .form-group.col-md-4
-            input.form-control(type="text", placeholder="RBC", ng-model="ctest.bloodTest.redBloodCells")
+            input.form-control(type="text", placeholder="RBC (cells/mcl)", ng-model="ctest.bloodTest.redBloodCells")
         .form-group.col-md-4
-            input.form-control(type="text", placeholder="WBC", ng-model="ctest.bloodTest.whiteBloodCells")
+            input.form-control(type="text", placeholder="WBC (cells/mcl)", ng-model="ctest.bloodTest.whiteBloodCells")
         .form-group.col-md-4
-            input.form-control(type="text", placeholder="Platelets", ng-model="ctest.bloodTest.platelets")
+            input.form-control(type="text", placeholder="Platelets (cells/mcl)", ng-model="ctest.bloodTest.platelets")
         .form-group.col-md-4
-            input.form-control(type="text", placeholder="Hemo Globin", ng-model="ctest.bloodTest.hemoglobin")
+            input.form-control(type="text", placeholder="Hemo Globin (gm/dl)", ng-model="ctest.bloodTest.hemoglobin")
         .form-group.col-md-4
-            input.form-control(type="text", placeholder="Hematocrit", ng-model="ctest.bloodTest.hematocrit")
+            input.form-control(type="text", placeholder="Hematocrit (%)", ng-model="ctest.bloodTest.hematocrit")
         .form-group.col-md-4
             input.form-control(type="text", placeholder="Plasma Glugose Level", ng-model="ctest.bloodTest.plasmaGlugoseLevel")
         .form-group.col-md-4
@@ -60,9 +60,9 @@ br
     form(role="form", ng-submit="addTest(ctest)", ng-show="partialForm=='addUrineTestForm'")
         h3.text-success.text-center Add Urine Test
         .form-group.col-md-6.col-md-offset-3
-            input.form-control(type="text", placeholder="Patient Number", ng-model="ctest.patientNo")
+            input.form-control(type="text", placeholder="Patient Number", ng-model="ctest._id")
         .form-group.col-md-4
-            input.form-control(type="text", placeholder="Urine volume", ng-model="ctest.urineTest.volume")
+            input.form-control(type="text", placeholder="Urine volume (ml)", ng-model="ctest.urineTest.volume")
         .form-group.col-md-4
             input.form-control(type="text", placeholder="Collected Time", ng-model="ctest.urineTest.collected")
         .form-group.col-md-4
@@ -76,15 +76,15 @@ br
         .form-group.col-md-4
             input.form-control(type="text", placeholder="Specific Gravity", ng-model="ctest.urineTest.specificGravity")
         .form-group.col-md-4
-            input.form-control(type="text", placeholder="Protein", ng-model="ctest.urineTest.protein")
+            input.form-control(type="text", placeholder="Protein (mg)", ng-model="ctest.urineTest.protein")
         .form-group.col-md-4
-            input.form-control(type="text", placeholder="Glucode", ng-model="ctest.urineTest.glucose")
+            input.form-control(type="text", placeholder="Glucode (mg)", ng-model="ctest.urineTest.glucose")
         .form-group.col-md-4
             input.form-control(type="text", placeholder="Ketones", ng-model="ctest.urineTest.ketones")
         .form-group.col-md-4
-            input.form-control(type="text", placeholder="RBC", ng-model="ctest.urineTest.redBloodCells")
+            input.form-control(type="text", placeholder="RBC (cells/mcl)", ng-model="ctest.urineTest.redBloodCells")
         .form-group.col-md-4
-            input.form-control(type="text", placeholder="WBC", ng-model="ctest.urineTest.whiteBloodCells")                           
+            input.form-control(type="text", placeholder="WBC (cells/mcl)", ng-model="ctest.urineTest.whiteBloodCells")                           
         button.col-md-2.col-md-offset-3.btn.btn-info.btn-default(type="submit") Add
         a.col-md-2.col-md-offset-2.btn-warning.btn(ng-click="partialForm='null'") Cancel
 
@@ -92,9 +92,9 @@ br
     form(role="form", ng-submit="addTest(ctest)", ng-show="partialForm=='addStoolTestForm'")
         h3.text-success.text-center Add Stool Test
         .form-group.col-md-6.col-md-offset-3
-            input.form-control(type="text", placeholder="Patient Number", ng-model="ctest.patientNo")
+            input.form-control(type="text", placeholder="Patient Number", ng-model="ctest._id")
         .form-group.col-md-4
-            input.form-control(type="text", placeholder="Stool volume", ng-model="ctest.stoolTest.volume")
+            input.form-control(type="text", placeholder="Stool volume (g)", ng-model="ctest.stoolTest.volume")
         .form-group.col-md-4
             input.form-control(type="text", placeholder="Collected Time", ng-model="ctest.stoolTest.collected")
         .form-group.col-md-4
@@ -104,9 +104,9 @@ br
         .form-group.col-md-4
             input.form-control(type="text", placeholder="Phthalates", ng-model="ctest.phthalates")
         .form-group.col-md-4.col-md-offset-2
-            input.form-control(type="text", placeholder="RBC", ng-model="ctest.redBloodCells")
+            input.form-control(type="text", placeholder="RBC (cells/mcl)", ng-model="ctest.redBloodCells")
         .form-group.col-md-4
-            input.form-control(type="text", placeholder="WBC", ng-model="ctest.whiteBloodcells")
+            input.form-control(type="text", placeholder="WBC (cells/mcl)", ng-model="ctest.whiteBloodcells")
         h3.col-md-6.col-md-offset-5.text-info Additives
         .form-group.col-md-4
             input.form-control(type="text", placeholder="Sodium Meta Bi Sulphite", ng-model="ctest.stoolTest.additives.sodiumMetaBiSulphite")
@@ -128,9 +128,9 @@ br
     form(role="form", ng-submit="addTest(ctest)", ng-show="partialForm=='addSputumTestForm'")
         h3.text-success.text-center Add Sputum Test
         .form-group.col-md-6.col-md-offset-3
-            input.form-control(type="text", placeholder="Patient Number", ng-model="ctest.patientNo")
+            input.form-control(type="text", placeholder="Patient Number", ng-model="ctest._id")
         .form-group.col-md-4
-            input.form-control(type="text", placeholder="Blood volume", ng-model="ctest.sputumTest.volume")
+            input.form-control(type="text", placeholder="Sputum volume (ml)", ng-model="ctest.sputumTest.volume")
         .form-group.col-md-4
             input.form-control(type="text", placeholder="Collected Time", ng-model="ctest.sputumTest.collected")
         .form-group.col-md-4
@@ -140,15 +140,15 @@ br
         .form-group.col-md-4
             input.form-control(type="text", placeholder="Respiratory Symtoms", ng-model="ctest.sputumTest.respiratorySymtoms")
         .form-group.col-md-4
-            input.form-control(type="text", placeholder="Tuber Culin Skin Test Induration", ng-model="ctest.sputumTest.tuberculinSkinTestInduration")
+            input.form-control(type="text", placeholder="Tuber Culin Skin Test Induration (mm)", ng-model="ctest.sputumTest.tuberculinSkinTestInduration")
         .form-group.col-md-4
             input.form-control(type="text", placeholder="Spontaneous Sputum Production", ng-model="ctest.sputumTest.spontaneousSputumProduction")
         .form-group.col-md-4
             input.form-control(type="text", placeholder="HIV Serology", ng-model="ctest.sputumTest.hivSerology")
         .form-group.col-md-4
-            input.form-control(type="text", placeholder="RBC", ng-model="ctest.sputumTest.redBloodCells")
+            input.form-control(type="text", placeholder="RBC (cells/mcl)", ng-model="ctest.sputumTest.redBloodCells")
         .form-group.col-md-4.col-md-offset-4
-            input.form-control(type="text", placeholder="WBC", ng-model="ctest.sputumTest.whiteBloodCells")
+            input.form-control(type="text", placeholder="WBC (cells/mcl)", ng-model="ctest.sputumTest.whiteBloodCells")
         button.col-md-2.col-md-offset-3.btn.btn-info.btn-default(type="submit") Add
         a.col-md-2.col-md-offset-2.btn-warning.btn(ng-click="partialForm='null'") Cancel       
 
@@ -156,36 +156,118 @@ br
     form(role="form", ng-submit="addTest(ctest)", ng-show="partialForm=='addMRITestForm'")
         h3.text-success.text-center Add MRI Test
         .form-group
-            input.form-control(type="text", placeholder="Enter MRI", ng-model="ctest.patientNo")
+            input.form-control(type="text", placeholder="Enter MRI", ng-model="ctest._id")
         button.col-md-2.col-md-offset-3.btn.btn-info.btn-default(type="submit") Add
         a.col-md-2.col-md-offset-2.btn-warning.btn(ng-click="partialForm='null'") Cancel
 
 .col-md-12
     form(role="form", ng-submit="addTest(ctest)", ng-show="partialForm=='addCardiogramTestForm'")
         h3.text-success.text-center Add Echo Cardiogram Test
-        .form-group
-            input.form-control(type="text", placeholder="Enter Cardio", ng-model="ctest.patientNo")
+        .form-group.col-md-6.col-md-offset-3
+            input.form-control(type="text", placeholder="Patient Number", ng-model="ctest._id")
+        .form-group.col-md-4
+            input.form-control(type="text", placeholder="Tested Time", ng-model="ctest.echoCardiogramTest.tested")
+        .form-group.col-md-4
+            input.form-control(type="text", placeholder="Aorta (mm)", ng-model="ctest.echoCardiogramTest.aorta")
+        .form-group.col-md-4
+            input.form-control(type="text", placeholder="Left Atrium (mm)", ng-model="ctest.echoCardiogramTest.leftAtrium")
+        .form-group.col-md-4
+            input.form-control(type="text", placeholder="IVSD (mm)", ng-model="ctest.echoCardiogramTest.ivsd")
+        .form-group.col-md-4
+            input.form-control(type="text", placeholder="LVPWD (mm)", ng-model="ctest.echoCardiogramTest.lvpwd")
+        .form-group.col-md-4
+            input.form-control(type="text", placeholder="LVDD (mm)", ng-model="ctest.echoCardiogramTest.lvdd")
+        .form-group.col-md-4
+            input.form-control(type="text", placeholder="LVSD (mm)", ng-model="ctest.echoCardiogramTest.lvsd")
+        .form-group.col-md-4
+            input.form-control(type="text", placeholder="LVDV (ml)", ng-model="ctest.echoCardiogramTest.lvdv")
+        .form-group.col-md-4
+            input.form-control(type="text", placeholder="LVSV (ml)", ng-model="ctest.echoCardiogramTest.lvsv")
+        .form-group.col-md-4
+            input.form-control(type="text", placeholder="Delta (%)", ng-model="ctest.echoCardiogramTest.delta")
+        .form-group.col-md-4
+            input.form-control(type="text", placeholder="E Wave (cm/s)", ng-model="ctest.echoCardiogramTest.eWave")
+        .form-group.col-md-4
+            input.form-control(type="text", placeholder="A Wave (cm/s)", ng-model="ctest.echoCardiogramTest.aWave")
+        .form-group.col-md-4
+            input.form-control(type="text", placeholder="EA Ratio", ng-model="ctest.echoCardiogramTest.eARatio")
+        .form-group.col-md-4
+            input.form-control(type="text", placeholder="EDT (ms)", ng-model="ctest.echoCardiogramTest.edt")
+        .form-group.col-md-4
+            input.form-control(type="text", placeholder="EF (%)", ng-model="ctest.echoCardiogramTest.ef")
+        .form-group.col-md-4.col-md-offset-2
+            input.form-control(type="text", placeholder="LVM / BSA (g/m2)", ng-model="ctest.echoCardiogramTest.bsa")
+        .form-group.col-md-4
+            input.form-control(type="text", placeholder="LVM / Height2 (g/m2)", ng-model="ctest.echoCardiogramTest.height")
         button.col-md-2.col-md-offset-3.btn.btn-info.btn-default(type="submit") Add
         a.col-md-2.col-md-offset-2.btn-warning.btn(ng-click="partialForm='null'") Cancel
 
-.col-md-12.padding--top--10px.padding--bottom--10px                
+.col-md-12.padding--top--10px.padding--bottom--10px
+    h3.text-info.col-md-offset-4 Test Details               
     .table-responsive(ng-if="rtests.length > 0")
         table.table
             thead.thead-default
                 tr
                     td #
                     td PatientNo
-                    td
+                    //td ReportNo
+                    td Collected
+                    td Tested
             tbody(ng-repeat="test in rtests")
                 tr
                     td {{$index + 1}}
-                    td {{test.patientNo}}                                        
+                    td {{test._id}}
+                    //td {{test.bloodTest[0].reportNo}}
+                    td {{test.bloodTest[0].collected}}
+                    td {{test.bloodTest[0].tested}}                                      
                     td.no_padding
-                        a.btn.btn-link(href="#", ng-click="getTest(test.patientNo)")
+                        a.btn.btn-link(href="#", ng-click="getTest(test._id)")
                             i.fa.fa-plus
-                tr(ng-show="test.patientNo===dtest.patientNo")
-                    td(colspan="6") 
-                        .col-md-12.padding--right--50px.text-align--right
-                            a.btn.btn-link(href="#", ng-click="dtest.patientNo='null'")
-                                i.fa.fa-minus
-                        h1 Test Details
+                tr(ng-show="test._id===dtest._id")
+                    td(colspan="6")
+                        table.col-md-12
+                            th
+                                td.text-warning Blood Test Details
+                                td.col-md-4.padding--right--50px.text-align--right
+                                    a.btn.btn-link(href="#", ng-click="dtest._id='null'")
+                                        i.fa.fa-minus
+                            tbody
+                                tr
+                                    td.col-md-3.text-infp PatientNo
+                                    td.col-md-3.text-success {{test._id}} 
+                                tr
+                                    td.col-md-3.text-infp Collected Date
+                                    td.col-md-3.text-success {{test.bloodTest[0].collected}} 
+                                tr
+                                    td.col-md-3.text-infp Tested Date
+                                    td.col-md-3.text-success {{test.bloodTest[0].tested}} 
+                                tr
+                                    td.col-md-3.text-infp Volume
+                                    td.col-md-3.text-success {{test.bloodTest[0].volume}} (ml)
+                                tr
+                                    td.col-md-3.text-infp RBC 
+                                    td.col-md-3.text-success {{test.bloodTest[0].redBloodCells}} (cells/mcl) 
+                                tr
+                                    td.col-md-3.text-infp WBC 
+                                    td.col-md-3.text-success {{test.bloodTest[0].whiteBloodCells}} (cells/mcl)
+                                tr
+                                    td.col-md-3.text-infp Platelets
+                                    td.col-md-3.text-success {{test.bloodTest[0].platelets}} (cells/mcl)
+                                tr
+                                    td.col-md-3.text-infp Hemoglobin 
+                                    td.col-md-3.text-success {{test.bloodTest[0].hemoglobin}} (gm/dl)
+                                tr
+                                    td.col-md-3.text-infp Hematocrit 
+                                    td.col-md-3.text-success {{test.bloodTest[0].hematocrit}} (%)
+                                tr
+                                    td.col-md-3.text-infp Plasma Glugose Level
+                                    td.col-md-3.text-success {{test.bloodTest[0].plasmaGlugoseLevel}}
+                                tr
+                                    td.col-md-3.text-infp Total Cholestrol Level
+                                    td.col-md-3.text-success {{test.bloodTest[0].totalCholesterolLevel}}
+                                tr
+                                    td.col-md-3.text-infp LDL Cholesterol Level
+                                    td.col-md-3.text-success {{test.bloodTest[0].lDLCholesterolLevel}}
+                                tr
+                                    td.col-md-3.text-infp HDL Cholesterol Level
+                                    td.col-md-3.text-success {{test.bloodTest[0].hDLCholesterolLevel}}s

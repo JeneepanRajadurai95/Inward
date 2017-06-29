@@ -9,7 +9,7 @@ angular.module('test.service', []).factory('TestService', [
         return {
             getTests: function() {
                 let deferred = $q.defer();
-                $http.get('/api/test').then((results) => {
+                $http.get('/api/tests').then((results) => {
                     deferred.resolve(results.data);
                 }, (err) => {
                     deferred.reject(err);
@@ -20,7 +20,7 @@ angular.module('test.service', []).factory('TestService', [
 
             getTest: function(patientNo) {
                 let deferred = $q.defer();
-                $http.get('/api/test/' + patientNo).then((results) => {
+                $http.get('/api/tests/' + patientNo).then((results) => {
                     deferred.resolve(results.data);
                 }, (err) => {
                     deferred.reject(err);
@@ -33,7 +33,7 @@ angular.module('test.service', []).factory('TestService', [
                 let deferred = $q.defer();
                 $http({
                     method: 'POST',
-                    url: '/api/test',
+                    url: '/api/tests',
                     data: $.param(newTest),
                     headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
                 }).then((results) => {

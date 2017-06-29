@@ -3,10 +3,15 @@
 'use strict';
 
 const mongoose = require('mongoose');
+const Counter = mongoose.model('Counter');
 
 const TestSchema = mongoose.Schema({
-    patientNo: String,
+    _id: {
+        type: String,
+        required: true
+    },
     bloodTest: [{
+        reportNo: Number,
         volume: Number, //ml
         collected: { type: Date, defualt: Date.now },
         tested: { type: Date, defualt: Date.now },
@@ -21,6 +26,7 @@ const TestSchema = mongoose.Schema({
         hDLCholesterolLevel: String // a major risk factor for heart disease <40 mg/dl,  The higher, the better 40 - 59, Consideed protective against heart disease >60
     }],
     urineTest: [{
+        reportNo: Number,
         volume: Number, //ml
         collected: { type: Date, defualt: Date.now },
         tested: { type: Date, defualt: Date.now },
@@ -35,6 +41,7 @@ const TestSchema = mongoose.Schema({
         whiteBloodcells: Number
     }],
     stoolTest: [{
+        reportNo: Number,
         volume: Number, //gram
         collected: { type: Date, defualt: Date.now },
         tested: { type: Date, defualt: Date.now },
@@ -54,6 +61,7 @@ const TestSchema = mongoose.Schema({
         whiteBloodcells: Number
     }],
     sputumTest: [{
+        reportNo: Number,
         volume: Number,
         collected: { type: Date, defualt: Date.now },
         tested: { type: Date, defualt: Date.now },
@@ -71,9 +79,38 @@ const TestSchema = mongoose.Schema({
     // xTray: [{
 
     // }],
-    // echoCardiogramTest: [{}],
+    echoCardiogramTest: [{
+        reportNo: Number,
+        tested: { type: Date, defualt: Date.now },
+        aorta: Number,
+        leftAtrium: Number,
+        ivsd: Number,
+        lvpwd: Number,
+        lvdd: Number,
+        lvsd: Number,
+        lvdv: Number,
+        lvsv: Number,
+        delta: Number,
+        eWave: Number,
+        aWave: Number,
+        eARatio: Number,
+        edt: Number,
+        ef: Number,
+        bsa: Number,
+        height: Number
+    }],
 
     time: { type: Date, default: Date.now }
 });
+
+// TestSchema.pre('save', function(next) {
+//     let doc = this;
+//     Counter.findByIdAndUpdate({ _id: 'test' }, { $inc: { seq: 1 } }, function(error, counter) {
+//         if (error)
+//             return next(error);
+//         doc.bloodTest[0].reportNo = "T-0" + counter.seq;
+//         next();
+//     });
+// });
 
 module.exports = mongoose.model('Test', TestSchema);

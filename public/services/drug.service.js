@@ -9,7 +9,7 @@ angular.module('drug.service', []).factory('DrugService', [
         return {
             getDrugs: function() {
                 let deferred = $q.defer();
-                $http.get('/api/drug').then((results) => {
+                $http.get('/api/drugs').then((results) => {
                     deferred.resolve(results.data);
                 }, (err) => {
                     deferred.reject(err);
@@ -20,7 +20,7 @@ angular.module('drug.service', []).factory('DrugService', [
 
             getDrug: function(serial) {
                 let deferred = $q.defer();
-                $http.get('/api/drug/' + serial).then((results) => {
+                $http.get('/api/drugs/' + serial).then((results) => {
                     deferred.resolve(results.data);
                 }, (err) => {
                     deferred.reject(err);
@@ -33,7 +33,7 @@ angular.module('drug.service', []).factory('DrugService', [
                 let deferred = $q.defer();
                 $http({
                     method: 'POST',
-                    url: '/api/drug',
+                    url: '/api/drugs',
                     data: $.param(newDrug),
                     headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
                 }).then((results) => {

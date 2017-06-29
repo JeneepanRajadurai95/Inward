@@ -1,0 +1,116 @@
+.col-md-12.col-sm-12.col-xs-12.margin-bottom--10px
+    span.col-md-2.col-sm-4.col-xs-12.top-selection
+        button.btn.btn-default(ng-click="archivePDF=true")
+            i.fa.fa-file-pdf-o
+        span.top-selection--inner  PDF
+    span.col-md-2.col-sm-4.col-xs-12.top-selection
+        button.btn.btn-default(ng-click="$parent.refresh();")
+            i.fa.fa-refresh
+        span.top-selection--inner  Refresh
+
+include patient.archive.pdf.jade
+
+.col-md-12.col-sm-12.col-xs-12
+    .row
+        .col-md-4.col-sm-12.col-xs-12.loader.archive(ng-show="loading")
+        .col-md-4.col-sm-12.col-xs-12.archive(ng-class="loading ? 'div-loading' : 'div-loaded'")
+            h4.col-md-12.col-sm-12-col-xs-12.archive-title
+                | {{dpatient.Name.firstName}} {{dpatient.Name.lastName}}
+            hr
+            span.col-md-12.col-sm-12.col-xs-12.archive-body
+                span.col-md-12.col-sm-12.col-xs-12.gap
+                    span.col-md-6.col-sm-12.col-xs-12.no_padding.montserrat
+                        i.fa(ng-class="(dpatient.Sex == 'Male') ? 'fa-mars' : ((dpatient.Sex == 'Female') ? 'fa-venus' : '')")
+                        | &nbsp; {{dpatient.Sex}}
+                    span.col-md-6.col-sm-12.col-xs-12.no_padding.montserrat
+                        | {{dpatient.MarriedStatus}} &nbsp;
+                small.col-md-12.col-sm-12.col-xs-12.padding
+                    b BHT # : 
+                    | &nbsp; {{dpatient.Inward.bhtNumber}}
+                small.col-md-12.col-sm-12.col-xs-12.padding
+                    b Ward # :
+                    | &nbsp; {{dpatient.Inward.wardNumer}}
+                small.col-md-12.col-sm-12.col-xs-12.padding
+                    b Bed # :
+                    | &nbsp; {{dpatient.Inward.bedNumber}}
+                small.col-md-12.col-sm-12.col-xs-12.padding
+                    b Admitted : 
+                    | &nbsp; {{dpatient.Inward.admittedDateTime | date}}
+        .col-md-7.col-sm-12.col-xs-12.loader.archive-shadow--0(ng-show="loading")
+        .col-md-7.col-sm-12.col-xs-12.archive-shadow--0(style="padding-left: 40px !important;", ng-class="loading ? 'div-loading' : 'div-loaded'")
+            .row.col-md-12.col-sm-12.col-xs-12
+                .col-md-1.col-sm-2.col-xs-2.no_padding
+                    round-progress(max="100", current="current", color="#7E57C2", bgcolor="#eaeaea", radius="100", stroke="20", clockwise="true", responsive="true", duration="800", animation="easeInOutQuart", animation-delay="0")
+                .col-md-11.col-sm-10.col-xs-10.vcenter(style="font-size: 12px !important;")
+                    span.width--100 {{current}}% Dosage
+    .row
+        .col-md-4.col-sm-12.col-xs-12.loader.archive(ng-show="loading")
+        .col-md-4.col-sm-12.col-xs-12.archive(ng-class="loading ? 'div-loading' : 'div-loaded'")
+            h4.col-md-12.col-sm-12-col-xs-12.archive-heading
+                | Personal Details
+            hr
+            .col-md-12.col-sm-12.col-xs-12.archive-body
+                .col-md-12.col-sm-12.col-xs-12.gap
+                    span.col-md-12.col-sm-12.col-xs-12.padding
+                        b.montserrat DOB : 
+                        | &nbsp; {{ dpatient.DOB | date: 'yyyy-MM-dd' }}
+                .col-md-12.col-sm-12.col-xs-12.gap
+                    span.col-md-12.col-sm-12.col-xs-12.padding
+                        b.montserrat Employement : 
+                        | &nbsp; {{dpatient.EmployementStatus}}
+                .col-md-12.col-sm-12.col-xs-12.gap
+                    span.col-md-12.col-sm-12.col-xs-12.padding
+                        b.montserrat Address : 
+                        | &nbsp; {{dpatient.ContactInfo.Address.AddressLine}},
+                        br
+                        | {{dpatient.ContactInfo.Address.City}}, {{dpatient.ContactInfo.Address.Zip}},
+                        br
+                        | {{dpatient.ContactInfo.Address.City}}
+                .col-md-12.col-sm-12.col-xs-12.gap
+                    span.col.md-12.col-sm-12.col-xs-12.padding
+                        i.fa.fa-home 
+                        | &nbsp; Home &nbsp;&nbsp;: {{dpatient.ContactInfo.Phone.Home}}
+                    span.col.md-12.col-sm-12.col-xs-12.padding
+                        i.fa.fa-mobile-phone
+                        | &nbsp;&nbsp;&nbsp; Mobile &nbsp;: {{dpatient.ContactInfo.Phone.Mobile}}
+                    span.col.md-12.col-sm-12.col-xs-12.padding
+                        i.fa.fa-briefcase
+                        | &nbsp; Office &nbsp;&nbsp;: {{dpatient.ContactInfo.Phone.Office}}
+        .col-md-4.col-sm-12.col-xs-12.loader.archive(ng-show="loading")
+        .col-md-4.col-sm-12.col-xs-12.archive(ng-class="loading ? 'div-loading' : 'div-loaded'")
+            h4.col-md-12.col-sm-12-col-xs-12.archive-heading
+                | Guardian Details
+            hr
+            .col-md-12.col-sm-12.col-xs-12.archive-body
+                h4.col-md-12.col-sm-12-col-xs-12.montserrat.no_margin.gap
+                    | {{dpatient.ResponsibleParty.Name.firstName}} {{dpatient.ResponsibleParty.Name.lastName}}
+                .col-md-12.col-sm-12.col-xs-12.gap
+                    span.col-md-12.col-sm-12.col-xs-12.padding
+                        b.montserrat Age : 
+                        | &nbsp; {{ dpatient.ResponsibleParty.Age }}
+                .col-md-12.col-sm-12.col-xs-12.gap
+                    span.col-md-12.col-sm-12.col-xs-12.padding
+                        b.montserrat Employement : 
+                        | &nbsp; {{dpatient.ResponsibleParty.EmployementStatus}}
+                .col-md-12.col-sm-12.col-xs-12.gap
+                    span.col-md-12.col-sm-12.col-xs-12.padding
+                        b.montserrat Address :
+                        | &nbsp; {{dpatient.ResponsibleParty.ContactInfo.Address.AddressLine}},
+                        br
+                        | {{dpatient.ResponsibleParty.ContactInfo.Address.City}}, {{dpatient.ResponsibleParty.ContactInfo.Address.Zip}},
+                        br
+                        | {{dpatient.ResponsibleParty.ContactInfo.Address.City}}
+                .col-md-12.col-sm-12.col-xs-12.gap
+                    span.col.md-12.col-sm-12.col-xs-12.padding
+                        i.fa.fa-home 
+                        | &nbsp; Home &nbsp;&nbsp;: {{dpatient.ResponsibleParty.ContactInfo.Phone.Home}}
+                    span.col.md-12.col-sm-12.col-xs-12.padding
+                        i.fa.fa-mobile-phone
+                        | &nbsp;&nbsp;&nbsp; Mobile &nbsp;: {{dpatient.ResponsibleParty.ContactInfo.Phone.Mobile}}
+                    span.col.md-12.col-sm-12.col-xs-12.padding
+                        i.fa.fa-briefcase
+                        | &nbsp; Office &nbsp;&nbsp;: {{dpatient.ResponsibleParty.ContactInfo.Phone.Office}}
+    .row
+        .col-md-3.col-sm-5.col-xs-12.loader.archive(ng-show="loading")
+        .col-md-3.col-sm-5.col-xs-12.archive(ng-class="loading ? 'div-loading' : 'div-loaded'", style="box-shadow: none !important;")
+            canvas.chart.chart-doughnut#doughnut(chart-data="data", chart-labels="labels", chart-colors="colors", chart-options="options")

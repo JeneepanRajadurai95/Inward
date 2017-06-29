@@ -1,67 +1,246 @@
-.col-md-12.padding--top--10px
-    form(role="form", ng-submit="addPatient(cpatient)", ng-show="partialForm=='addPatientForm'")
-        .form-group.col-md-12
-            .form-group.col-md-12
-                h5.montserrat Details
-            .form-group.col-md-4
-                input.form-control(type="text", placeholder="First Name", ng-model="cpatient.Name.firstName")
-            .form-group.col-md-4
-                input.form-control(type="text", placeholder="Last Name", ng-model="cpatient.Name.lastName")
-            .form-group.col-md-1
-                input.form-control.border--none(type="text", placeholder="Age", ng-model="cpatient.Age")
-        .form-group.form-inline.col-md-6
-            .form-group.col-md-4
-                h5.montserrat Sex
-                div.btn-group
-                    label.no-padding--left.width--100
-                        input(type="radio", ng-model="cpatient.Sex", value="Male")
-                        span.montserrat.light.size-12  Male
-                    label.no-padding--left.width--100
-                        input(type="radio", ng-model="cpatient.Sex", value="Female")
-                        span.montserrat.light.size-12  Female
-            .form-group.col-md-4
-                h5.montserrat Status
-                div.btn-group(data-toggle="buttons")
-                    label.no-padding--left.width--100
-                        input(type="radio", ng-model="cpatient.MarriedStatus", value="Single")
-                        span.montserrat.light.size-12  Single
-                    label.no-padding--left.width--100
-                        input(type="radio", ng-model="cpatient.MarriedStatus", value="Married")
-                        span.montserrat.light.size-12  Married
-                    label.no-padding--left.width--100
-                        input(type="radio", ng-model="cpatient.MarriedStatus", value="Divorced")
-                        span.montserrat.light.size-12  Divorced
-            .form-group.col-md-4
-                h5.montserrat Emp Status
-                div.btn-group(data-toggle="buttons")
-                    label.no-padding--left.width--100
-                        input(type="radio", ng-model="cpatient.EmployementStatus", value="Working")
-                        span.montserrat.light.size-12  Working
-                    label.no-padding--left.width--100
-                        input(type="radio", ng-model="cpatient.EmployementStatus", value="Retired")
-                        span.montserrat.light.size-12  Retired
-        .form-group.col-md-6
-            .form-group.col-md-12
-                h5.montserrat Contact
-            .form-group.col-md-12
-                input.form-control(type="text", placeholder="Address Line", ng-model="cpatient.ContactInfo.Address.AddressLine")
-            .form-group.col-md-4
-                input.form-control(type="text", placeholder="Zip", ng-model="cpatient.ContactInfo.Address.Zip")
-            .form-group.col-md-8
-                input.form-control(type="text", placeholder="City", ng-model="cpatient.ContactInfo.Address.City")
-            .form-group.col-md-4
-                input.form-control(type="text", placeholder="Home", ng-model="cpatient.ContactInfo.Phone.Home")
-            .form-group.col-md-4
-                input.form-control(type="text", placeholder="Mobile", ng-model="cpatient.ContactInfo.Phone.Mobile")
-            .form-group.col-md-4
-                input.form-control(type="text", placeholder="Office", ng-model="cpatient.ContactInfo.Phone.Office")
-        .form-group.col-md-6
-            .form-group.col-md-12
-                h5.montserrat Ward Admission
-            .form-group.col-md-12
-                input.form-control(type="number", placeholder="Bed Number", ng-model="cpatient.Inward.bedNumber")
-        .form-group.col-md-12
-            .form-group
-                button.btn.btn-default(type="submit") Add
-            .form-group
-                a.btn(ng-click="partialForm='null'") Cancel
+.col-md-12.col-sm-12.col-xs-12(name="addPatientForm")
+    form.col-md-12.col-sm-12.col-xs-12.border-top--2px(role="form", ng-submit="addPatient(cpatient)", ng-show="partialForm=='addPatientForm'", name="addPatientForm")
+        span.col-md-12.col-sm-12.col-xs-12.text-align--right.padding-top--10px.form-group(ng-click="partialForm='null';clearAll();", name="closePatientForm")
+            label.btn.btn-default.btn-circle
+                i.fa.fa-times
+        .step-progress.form-group.col-md-12.col-sm-12.col-xs-12.padding-top--10px
+            .step-slider.col-md-12.col-sm-12.col-xs-12
+                .step-slider-item._25(data-id="personal")
+                .step-slider-item._25(data-id="disease")
+                .step-slider-item._25(data-id="responsible")
+                .step-slider-item._25(data-id="wardAdmission")
+            .step-content.col-md-12.col-sm-12.col-xs-12
+                .step-content-body#personal
+                    h5.col-md-12.col-sm-12.col-xs-12.content-heading 
+                        | Personal Details
+                    .form-group.col-md-2.col-sm-12.col-xs-12
+                        label.content-label 
+                            | Title
+                            span.red *
+                        select.form-control.input-sm(ng-model="cpatient.Name.title", required)
+                            option(ng-repeat="t in titles") {{t}}
+                    .form-group.col-md-3.col-sm-12.col-xs-12
+                        label.content-label 
+                            | First Name
+                            span.red *
+                        input.form-control.input-sm(type="text", placeholder="First Name", ng-model="cpatient.Name.firstName", required)
+                    .form-group.col-md-3.col-sm-12.col-xs-12
+                        label.content-label 
+                            | Last Name
+                            span.red *
+                        input.form-control.input-sm(type="text", placeholder="Last Name", ng-model="cpatient.Name.lastName", required)
+                    .form-group.col-md-4.col-sm-6.col-xs-12
+                        label.content-label 
+                            | D.O.B
+                            span.red *
+                        div.dropdown
+                            a.dropdown-toggle#dLabel(role="button" data-toggle="dropdown" data-target=".dropdown" href="#")
+                                div.input-group
+                                    input.form-control.input-sm#date(type="text", name="date", ng-model="cpatient.DOB", placeholder="Date of Birth", required)
+                                    span.input-group-addon
+                                        i.glyphicon.glyphicon-calendar
+                            ul.dropdown-menu(role="menu" aria-labelledby="dLabel")
+                                datetimepicker(ng-model="cpatient.DOB", data-datetimepicker-config="{ dropdownSelector: '.dropdown-toggle' }")
+                    .form-group.col-md-12.col-sm-12.col-xs-12.no_padding.margin-top--10px
+                        .form-group.col-md-12.col-sm-12.col-xs-12
+                            label.col-md-3.col-sm-6.col-xs-12.content-label 
+                                | Gender
+                            label.radio-inline
+                                input(type="radio", ng-model="cpatient.Sex", value="Male")
+                                span.radio-span  Male
+                            label.radio-inline
+                                input(type="radio", ng-model="cpatient.Sex", value="Female")
+                                span.radio-span  Female
+                        .form-group.col-md-12.col-sm-12.col-xs-12
+                            label.col-md-3.col-sm-6.col-xs-12.content-label 
+                                | Status
+                            label.radio-inline
+                                input(type="radio", ng-model="cpatient.MarriedStatus", value="Single")
+                                span.radio-span  Single
+                            label.radio-inline
+                                input(type="radio", ng-model="cpatient.MarriedStatus", value="Married")
+                                span.radio-span  Married
+                            label.radio-inline
+                                input(type="radio", ng-model="cpatient.MarriedStatus", value="Divorced")
+                                span.radio-span  Divorced
+                        .form-group.col-md-12.col-sm-12.col-xs-12
+                            label.col-md-3.col-sm-6.col-xs-12.content-label 
+                                | Employment Status
+                            label.radio-inline
+                                input(type="radio", ng-model="cpatient.EmployementStatus", value="Working")
+                                span.radio-span  Working
+                            label.radio-inline
+                                input(type="radio", ng-model="cpatient.EmployementStatus", value="Retired")
+                                span.radio-span  Retired
+                            label.radio-inline
+                                input(type="radio", ng-model="cpatient.EmployementStatus", value="None")
+                                span.radio-span  None
+                    .form-group.col-md-12.col-sm-12.col-xs-12.no_padding
+                        h5.col.md-12.col-sm-12.col-xs-12.content-title
+                            | Address & Contact Info
+                        .form-group.col-md-12.col-sm-12.col-xs-12
+                            label.content-label 
+                                | Address Line
+                                span.red *
+                            input.form-control.input-sm(type="text", placeholder="Address Line", ng-model="cpatient.ContactInfo.Address.AddressLine", required)
+                        .form-group.col-md-4.col-sm-12.col-xs-12
+                            label.content-label 
+                                | Zip
+                                span.red *
+                            input.form-control.input-sm(type="text", placeholder="Zip", ng-model="cpatient.ContactInfo.Address.Zip", required)
+                        .form-group.col-md-4.col-sm-12.col-xs-12
+                            label.content-label 
+                                | City
+                                span.red *
+                            input.form-control.input-sm(type="text", placeholder="City", ng-model="cpatient.ContactInfo.Address.City", required)
+                        .form-group.col-md-4.col-sm-12.col-xs-12
+                            label.content-label 
+                                | Country
+                                span.red *
+                            input.form-control.input-sm(type="text", placeholder="Country", ng-model="cpatient.ContactInfo.Address.Country", required)
+                        .form-group.col-md-4.col-sm-12.col-xs-12
+                            label.content-label 
+                                | Home | Land-line Number
+                                span.red *
+                            input.form-control.input-sm(type="text", placeholder="Home", ng-model="cpatient.ContactInfo.Phone.Home", required)
+                        .form-group.col-md-4.col-sm-12.col-xs-12
+                            label.content-label 
+                                | Mobile Number
+                                span.red *
+                            input.form-control.input-sm(type="text", placeholder="Mobile", ng-model="cpatient.ContactInfo.Phone.Mobile", required)
+                        .form-group.col-md-4.col-sm-12.col-xs-12
+                            label.content-label 
+                                | Office Number
+                            input.form-control.input-sm(type="text", placeholder="Office", ng-model="cpatient.ContactInfo.Phone.Office")
+                .step-content-body.out#disease
+                    h5.col-md-12.col-sm-12.col-xs-12.content-heading 
+                        | Disease
+                    .form-group.col-md-6.col-sm-12.col-xs-12
+                        label.content-label 
+                            | Disease Selection
+                            span.red *
+                        select.form-control.input-sm(placeholder="Disease Selection", ng-model="cpatient.Inward.disease.diseaseType", required)
+                            option(ng-repeat="d in diseaseList", value="{{d}}") {{d}}
+                    .form-group.col-md-6.col-sm-12.col-xs-12
+                        label.content-label 
+                            | Explanation
+                        input.form-control.input-sm(type="text", placeholder="Explanation", ng-model="cpatient.Inward.disease.diseaseType.explanation")
+                .step-content-body.out#responsible
+                    h5.col-md-12.col-sm-12.col-xs-12.content-heading 
+                        | Guardian Details
+                    .form-group.col-md-2.col-sm-12.col-xs-12
+                        label.content-label 
+                            | Title
+                            span.red *
+                        select.form-control.input-sm(ng-model="cpatient.ResponsibleParty.Name.title", required)
+                            option(ng-repeat="t in titles") {{t}}
+                    .form-group.col-md-4.col-sm-12.col-xs-12
+                        label.content-label 
+                            | First Name
+                            span.red *
+                        input.form-control.input-sm(type="text", placeholder="First Name", ng-model="cpatient.ResponsibleParty.Name.firstName", required)
+                    .form-group.col-md-4.col-sm-12.col-xs-12
+                        label.content-label 
+                            | Last Name
+                            span.red *
+                        input.form-control.input-sm(type="text", placeholder="Last Name", ng-model="cpatient.ResponsibleParty.Name.lastName", required)
+                    .form-group.col-md-2.col-sm-6.col-xs-12
+                        label.content-label 
+                            | Age
+                            span.red *
+                        input.form-control.input-sm(type="text", placeholder="Age", ng-model="cpatient.ResponsibleParty.Age", pattern="^(0?[1-9]|[1-9][0-9])$")
+                    .form-group.col-md-12.col-sm-12.col-xs-12.no_padding.margin-top--10px
+                        .form-group.col-md-12.col-sm-12.col-xs-12
+                            label.col-md-3.col-sm-6.col-xs-12.content-label 
+                                | Gender
+                            label.radio-inline
+                                input(type="radio", ng-model="cpatient.ResponsibleParty.Sex", value="Male")
+                                span.radio-span  Male
+                            label.radio-inline
+                                input(type="radio", ng-model="cpatient.ResponsibleParty.Sex", value="Female")
+                                span.radio-span  Female
+                        .form-group.col-md-12.col-sm-12.col-xs-12
+                            label.col-md-3.col-sm-6.col-xs-12.content-label 
+                                | Status
+                            label.radio-inline
+                                input(type="radio", ng-model="cpatient.ResponsibleParty.MarriedStatus", value="Single")
+                                span.radio-span  Single
+                            label.radio-inline
+                                input(type="radio", ng-model="cpatient.ResponsibleParty.MarriedStatus", value="Married")
+                                span.radio-span  Married
+                            label.radio-inline
+                                input(type="radio", ng-model="cpatient.ResponsibleParty.MarriedStatus", value="Divorced")
+                                span.radio-span  Divorced
+                        .form-group.col-md-12.col-sm-12.col-xs-12
+                            label.col-md-3.col-sm-6.col-xs-12.content-label 
+                                | Employment Status
+                            label.radio-inline
+                                input(type="radio", ng-model="cpatient.ResponsibleParty.EmployementStatus", value="Working")
+                                span.radio-span  Working
+                            label.radio-inline
+                                input(type="radio", ng-model="cpatient.ResponsibleParty.EmployementStatus", value="Retired")
+                                span.radio-span  Retired
+                            label.radio-inline
+                                input(type="radio", ng-model="cpatient.ResponsibleParty.EmployementStatus", value="None")
+                                span.radio-span  None
+                    .form-group.col-md-12.col-sm-12.col-xs-12.no_padding
+                        h5.col.md-12.col-sm-12.col-xs-12.content-title
+                            | Address & Contact Info
+                        .form-group.col-md-12.col-sm-12.col-xs-12
+                            label.content-label 
+                                | Address Line
+                                span.red *
+                            input.form-control.input-sm(type="text", placeholder="Address Line", ng-model="cpatient.ResponsibleParty.ContactInfo.Address.AddressLine", required)
+                        .form-group.col-md-4.col-sm-12.col-xs-12
+                            label.content-label 
+                                | Zip
+                                span.red *
+                            input.form-control.input-sm(type="text", placeholder="Zip", ng-model="cpatient.ResponsibleParty.ContactInfo.Address.Zip", required)
+                        .form-group.col-md-4.col-sm-12.col-xs-12
+                            label.content-label 
+                                | City
+                                span.red *
+                            input.form-control.input-sm(type="text", placeholder="City", ng-model="cpatient.ResponsibleParty.ContactInfo.Address.City", required)
+                        .form-group.col-md-4.col-sm-12.col-xs-12
+                            label.content-label 
+                                | Country
+                                span.red *
+                            input.form-control.input-sm(type="text", placeholder="Country", ng-model="cpatient.ResponsibleParty.ContactInfo.Address.Country", required)
+                        .form-group.col-md-4.col-sm-12.col-xs-12
+                            label.content-label 
+                                | Home | Land-line Number
+                                span.red *
+                            input.form-control.input-sm(type="text", placeholder="Home", ng-model="cpatient.ResponsibleParty.ContactInfo.Phone.Home", required)
+                        .form-group.col-md-4.col-sm-12.col-xs-12
+                            label.content-label 
+                                | Mobile Number
+                                span.red *
+                            input.form-control.input-sm(type="text", placeholder="Mobile", ng-model="cpatient.ResponsibleParty.ContactInfo.Phone.Mobile", required)
+                        .form-group.col-md-4.col-sm-12.col-xs-12
+                            label.content-label 
+                                | Office Number
+                            input.form-control.input-sm(type="text", placeholder="Office", ng-model="cpatient.ResponsibleParty.ContactInfo.Phone.Office")
+                .step-content-body.out#wardAdmission
+                    h5.col-md-12.col-sm-12.col-xs-12.content-heading 
+                        | Ward Admission
+                    .form-group.col-md-6.col-sm-12.col-xs-12
+                        label.content-label 
+                            | Ward Selection
+                            span.red *
+                        select.form-control.input-sm(placeholder="Ward Selection", ng-model="cpatient.Inward.wardNumber", ng-change="getGreenBeds(cpatient.Inward.wardNumber)", required)
+                            option(ng-repeat="w in availableWards", value="{{w.wardNumber}}") {{w.name}}
+                    .form-group.col-md-6.col-sm-12.col-xs-12
+                        label.content-label 
+                            | Bed Selection
+                            span.red *
+                        select.form-control.input-sm(placeholder="Bed Selection", ng-model="cpatient.Inward.bedNumber", ng-disabled="availableBedsDisabled", required)
+                            option(ng-repeat="b in availableBeds.beds", value="{{b.bedNumber}}") {{b.bedNumber}}
+                .step-content-body.out#stepLast Completed
+                .step-content-foot.col-md-12.col-sm-12.col-xs-12
+                    label.btn.btn-warning.float--left(name="prev")  
+                        i.fa.fa-chevron-left
+                        |  Previous
+                    label.btn.btn-success.active(name="next")
+                        | Next  
+                        i.fa.fa-chevron-right
+                    button.btn.btn-success.active.out(type="submit", name="finish") Add

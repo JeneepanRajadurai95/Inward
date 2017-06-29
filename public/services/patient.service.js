@@ -9,7 +9,7 @@ angular.module('patient.service', []).factory('PatientService', [
         return {
             getPatients: function() {
                 let deferred = $q.defer();
-                $http.get('/api/patient').then((results) => {
+                $http.get('/api/patients').then((results) => {
                     deferred.resolve(results.data);
                 }, (err) => {
                     deferred.reject(err);
@@ -19,7 +19,7 @@ angular.module('patient.service', []).factory('PatientService', [
 
             getPatient: function(bht) {
                 let deferred = $q.defer();
-                $http.get('/api/patient/' + bht).then((results) => {
+                $http.get('/api/patients/' + bht).then((results) => {
                     deferred.resolve(results.data);
                 }, (err) => {
                     deferred.reject(err);
@@ -31,7 +31,7 @@ angular.module('patient.service', []).factory('PatientService', [
                 let deferred = $q.defer();
                 $http({
                     method: 'POST',
-                    url: '/api/patient',
+                    url: '/api/patients',
                     data: $.param(newPatient),
                     headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
                 }).then((results) => {

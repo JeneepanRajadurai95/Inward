@@ -2,11 +2,15 @@
 
 'use strict';
 
+/**
+ * Front-end Routing | Rendering Jade Templates for AngularJS
+ */
+
 const path = require('path');
 
 module.exports = function(app) {
 
-    // rendering _layout.jade if only user logged in
+    // Rendering _layout.jade if only user logged in
     app.get('/_layout', isLoggedIn, (req, res) => {
         res.render('shared/_layout.jade', { user: req.user });
     });

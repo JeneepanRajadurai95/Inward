@@ -19,8 +19,8 @@ angular.module('test.controller', []).controller('TestController', [
             });
         }
 
-        $scope.getTest = function(serialnumber) {
-            TestService.getTest(serialnumber).then((test) => {
+        $scope.getTest = function(patientNo) {
+            TestService.getTest(patientNo).then((test) => {
                 $scope.dtest = test;
             }, (err) => {
                 console.log(err);

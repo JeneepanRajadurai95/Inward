@@ -1,0 +1,12 @@
+.col-md-12.col-sm-12.col-xs-12(name="addWardBedForm")
+    form.col-md-12.col-sm-12.col-xs-12.border-top--2px(role="form", ng-submit="addWardBed(wardNumber)", ng-show="partialForm=='addWardBedForm'", name="addWardBedForm")
+        span.col-md-12.col-sm-12.col-xs-12.text-align--right.padding-top--10px.form-group(ng-click="partialForm='null'", name="closeWardBedForm")
+            label.btn.btn-default.btn-circle
+                i.fa.fa-times
+        .form-group.col-md-2.col-sm-12.col-xs-12
+            label.content-label 
+                | Ward Number
+                span.red *
+            select.form-control.input-sm(placeholder="Ward Number", ng-model="wardNumber", required)
+                option(ng-repeat="t in wards", value="{{t.wardNumber}}") {{t.name}}
+            button.btn.btn-success(type="submit", name="finish") Add

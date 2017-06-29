@@ -2,11 +2,12 @@
 
 'use strict';
 
-angular.module('appRoutes', []).config([
+angular.module('appRoutes', ['angular-loading-bar']).config([
     '$routeProvider',
     '$locationProvider',
-    function($routeProvider, $locationProvider) {
-
+    'cfpLoadingBarProvider',
+    function($routeProvider, $locationProvider, cfpLoadingBarProvider) {
+        cfpLoadingBarProvider.includeSpinner = false;
         $routeProvider
             .when('/', { // root of Dashboard
                 templateUrl: 'template/dashboard',
@@ -15,6 +16,14 @@ angular.module('appRoutes', []).config([
             .when('/patient', {
                 templateUrl: 'template/patient/patient.index',
                 controller: 'PatientController'
+            })
+            .when('/patient/archive/:bht', {
+                templateUrl: 'template/patient/patient.archive',
+                controller: 'PatientArchiveController'
+            })
+            .when('/patient/archive/:bht/pdf', {
+                templateUrl: 'template/patient/patient.archive.pdf',
+                controller: 'PatientArchiveController'
             })
             .when('/doctor', {
                 templateUrl: 'template/doctor/doctor.index',

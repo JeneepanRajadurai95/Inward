@@ -1,32 +1,49 @@
 {
-  "name": "code19",
-  "description": "Health Information System Inward Module",
-  "main": "server.js",
-  "authors": [
-    "Athiththan <kathirgamasagaran.ahtiththan@my.sliit.lk>"
-  ],
-  "license": "ISC",
-  "homepage": "https://github.com/Athiththan/code19",
-  "private": true,
-  "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components",
-    "public/libs",
-    "test",
-    "tests"
-  ],
-  "dependencies": {
-    "angular": "1.5.x",
-    "angular-animate": "1.5.x",
-    "angular-mocks": "1.5.x",
-    "angular-resource": "1.5.x",
-    "angular-route": "1.5.x",
-    "font-awesome": "^4.7.0",
-    "Ionicons": "ionicons#^2.0.1",
-    "AdminLTE": "adminlte#^2.3.11"
-  },
-  "devDependencies": {
-    "bootstrap": "3.3.7"
-  }
+    "name": "code19",
+    "description": "Health Information System Inward Module",
+    "main": "server.js",
+    "authors": [
+        "Athiththan <kathirgamasagaran.ahtiththan@my.sliit.lk>"
+    ],
+    "license": "ISC",
+    "homepage": "https://github.com/Athiththan/code19",
+    "private": true,
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components",
+        "public/libs",
+        "test",
+        "tests"
+    ],
+    "dependencies": {
+        "angular": "1.5.x",
+        "angular-animate": "1.5.x",
+        "angular-mocks": "1.5.x",
+        "angular-resource": "1.5.x",
+        "angular-route": "1.5.x",
+        "font-awesome": "4.7.0",
+        "Ionicons": "ionicons#2.0.1",
+        "AdminLTE": "adminlte#2.3.11",
+        "bootstrap": "3.3.7",
+        "angular-loading-bar": "0.9.0",
+        "moment": "2.18.1",
+        "AngularSlideables": "*",
+        "v-accordion": "1.6.0",
+        "angular-save-html-to-pdf": "*",
+        "angular-chart.js": "1.1.1",
+        "progressbar.js": "1.0.1",
+        "angular-svg-round-progressbar": "0.4.8",
+        "angular-bootstrap-calendar": "0.29.2",
+        "interactjs": "interact#1.2.8"
+    },
+    "devDependencies": {
+        "bootstrap": "3.3.7"
+    },
+    "resolutions": {
+        "bootstrap": "3.3.7",
+        "jquery": "1.12",
+        "angular-svg-round-progressbar": "0.4.8",
+        "angular": "1.5.x"
+    }
 }

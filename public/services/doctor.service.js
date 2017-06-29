@@ -9,7 +9,7 @@ angular.module('doctor.service', []).factory('DoctorService', [
         return {
             getdoctors: function() {
                 let deferred = $q.defer();
-                $http.get('/api/doctor').then((results) => {
+                $http.get('/api/doctors').then((results) => {
                     deferred.resolve(results.data);
                 }, (err) => {
                     deferred.reject(err);
@@ -22,7 +22,7 @@ angular.module('doctor.service', []).factory('DoctorService', [
                 let deferred = $q.defer();
                 $http({
                     method: 'POST',
-                    url: '/api/doctor',
+                    url: '/api/doctors',
                     data: $.param(newDoctor),
                     headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
                 }).then((results) => {

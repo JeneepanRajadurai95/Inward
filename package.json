@@ -1,57 +1,58 @@
 {
-    "name": "code19",
-    "version": "1.0.0",
-    "description": "Health Information System Inward Module",
-    "main": "server.js",
-    "scripts": {
-        "test": "./node_modules/.bin/mocha --reporter spec"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/Athiththan/code19.git"
-    },
-    "author": "",
-    "license": "ISC",
-    "bugs": {
-        "url": "https://github.com/Athiththan/code19/issues"
-    },
-    "homepage": "https://github.com/Athiththan/code19#readme",
-    "private": true,
-    "ignore": [
-        "**/.*",
-        "node_modules",
-        "bower_components",
-        "public/libs",
-        "test",
-        "tests"
-    ],
-    "dependencies": {
-        "bcrypt-nodejs": "0.0.3",
-        "body-parser": "1.17.1",
-        "bower": "1.8.0",
-        "connect-flash": "0.1.1",
-        "cookie-parser": "1.4.3",
-        "ejs": "2.5.6",
-        "express": "4.15.2",
-        "express-session": "1.15.2",
-        "jade": "^1.11.0",
-        "method-override": "2.3.7",
-        "mongoose": "4.9.1",
-        "morgan": "1.8.1",
-        "passport": "0.3.2",
-        "passport-facebook": "2.1.1",
-        "passport-google-oauth": "1.0.0",
-        "passport-local": "1.0.0",
-        "passport-twitter": "1.0.4",
-        "serve-favicon": "2.4.2"
-    },
-    "devDependencies": {
-        "chai": "3.5.0",
-        "grunt": "1.0.1",
-        "mocha": "3.2.0",
-        "nodemon": "1.11.0",
-        "request": "2.81.0",
-        "should": "11.2.1",
-        "supertest": "3.0.0"
-    }
+  "name": "code19",
+  "version": "1.0.0",
+  "description": "Health Information System Inward Module",
+  "main": "server.js",
+  "scripts": {
+    "test": "./node_modules/.bin/mocha --reporter spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Athiththan/code19.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Athiththan/code19/issues"
+  },
+  "homepage": "https://github.com/Athiththan/code19#readme",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/libs",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-bootstrap-datetimepicker": "^1.1.4",
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "1.17.1",
+    "bower": "1.8.0",
+    "connect-flash": "0.1.1",
+    "cookie-parser": "1.4.3",
+    "ejs": "2.5.6",
+    "express": "4.15.2",
+    "express-session": "1.15.2",
+    "jade": "^1.11.0",
+    "method-override": "2.3.7",
+    "mongoose": "4.9.1",
+    "morgan": "1.8.1",
+    "passport": "0.3.2",
+    "passport-facebook": "2.1.1",
+    "passport-google-oauth": "1.0.0",
+    "passport-local": "1.0.0",
+    "passport-twitter": "1.0.4",
+    "serve-favicon": "2.4.2"
+  },
+  "devDependencies": {
+    "chai": "3.5.0",
+    "grunt": "1.0.1",
+    "mocha": "3.2.0",
+    "nodemon": "1.11.0",
+    "request": "2.81.0",
+    "should": "11.2.1",
+    "supertest": "3.0.0"
+  }
 }

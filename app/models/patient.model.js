@@ -11,6 +11,10 @@ const patientSchema = mongoose.Schema({
         unique: true
     },
     Name: {
+        title: {
+            type: String,
+            required: true
+        },
         firstName: {
             type: String,
             required: true
@@ -19,9 +23,12 @@ const patientSchema = mongoose.Schema({
             type: String
         }
     },
-    Age: {
-        type: Number,
+    DOB: {
+        type: Date,
         required: true
+    },
+    Age: {
+        type: Number
     },
     Sex: {
         type: String,
@@ -36,21 +43,30 @@ const patientSchema = mongoose.Schema({
     ContactInfo: {
         Address: {
             AddressLine: {
-                type: String
+                type: String,
+                required: true
             },
             Zip: {
                 type: Number
+                    // required: true
             },
             City: {
-                type: String
+                type: String,
+                required: true
+            },
+            Country: {
+                type: String,
+                required: true
             }
         },
         Phone: {
             Home: {
-                type: Number
+                type: Number,
+                required: true
             },
             Mobile: {
-                type: Number
+                type: Number,
+                required: true
             },
             Office: {
                 type: Number
@@ -62,48 +78,111 @@ const patientSchema = mongoose.Schema({
             type: String,
             unique: true
         },
+        wardNumber: {
+            type: String,
+            required: true
+        },
         bedNumber: {
-            type: Number
+            type: String,
+            required: true
         },
         admittedDateTime: {
             type: Date,
             default: Date.now()
+        },
+        disease: {
+            diseaseType: {
+                type: String,
+                required: true
+            },
+            explanation: {
+                type: String
+            }
+        },
+        history: [{
+            bhtNumber: {
+                type: String
+            },
+            wardNumber: {
+                type: String
+            },
+            bedNumber: {
+                type: String
+            },
+            admittedDateTime: {
+                type: Date
+            },
+            disease: {
+                diseaseType: {
+                    type: String,
+                    required: true
+                },
+                explanation: {
+                    type: String
+                }
+            },
+        }]
+    },
+    ResponsibleParty: {
+        Name: {
+            title: {
+                type: String,
+                required: true
+            },
+            firstName: {
+                type: String
+            },
+            lastName: {
+                type: String
+            }
+        },
+        Age: {
+            type: Number,
+            required: true
+        },
+        Sex: {
+            type: String,
+            required: true
+        },
+        MarriedStatus: {
+            type: String
+        },
+        EmployementStatus: {
+            type: String
+        },
+        ContactInfo: {
+            Address: {
+                AddressLine: {
+                    type: String,
+                    required: true
+                },
+                Zip: {
+                    type: Number
+                },
+                City: {
+                    type: String,
+                    required: true
+                },
+                Country: {
+                    type: String,
+                    required: true
+                }
+            },
+            Phone: {
+                Home: {
+                    type: Number,
+                    required: true
+                },
+                Mobile: {
+                    type: Number,
+                    required: true
+                },
+                Office: {
+                    type: Number
+                }
+            }
         }
     }
-    // ResponsibleParty: {
-    //     Name: {
-    //         firstName: {
-    //             type: String
-    //         },
-    //         lastName: {
-    //             type: String
-    //         }
-    //     },
-    //     ContactInfo: {
-    //         Address: {
-    //             AddressLine: {
-    //                 type: String
-    //             },
-    //             Zip: {
-    //                 type: Number
-    //             },
-    //             City: {
-    //                 type: String
-    //             }
-    //         },
-    //         Phone: {
-    //             Home: {
-    //                 type: Number
-    //             },
-    //             Mobile: {
-    //                 type: Number
-    //             },
-    //             Office: {
-    //                 type: Number
-    //             }
-    //         }
-    //     }
-    // }
 });
 
 patientSchema.pre('save', function(next) {
@@ -118,6 +197,18 @@ patientSchema.pre('save', function(next) {
                 return next(error);
             }
             doc.Inward.bhtNumber = "BHT-" + bhtCounter.seq;
+            let d = {
+                "diseaseType": doc.Inward.disease.diseaseType,
+                "explanation": doc.Inward.disease.explanation
+            };
+            let h = {
+                "bhtNumber": doc.Inward.bhtNumber,
+                "wardNumber": doc.Inward.wardNumber,
+                "bedNumber": doc.Inward.bedNumber,
+                "admittedDateTime": doc.Inward.admittedDateTime,
+                "disease": d
+            };
+            doc.Inward.history.push(h);
             next();
         });
     });
