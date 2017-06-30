@@ -13,18 +13,53 @@ angular.module('patient.controller', []).controller('PatientController', [
 
         $(function() {
 
+            $('button[name="addTransferForm"]').on('click', function() {
+                $('div[name="addDischargeForm"]').removeClass('margin-top--10px margin-bottom--30px card');
+                $('div[name="addAllergyForm"]').removeClass('margin-top--10px margin-bottom--30px card');
+                $('div[name="addPatientForm"]').removeClass('margin-top--10px margin-bottom--30px card');
+
+                $('div[name="addTransferForm"]').addClass('margin-top--10px margin-bottom--30px card');
+            });
+
+            $('span[name="closeTransferForm"]').on('click', function() {
+                $('div[name="addTransferForm"]').removeClass('margin-top--10px margin-bottom--30px card');
+            });
+
+            $('button[name="addDischargeForm"]').on('click', function() {
+                $('div[name="addTransferForm"]').removeClass('margin-top--10px margin-bottom--30px card');
+                $('div[name="addAllergyForm"]').removeClass('margin-top--10px margin-bottom--30px card');
+                $('div[name="addPatientForm"]').removeClass('margin-top--10px margin-bottom--30px card');
+
+                $('div[name="addDischargeForm"]').addClass('margin-top--10px margin-bottom--30px card');
+            });
+
+            $('span[name="closeDischargeForm"]').on('click', function() {
+                $('div[name="addDischargeForm"]').removeClass('margin-top--10px margin-bottom--30px card');
+            });
+
+            $('button[name="addAllergyForm"]').on('click', function() {
+                $('div[name="addTransferForm"]').removeClass('margin-top--10px margin-bottom--30px card');
+                $('div[name="addDischargeForm"]').removeClass('margin-top--10px margin-bottom--30px card');
+                $('div[name="addPatientForm"]').removeClass('margin-top--10px margin-bottom--30px card');
+
+                $('div[name="addAllergyForm"]').addClass('margin-top--10px margin-bottom--30px card');
+            });
+
+            $('span[name="closeAllergyForm"]').on('click', function() {
+                $('div[name="addAllergyForm"]').removeClass('margin-top--10px margin-bottom--30px card');
+            });
+
             $('button[name="addPatientForm"]').on('click', function() {
-                let instance = $(this);
-                $('div[name="addPatientForm"]').addClass('margin-top--10px');
-                $('div[name="addPatientForm"]').addClass('margin-bottom--30px');
-                $('div[name="addPatientForm"]').addClass('card');
+                $('div[name="addTransferForm"]').removeClass('margin-top--10px margin-bottom--30px card');
+                $('div[name="addDischargeForm"]').removeClass('margin-top--10px margin-bottom--30px card');
+                $('div[name="addAllergyForm"]').removeClass('margin-top--10px margin-bottom--30px card');
+
+                $('div[name="addPatientForm"]').addClass('margin-top--10px margin-bottom--30px card');
             });
 
             $('span[name="closePatientForm"]').on('click', function() {
                 let instance = $(this);
-                $('div[name="addPatientForm"]').removeClass('margin-top--10px');
-                $('div[name="addPatientForm"]').removeClass('margin-bottom--30px');
-                $('div[name="addPatientForm"]').removeClass('card');
+                $('div[name="addPatientForm"]').removeClass('margin-top--10px margin-bottom--30px card');
 
                 for (var i = step; i > 0; i--) {
                     let instance = $('.step-content .step-content-foot label[name="prev"]');
@@ -172,8 +207,10 @@ angular.module('patient.controller', []).controller('PatientController', [
             PatientService.addPatient(cpatient).then((newPatient) => {
                 $scope.rpatients.push(newPatient);
                 $scope.cpatient = {};
+                $rootScope.growl("success", 'Patient ' + newPatient.ID + ' Added Successfully');
             }, (err) => {
                 console.log(err);
+                $rootScope.growl("error", 'Something went wrong');
             });
         };
 

@@ -1,5 +1,5 @@
-.col-md-12.col-sm-12.col-xs-12.margin-bottom--10px(name="addDischargeForm")
-    div.col-md-12.col-sm-12.col-xs-12(ng-show="partialForm=='addDischargeForm'", name="addDischargeForm")
+.col-md-12.col-sm-12.col-xs-12(name="addDischargeForm")
+    div.col-md-12.col-sm-12.col-xs-12(ng-show="partialForm=='addDischargeForm'")
         span.col-md-12.col-sm-12.col-xs-12.text-align--right(ng-click="partialForm='null';clearAll();", name="closeDischargeForm")
             label.btn.btn-default.btn-circle.close-btn
                 i.fa.fa-times   
@@ -28,7 +28,7 @@
                                 span.input-group-addon
                                     i.glyphicon.glyphicon-calendar
                         ul.dropdown-menu(role="menu" aria-labelledby="dLabel")
-                            datetimepicker(ng-model="dcpatient.dischargeDate", data-datetimepicker-config="{ dropdownSelector: '.dropdown-toggle' }")
+                            datetimepicker(ng-model="dcpatient.dischargeDate", data-datetimepicker-config="{ dropdownSelector: '.dropdown-toggle' }", data-before-render="$parent.pastDateBeforeRender($dates)")
                 .form-group.col-md-6.col-sm-12.col-xs-12
                     label.content-label 
                         | Remarks

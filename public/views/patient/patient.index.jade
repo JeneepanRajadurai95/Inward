@@ -27,15 +27,10 @@
             input.form-control.input-sm(type="text" placeholder="Search.." ng-model="searchPatient")
             span.input-group-btn
                 span.btn.fa.fa-search
-    span.col-md-2.col-sm-4.col-xs-12.top-selection
-        button.btn.btn-default.btn-circle.btn-green(ng-click="partialForm='addAllergyForm'", name="addAllergyForm")
-            i.fa.fa-plus
-        span.top-selection--inner Allergy
 
 include patient.add.jade
 include patient.transfer.jade
 include patient.discharge.jade
-include patient.allergy.jade
 
 .col-md-12.col-sm-12.col-xs-12.padding--top--10px.padding-bottom--10px.padding-top--10px(ng-show="tableLoading")
   include ./../shared/table-laoding.jade  
@@ -64,7 +59,8 @@ include patient.allergy.jade
                             span.fa.fa-caret-up(ng-show="sortType == 'admittedDate' && sortReverse")
                         th
                 tbody
-                    tr.pointer(ng-repeat-start="patient in rpatients | orderBy:sortBy:sortReverse | filter:searchPatient | StartFromFilter:currentPage*pageSize | limitTo:pageSize ", ng-init="patient.expanded = false", ng-click="patient.expanded = !patient.expanded", ng-class="(patient.discharged == 'True') ? 'discharged' : ''")
+                    //- , ng-class="(patient.discharged == 'True') ? 'discharged' : ''"
+                    tr.pointer(ng-repeat-start="patient in rpatients | orderBy:sortBy:sortReverse | filter:searchPatient | StartFromFilter:currentPage*pageSize | limitTo:pageSize ", ng-init="patient.expanded = false", ng-click="patient.expanded = !patient.expanded")
                         td {{patient.Inward.bhtNumber}}
                         td {{patient.ID}}
                         td {{patient.Name.firstName}}

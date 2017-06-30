@@ -115,5 +115,56 @@ angular.module('patient.archive.controller', []).controller('PatientArchiveContr
         $scope.tabIsSet = function(tabNumber) { return ($scope.tab === tabNumber); };
 
         initializePatientArchive();
+
+
+        $(function() {
+            $('button[name="addTransferForm"]').on('click', function() {
+                $('div[name="addDischargeForm"]').removeClass('margin-top--10px margin-bottom--30px card');
+                $('div[name="addAllergyForm"]').removeClass('margin-top--10px margin-bottom--30px card');
+                $('div[name="addPatientForm"]').removeClass('margin-top--10px margin-bottom--30px card');
+
+                $('div[name="addTransferForm"]').addClass('margin-top--10px margin-bottom--30px card');
+            });
+
+            $('span[name="closeTransferForm"]').on('click', function() {
+                $('div[name="addTransferForm"]').removeClass('margin-top--10px margin-bottom--30px card');
+            });
+
+            $('button[name="addDischargeForm"]').on('click', function() {
+                $('div[name="addTransferForm"]').removeClass('margin-top--10px margin-bottom--30px card');
+                $('div[name="addAllergyForm"]').removeClass('margin-top--10px margin-bottom--30px card');
+                $('div[name="addPatientForm"]').removeClass('margin-top--10px margin-bottom--30px card');
+
+                $('div[name="addDischargeForm"]').addClass('margin-top--10px margin-bottom--30px card');
+            });
+
+            $('span[name="closeDischargeForm"]').on('click', function() {
+                $('div[name="addDischargeForm"]').removeClass('margin-top--10px margin-bottom--30px card');
+            });
+
+            $('button[name="addAllergyForm"]').on('click', function() {
+                $('div[name="addTransferForm"]').removeClass('margin-top--10px margin-bottom--30px card');
+                $('div[name="addDischargeForm"]').removeClass('margin-top--10px margin-bottom--30px card');
+                $('div[name="addPatientForm"]').removeClass('margin-top--10px margin-bottom--30px card');
+
+                $('div[name="addAllergyForm"]').addClass('margin-top--10px margin-bottom--30px card');
+            });
+
+            $('span[name="closeAllergyForm"]').on('click', function() {
+                $('div[name="addAllergyForm"]').removeClass('margin-top--10px margin-bottom--30px card');
+            });
+
+            $('button[name="addPatientForm"]').on('click', function() {
+                $('div[name="addTransferForm"]').removeClass('margin-top--10px margin-bottom--30px card');
+                $('div[name="addDischargeForm"]').removeClass('margin-top--10px margin-bottom--30px card');
+                $('div[name="addAllergyForm"]').removeClass('margin-top--10px margin-bottom--30px card');
+
+                $('div[name="addPatientForm"]').addClass('margin-top--10px margin-bottom--30px card');
+            });
+
+            $('span[name="closePatientForm"]').on('click', function() {
+                $('div[name="addPatientForm"]').removeClass('margin-top--10px margin-bottom--30px card');
+            });
+        });
     }
 ]);

@@ -210,6 +210,10 @@ a {
     padding-top: 30px !important;
 }
 
+.padding-bottom--5px {
+    padding-bottom: 5px !important;
+}
+
 .padding-bottom--10px {
     padding-bottom: 10px !important;
 }
@@ -228,6 +232,10 @@ a {
 
 .margin-top--10px {
     margin-top: 10px !important;
+}
+
+.margin-top--20px {
+    margin-top: 20px !important;
 }
 
 .margin-bottom--10px {
@@ -646,7 +654,8 @@ span.radio-span {
 
 div[name="addPatientForm"],
 div[name="addTransferForm"],
-div[name="addDischargeForm"] {
+div[name="addDischargeForm"],
+div[name="addAllergyForm"] {
     transition: 0.5s ease;
     -webkit-transition: 0.5s ease;
     -moz-transition: 0.5s ease;
