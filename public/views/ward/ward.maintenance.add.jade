@@ -1,0 +1,34 @@
+.col-md-12    
+    .col-md-4(name="assignMaintenance")
+        form.col-md-12.col-sm-12.col-xs-12.border-top--2px(role="form", ng-submit="assignMaintenance()", ng-show="partialForm=='assignMaintenanceForm'", name="assignMaintenanceForm")
+            span.col-md-12.col-sm-12.col-xs-12.text-align--right.padding-top--10px.form-group(ng-click="partialForm='null'", name="closeWardForm")
+                label.btn.btn-default.btn-circle
+                    i.fa.fa-times   
+            .form-group
+                label.content-label 
+                    | Staff NIC
+                    span.red *
+                input.form-control(type="text", placeholder="Enter NIC ", ng-model="cmaintenance.staff.nic",pattern="[0-9]{9}[vV]" ,required)
+            .form-group
+                label.content-label 
+                    | Staff Name               
+                input.form-control(type="text", placeholder="Enter Staff Name", ng-model="cmaintenance.staff.name",pattern="^[a-zA-Z]+$")
+            .form-group
+                label.content-label 
+                    | Ward
+                    span.red *
+                select.form-control.input-sm(ng-model="cmaintenance.ward", required)
+                    option(ng-repeat="w in wards") {{w.name}}
+            .form-group
+                label.content-label 
+                    | Duty Date
+                    span.red *
+                input.form-control(type="Date", placeholder="Select The Date", ng-model="cmaintenance.date")
+            .form-group
+                button.btn.btn-success(type="submit", name="finish") Add 
+    .col-md-8
+            mwl-calendar(view="calendarView", view-date="viewDate", events="events", view-title="calendarTitle", on-event-click="eventClicked(calendarEvent)", 
+                on-event-times-changed="calendarEvent.startsAt = calendarNewEventStart; calendarEvent.endsAt = calendarNewEventEnd",cell-is-open="false")  
+      
+             
+            
