@@ -106,7 +106,6 @@ const TestSchema = mongoose.Schema({
         bsa: Number,
         height: Number
     }],
-
     time: { type: Date, default: Date.now }
 });
 

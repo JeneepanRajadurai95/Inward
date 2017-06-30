@@ -19,6 +19,7 @@ angular.module('test.controller', []).controller('TestController', [
             });
         }
 
+
         $scope.getTest = function(patientID) {
             TestService.getTest(patientID).then((test) => {
                 $scope.dtest = test;

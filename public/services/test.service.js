@@ -29,6 +29,7 @@ angular.module('test.service', []).factory('TestService', [
                 return deferred.promise;
             },
 
+
             addTest: function(newTest, type) {
                 let deferred = $q.defer();
                 $http({

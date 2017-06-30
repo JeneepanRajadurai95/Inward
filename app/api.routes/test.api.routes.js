@@ -25,15 +25,6 @@ Router.get('/:id', (req, res) => {
 });
 
 Router.post('/', (req, res) => {
-    // var body = req.body;
-    // var patientID = body.
-    // var newTest = new TestModel(req.body);
-    // newTest.save().then((test) => {
-    //     res.json(test);
-    // }).catch((err) => {
-    //     console.error(err);
-    //     res.sendStatus(500);
-    // });
     var body = req.body;
 
     switch (req.query.type) {
