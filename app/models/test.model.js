@@ -6,15 +6,14 @@ const mongoose = require('mongoose');
 const Counter = mongoose.model('Counter');
 
 const TestSchema = mongoose.Schema({
-    _id: {
+    ID: {
         type: String,
-        //required: true
+        unique: true,
+    },
+    patientID: {
+        type: String
     },
     bloodTest: [{
-        patientNo: {
-            type: String,
-            //ref : 'Patient'
-        },
         reportNo: String,
         volume: Number, //ml
         collected: { type: Date, default: Date.now },
@@ -30,10 +29,6 @@ const TestSchema = mongoose.Schema({
         hDLCholesterolLevel: String // a major risk factor for heart disease <40 mg/dl,  The higher, the better 40 - 59, Consideed protective against heart disease >60
     }],
     urineTest: [{
-        patientNo: {
-            type: String,
-            //ref : 'Patient'
-        },
         reportNo: String,
         volume: Number, //ml
         collected: { type: Date, default: Date.now },
@@ -49,10 +44,6 @@ const TestSchema = mongoose.Schema({
         whiteBloodcells: Number
     }],
     stoolTest: [{
-        patientNo: {
-            type: String,
-            //ref : 'Patient'
-        },
         reportNo: String,
         volume: Number, //gram
         collected: { type: Date, default: Date.now },
@@ -73,10 +64,6 @@ const TestSchema = mongoose.Schema({
         whiteBloodcells: Number
     }],
     sputumTest: [{
-        patientNo: {
-            type: String,
-            //ref : 'Patient'
-        },
         reportNo: String,
         volume: Number,
         collected: { type: Date, default: Date.now },
@@ -90,11 +77,8 @@ const TestSchema = mongoose.Schema({
         whiteBloodCells: Number
     }],
     mriTest: [{
-        patientNo: {
-            type: String,
-            //ref : 'Patient'
-        },
         reportNo: String,
+        tested: { type: Date, default: Date.now },
         top: { data: Buffer, contentType: String },
         bottom: { data: Buffer, contentType: String },
         front: { data: Buffer, contentType: String },
@@ -103,10 +87,6 @@ const TestSchema = mongoose.Schema({
         right: { data: Buffer, contentType: String }
     }],
     echoCardiogramTest: [{
-        patientNo: {
-            type: String,
-            //ref : 'Patient'
-        },
         reportNo: Number,
         tested: { type: Date, default: Date.now },
         aorta: Number,
@@ -135,7 +115,7 @@ TestSchema.pre('save', function(next) {
     Counter.findByIdAndUpdate({ _id: 'test' }, { $inc: { seq: 1 } }, function(error, counter) {
         if (error)
             return next(error);
-        doc._id = "T-0" + counter.seq;
+        doc.ID = "T-0" + counter.seq;
         next();
     });
 });

@@ -1,414 +1,459 @@
 .col-md-12.padding--top--10px.padding--bottom--10px
-    h3.text-info.col-md-offset-4 Blood Test Details               
+    h3.text-info.col-md-offset-4 Test Details               
     .table-responsive(ng-if="rtests.length > 0")
         table.table
             thead.thead-default
                 tr
                     td #
-                    td ReportNo
-                    td Patient No
-                    td Collected
-                    td Tested
+                    td Report ID
+                    td Patient ID
+                    td Time stamp
             tbody(ng-repeat="test in rtests")
                 tr
                     td {{$index + 1}}
-                    td {{test._id}}
-                    td {{test.bloodTest[0].patientNo}}
-                    td {{test.bloodTest[0].collected}}
-                    td {{test.bloodTest[0].tested}}                                      
+                    td {{test.ID}}
+                    td {{test.patientID}}
+                    td {{test.time}}                                     
                     td.no_padding
                         a.btn.btn-link(href="#", ng-click="getTest(test._id)")
                             i.fa.fa-plus
-                tr(ng-show="test._id===dtest._id")
+                tr(ng-show="test._id===dtest._id",ng-if="test.bloodTest.length > 0")
                     td(colspan="6")
-                        .col-md-12.col-sm-12.col-xs-12(pdf-save-content="testArchive", name="testArchivePDF")
+                        .col-md-12.col-sm-12.col-xs-12
                             table.col-md-12
                                 th
-                                    td.text-warning Blood Test Details
+                                    td.text-warning Report
                                     td.col-md-4.padding--right--50px.text-align--right
                                         a.btn.btn-link(href="#", ng-click="dtest._id='null'")
                                             i.fa.fa-minus
-                                tbody
+                                tbody(ng-repeat="t in test.bloodTest in test")
                                     tr
-                                        td.col-md-3.text-info PatientNo
-                                        td.col-md-3.text-success {{test.bloodTest[0].patientNo}} 
-                                    tr
-                                        td.col-md-3.text-info Collected Date
-                                        td.col-md-3.text-success {{test.bloodTest[0].collected}} 
-                                    tr
-                                        td.col-md-3.text-info Tested Date
-                                        td.col-md-3.text-success {{test.bloodTest[0].tested}} 
-                                    tr
-                                        td.col-md-3.text-info Volume (ml)
-                                        td.col-md-3.text-success {{test.bloodTest[0].volume}} 
-                                    tr
-                                        td.col-md-3.text-info RBC (cells/mcl)
-                                        td.col-md-3.text-success {{test.bloodTest[0].redBloodCells}}  
-                                    tr
-                                        td.col-md-3.text-info WBC (cells/mcl)
-                                        td.col-md-3.text-success {{test.bloodTest[0].whiteBloodCells}} 
-                                    tr
-                                        td.col-md-3.text-info Platelets (cells/mcl)
-                                        td.col-md-3.text-success {{test.bloodTest[0].platelets}} 
-                                    tr
-                                        td.col-md-3.text-info Hemoglobin (gm/dl)
-                                        td.col-md-3.text-success {{test.bloodTest[0].hemoglobin}} 
-                                    tr
-                                        td.col-md-3.text-info Hematocrit (%)
-                                        td.col-md-3.text-success {{test.bloodTest[0].hematocrit}} 
-                                    tr
-                                        td.col-md-3.text-info Plasma Glugose Level
-                                        td.col-md-3.text-success {{test.bloodTest[0].plasmaGlugoseLevel}}
-                                    tr
-                                        td.col-md-3.text-info Total Cholestrol Level
-                                        td.col-md-3.text-success {{test.bloodTest[0].totalCholesterolLevel}}
-                                    tr
-                                        td.col-md-3.text-info LDL Cholesterol Level
-                                        td.col-md-3.text-success {{test.bloodTest[0].lDLCholesterolLevel}}
-                                    tr
-                                        td.col-md-3.text-info HDL Cholesterol Level
-                                        td.col-md-3.text-success {{test.bloodTest[0].hDLCholesterolLevel}}
-                                    tr
-                                        td.col-md-3.text-info Generated Time
-                                        td.col-md-3.text-success {{test.time}}
-                                    tr
-                                        td.col.md-3.col-md-offset-9
-                        .col-md-12
-                            .col-md-12.col-sm-12.col-xs-12.margin-bottom--30px.padding-bottom--30px(ng-show="archivePDF", style="border-bottom: 1px solid #e1e1e1;")
-                                .col-md-12.col-sm-12.col-xs-12.margin-bottom--10px
-                                    span.col-md-2.col-sm-6.col-xs-6.top-selection.float-right.text-align--right(ng-click="archivePDF=false", style="padding-right: 0px !important;")
-                                        label.btn.btn-default.btn-circle
-                                            i.fa.fa-times
-                                    span.col-md-2.col-sm-6.col-xs-6.top-selection
-                                        button.btn(pdf-save-button="patientArchive" pdf-name="{{dpatient.ID}}__{{dpatient.Name.firstName}}_{{dpatient.Name.lastName}}.pdf")
-                                            i.fa.fa-print
-                                        span.top-selection--inner  Print
+                                        table.col.md-12
+                                            tr
+                                                td.col-md-3.text-info Patient ID
+                                                td.col-md-3.text-success {{test.patientID}}                                  
+                                            tr(ng-if="t.collected!=null")   
+                                                td.col-md-3.text-info Collected Date
+                                                td.col-md-3.text-success {{test.collected}} 
+                                            tr(ng-if="t.tested!=null")
+                                                td.col-md-3.text-info Tested Date
+                                                td.col-md-3.text-success {{t.tested}} 
+                                            tr(ng-if="t.volume!=null")
+                                                td.col-md-3.text-info Volume
+                                                td.col-md-3.text-success {{t.volume}} (ml)
+                                            tr(ng-if="t.redBloodCells!=null")
+                                                td.col-md-3.text-info RBC 
+                                                td.col-md-3.text-success {{t.redBloodCells}} (cells/mcl) 
+                                            tr(ng-if="t.whiteBloodCells!=null")
+                                                td.col-md-3.text-info WBC 
+                                                td.col-md-3.text-success {{t.whiteBloodCells}} (cells/mcl)
+                                            tr(ng-if="t.platelets!=null")
+                                                td.col-md-3.text-info Platelets
+                                                td.col-md-3.text-success {{t.platelets}} (cells/mcl)
+                                            tr(ng-if="t.hemoglobin!=null")
+                                                td.col-md-3.text-info Hemoglobin 
+                                                td.col-md-3.text-success {{t.hemoglobin}} (gm/dl)
+                                            tr(ng-if="t.hematocrit!=null")
+                                                td.col-md-3.text-info Hematocrit 
+                                                td.col-md-3.text-success {{t.hematocrit}} (%)
+                                            tr(ng-if="t.plasmaGlugoseLevel!=null")
+                                                td.col-md-3.text-info Plasma Glugose Level
+                                                td.col-md-3.text-success {{t.plasmaGlugoseLevel}}
+                                            tr(ng-if="t.totalCholesterolLevel!=null")
+                                                td.col-md-3.text-info Total Cholestrol Level
+                                                td.col-md-3.text-success {{t.totalCholesterolLevel}}
+                                            tr(ng-if="t.lDLCholesterolLevel!=null")
+                                                td.col-md-3.text-info LDL Cholesterol Level
+                                                td.col-md-3.text-success {{t.lDLCholesterolLevel}}
+                                            tr(ng-if="t.hDLCholesterolLevel!=null")
+                                                td.col-md-3.text-info HDL Cholesterol Level
+                                                td.col-md-3.text-success {{t.hDLCholesterolLevel}}
+                                            tr
+                                                td.col-md-3.text-info Generated Time
+                                                td.col-md-3.text-success {{test.time}}
 
-                                .col-md-12.col-sm-12.col-xs-12(pdf-save-content="patientArchive", name="patientArchivePDF")
-                                    .col-md-12.col-sm-12.col-xs-12.pdf-header
-                                        span.montserrat(style="font-weight: 700 !important;") code19 
-                                        span.montserrat(style="font-weight: lighter !important;color: #F44336 !important;") | Inward
-                                    h4.col-md-12.col-sm-12.col-xs-12.pdf-name 
-                                        | {{dpatient.Name.firstName}} {{dpatient.Name.lastName}} &nbsp;&nbsp;
-                                        i.fa(ng-class="(dpatient.Sex == 'Male') ? 'fa-mars' : ((dpatient.Sex == 'Female') ? 'fa-venus' : '')")
-                                    span.col-md-3.col-sm-12.col-xs-12.pdf-span-sm
-                                        b BHT : &nbsp;
-                                        | {{dpatient.Inward.bhtNumber}}
-                                    span.col-md-2.col-sm-12.col-xs-12.pdf-span-sm
-                                        b Ward : &nbsp;
-                                        | {{dpatient.Inward.wardNumber}}
-                                    span.col-md-2.col-sm-12.col-xs-12.pdf-span-sm
-                                        b Bed : &nbsp;
-                                        | {{dpatient.Inward.bedNumber}}
-                                    span.col-md-5.col-sm-12.col-xs-12.pdf-span-sm
-                                        b Admitted : &nbsp;
-                                        | &nbsp; {{dpatient.Inward.admittedDateTime | date:'yyyy-MM-dd HH:mm:ss Z'}}
 
-.col-md-12.padding--top--10px.padding--bottom--10px
-    h3.text-info.col-md-offset-4 Urine Test Details               
-    .table-responsive(ng-if="rtests.length > 0")
-        table.table
-            thead.thead-default
-                tr
-                    td #
-                    td ReportNo
-                    td Patient No
-                    td Collected
-                    td Tested
-            tbody(ng-repeat="test in rtests")
-                tr
-                    td {{$index + 1}}
-                    td {{test._id}}
-                    td {{test.urineTest[0].patientNo}}
-                    td {{test.urineTest[0].collected}}
-                    td {{test.urineTest[0].tested}}                                      
-                    td.no_padding
-                        a.btn.btn-link(href="#", ng-click="getTest(test._id)")
-                            i.fa.fa-plus
-                tr(ng-show="test._id===dtest._id")
-                    td(colspan="6")
-                        table.col-md-12
-                            th
-                                td.text-warning Urine Test Details
-                                td.col-md-4.padding--right--50px.text-align--right
-                                    a.btn.btn-link(href="#", ng-click="dtest._id='null'")
-                                        i.fa.fa-minus
-                            tbody
-                                tr
-                                    td.col-md-3.text-info PatientNo
-                                    td.col-md-3.text-success {{test.urineTest[0].patientNo}} 
-                                tr
-                                    td.col-md-3.text-info Collected Date
-                                    td.col-md-3.text-success {{test.urineTest[0].collected}} 
-                                tr
-                                    td.col-md-3.text-info Tested Date
-                                    td.col-md-3.text-success {{test.urineTest[0].tested}} 
-                                tr
-                                    td.col-md-3.text-info Volume
-                                    td.col-md-3.text-success {{test.urineTest[0].volume}} (ml)
-                                tr
-                                    td.col-md-3.text-info Color
-                                    td.col-md-3.text-success {{test.urineTest[0].color}} 
-                                tr
-                                    td.col-md-3.text-info Clarity 
-                                    td.col-md-3.text-success {{test.urineTest[0].clarity}}
-                                tr
-                                    td.col-md-3.text-info pH
-                                    td.col-md-3.text-success {{test.urineTest[0].pH}}
-                                tr
-                                    td.col-md-3.text-info Specific Gravity 
-                                    td.col-md-3.text-success {{test.urineTest[0].specificGravity}}
-                                tr
-                                    td.col-md-3.text-info Protein 
-                                    td.col-md-3.text-success {{test.urineTest[0].protein}}
-                                tr
-                                    td.col-md-3.text-info Glucose
-                                    td.col-md-3.text-success {{test.urineTest[0].glucose}}
-                                tr
-                                    td.col-md-3.text-info Ketone
-                                    td.col-md-3.text-success {{test.urineTest[0].ketones}}
-                                tr
-                                    td.col-md-3.text-info Red Blood Cells
-                                    td.col-md-3.text-success {{test.urineTest[0].redBloodCells}}
-                                tr
-                                    td.col-md-3.text-info White Blood Cells
-                                    td.col-md-3.text-success {{test.urineTest[0].whiteBloodcells}}
-                                tr
-                                    td.col-md-3.text-info Generated Time
-                                    td.col-md-3.text-success {{test.time}}
 
-.col-md-12.padding--top--10px.padding--bottom--10px
-    h3.text-info.col-md-offset-4 Stool Test Details               
-    .table-responsive(ng-if="rtests.length > 0")
-        table.table
-            thead.thead-default
-                tr
-                    td #
-                    td ReportNo
-                    td Patient No
-                    td Collected
-                    td Tested
-            tbody(ng-repeat="test in rtests")
-                tr
-                    td {{$index + 1}}
-                    td {{test._id}}
-                    td {{test.stoolTest[0].patientNo}}
-                    td {{test.stoolTest[0].collected}}
-                    td {{test.stoolTest[0].tested}}                                      
-                    td.no_padding
-                        a.btn.btn-link(href="#", ng-click="getTest(test._id)")
-                            i.fa.fa-plus
-                tr(ng-show="test._id===dtest._id")
-                    td(colspan="6")
-                        table.col-md-12
-                            th
-                                td.text-warning Stool Test Details
-                                td.col-md-4.padding--right--50px.text-align--right
-                                    a.btn.btn-link(href="#", ng-click="dtest._id='null'")
-                                        i.fa.fa-minus
-                            tbody
-                                tr
-                                    td.col-md-3.text-info PatientNo
-                                    td.col-md-3.text-success {{test.stoolTest[0].patientNo}} 
-                                tr
-                                    td.col-md-3.text-info Collected Date
-                                    td.col-md-3.text-success {{test.stoolTest[0].collected}} 
-                                tr
-                                    td.col-md-3.text-info Tested Date
-                                    td.col-md-3.text-success {{test.stoolTest[0].tested}} 
-                                tr
-                                    td.col-md-3.text-info Volume
-                                    td.col-md-3.text-success {{test.stoolTest[0].volume}} (g)
-                                tr
-                                    td.col-md-3.text-info Penta Chloro Phenol
-                                    td.col-md-3.text-success {{test.stoolTest[0].pentachlorophenol}}
-                                tr
-                                    td.col-md-3.text-info phthalates
-                                    td.col-md-3.text-success {{test.stoolTest[0].phthalates}}
-                                tr
-                                    td.col-md-3.text-info Hemoglobin 
-                                    td.col-md-3.text-success {{test.stoolTest[0].redBloodCells}}
-                                tr
-                                    td.col-md-3.text-info Hematocrit 
-                                    td.col-md-3.text-success {{test.stoolTest[0].whiteBloodcells}}
-                                tr
-                                    td.col-md-3.text-info Plasma Glugose Level
-                                    td.col-md-3.text-success {{test.stoolTest[0].additives.sodiumMetaBiSulphite}}
-                                tr
-                                    td.col-md-3.text-info Total Cholestrol Level
-                                    td.col-md-3.text-success {{test.stoolTest[0].additives.sodiumBenzoate}}
-                                tr
-                                    td.col-md-3.text-info LDL Cholesterol Level
-                                    td.col-md-3.text-success {{test.stoolTest[0].additives.monoSodiumGlutamate}}
-                                tr
-                                    td.col-md-3.text-info HDL Cholesterol Level
-                                    td.col-md-3.text-success {{test.stoolTest[0].environmentalChemicals.formaldehyde}}
-                                tr
-                                    td.col-md-3.text-info HDL Cholesterol Level
-                                    td.col-md-3.text-success {{test.stoolTest[0].environmentalChemicals.dieselExhaustfumes}}
-                                tr
-                                    td.col-md-3.text-info HDL Cholesterol Level
-                                    td.col-md-3.text-success {{test.stoolTest[0].environmentalChemicals.naturalGas}}
-                                tr
-                                    td.col-md-3.text-info Generated Time
-                                    td.col-md-3.text-success {{test.time}}
 
-.col-md-12.padding--top--10px.padding--bottom--10px
-    h3.text-info.col-md-offset-4 Sputum Test Details               
-    .table-responsive(ng-if="rtests.length > 0")
-        table.table
-            thead.thead-default
-                tr
-                    td #
-                    td ReportNo
-                    td Patient No
-                    td Collected
-                    td Tested
-            tbody(ng-repeat="test in rtests")
-                tr
-                    td {{$index + 1}}
-                    td {{test._id}}
-                    td {{test.sputumTest[0].patientNo}}
-                    td {{test.sputumTest[0].collected}}
-                    td {{test.sputumTest[0].tested}}                                      
-                    td.no_padding
-                        a.btn.btn-link(href="#", ng-click="getTest(test._id)")
-                            i.fa.fa-plus
-                tr(ng-show="test._id===dtest._id")
-                    td(colspan="6")
-                        table.col-md-12
-                            th
-                                td.text-warning Sputum Test Details
-                                td.col-md-4.padding--right--50px.text-align--right
-                                    a.btn.btn-link(href="#", ng-click="dtest._id='null'")
-                                        i.fa.fa-minus
-                            tbody
-                                tr
-                                    td.col-md-3.text-info PatientNo
-                                    td.col-md-3.text-success {{test.sputumTest[0].patientNo}} 
-                                tr
-                                    td.col-md-3.text-info Collected Date
-                                    td.col-md-3.text-success {{test.sputumTest[0].collected}} 
-                                tr
-                                    td.col-md-3.text-info Tested Date
-                                    td.col-md-3.text-success {{test.sputumTest[0].tested}} 
-                                tr
-                                    td.col-md-3.text-info Volume
-                                    td.col-md-3.text-success {{test.sputumTest[0].volume}} (ml)
-                                tr
-                                    td.col-md-3.text-info RBC 
-                                    td.col-md-3.text-success {{test.sputumTest[0].race}} 
-                                tr
-                                    td.col-md-3.text-info WBC 
-                                    td.col-md-3.text-success {{test.sputumTest[0].respiratorySymtoms}}
-                                tr
-                                    td.col-md-3.text-info Platelets
-                                    td.col-md-3.text-success {{test.sputumTest[0].tuberculinSkinTestInduration}}
-                                tr
-                                    td.col-md-3.text-info Hemoglobin 
-                                    td.col-md-3.text-success {{test.sputumTest[0].spontaneousSputumProduction}}
-                                tr
-                                    td.col-md-3.text-info Hematocrit 
-                                    td.col-md-3.text-success {{test.sputumTest[0].hivSerology}}
-                                tr
-                                    td.col-md-3.text-info Plasma Glugose Level
-                                    td.col-md-3.text-success {{test.sputumTest[0].redBloodCells}}
-                                tr
-                                    td.col-md-3.text-info Total Cholestrol Level
-                                    td.col-md-3.text-success {{test.sputumTest[0].whiteBloodCells}}
-                                tr
-                                    td.col-md-3.text-info Generated Time
-                                    td.col-md-3.text-success {{test.time}}
+//- .col-md-12.padding--top--10px.padding--bottom--10px
+//-     h3.text-info.col-md-offset-4 Blood Test Details               
+//-     .table-responsive(ng-if="rtests.length > 0")
+//-         table.table
+//-             thead.thead-default
+//-                 tr
+//-                     td #
+//-                     td ID
+//-                     td PatientID
+//-                     td Collected
+//-                     td Tested
+//-             tbody(ng-repeat="test in rtests")
+//-                 tr
+//-                     td {{$index + 1}}
+//-                     td {{test.ID}}
+//-                     td {{test.patientID}}
+//-                     td {{test.bloodTest[0].collected}}
+//-                     td {{test.bloodTest[0].tested}}                                      
+//-                     td.no_padding
+//-                         a.btn.btn-link(href="#", ng-click="getTest(test._id)")
+//-                             i.fa.fa-plus
+//-                 tr(ng-show="test._id===dtest._id",)
+//-                     td(colspan="6")
+//-                         .col-md-12.col-sm-12.col-xs-12
+//-                             table.col-md-12
+//-                                 th
+//-                                     td.text-warning Blood Test Details
+//-                                     td.col-md-4.padding--right--50px.text-align--right
+//-                                         a.btn.btn-link(href="#", ng-click="dtest._id='null'")
+//-                                             i.fa.fa-minus
+//-                                 tbody
+//-                                     tr
+//-                                         td.col-md-3.text-info PatientNo
+//-                                         td.col-md-3.text-success() {{test.bloodTest[0].patientNo}} 
+//-                                     tr
+//-                                         td.col-md-3.text-info Collected Date
+//-                                         td.col-md-3.text-success {{test.bloodTest[0].collected}} 
+//-                                     tr
+//-                                         td.col-md-3.text-info Tested Date
+//-                                         td.col-md-3.text-success {{test.bloodTest[0].tested}} 
+//-                                     tr(ng-if="test.bloodTest[0].volume!=null")
+//-                                         td.col-md-3.text-info Volume
+//-                                         td.col-md-3.text-success {{test.bloodTest[0].volume}} (ml)
+//-                                     tr(ng-if="test.bloodTest[0].redBloodCells!=null")
+//-                                         td.col-md-3.text-info RBC 
+//-                                         td.col-md-3.text-success {{test.bloodTest[0].redBloodCells}} (cells/mcl) 
+//-                                     tr(ng-if="test.bloodTest[0].whiteBloodCells!=null")
+//-                                         td.col-md-3.text-info WBC 
+//-                                         td.col-md-3.text-success {{test.bloodTest[0].whiteBloodCells}} (cells/mcl)
+//-                                     tr(ng-if="test.bloodTest[0].platelets!=null")
+//-                                         td.col-md-3.text-info Platelets
+//-                                         td.col-md-3.text-success {{test.bloodTest[0].platelets}} (cells/mcl)
+//-                                     tr(ng-if="test.bloodTest[0].hemoglobin!=null")
+//-                                         td.col-md-3.text-info Hemoglobin 
+//-                                         td.col-md-3.text-success {{test.bloodTest[0].hemoglobin}} (gm/dl)
+//-                                     tr(ng-if="test.bloodTest[0].hematocrit!=null")
+//-                                         td.col-md-3.text-info Hematocrit 
+//-                                         td.col-md-3.text-success {{test.bloodTest[0].hematocrit}} (%)
+//-                                     tr(ng-if="test.bloodTest[0].plasmaGlugoseLevel!=null")
+//-                                         td.col-md-3.text-info Plasma Glugose Level
+//-                                         td.col-md-3.text-success {{test.bloodTest[0].plasmaGlugoseLevel}}
+//-                                     tr(ng-if="test.bloodTest[0].totalCholesterolLevel!=null")
+//-                                         td.col-md-3.text-info Total Cholestrol Level
+//-                                         td.col-md-3.text-success {{test.bloodTest[0].totalCholesterolLevel}}
+//-                                     tr(ng-if="test.bloodTest[0].lDLCholesterolLevel!=null")
+//-                                         td.col-md-3.text-info LDL Cholesterol Level
+//-                                         td.col-md-3.text-success {{test.bloodTest[0].lDLCholesterolLevel}}
+//-                                     tr(ng-if="test.bloodTest[0].hDLCholesterolLevel!=null")
+//-                                         td.col-md-3.text-info HDL Cholesterol Level
+//-                                         td.col-md-3.text-success {{test.bloodTest[0].hDLCholesterolLevel}}
+//-                                     tr
+//-                                         td.col-md-3.text-info Generated Time
+//-                                         td.col-md-3.text-success {{test.time}}
 
-.col-md-12.padding--top--10px.padding--bottom--10px
-    h3.text-info.col-md-offset-4 Cardiogram Test Details               
-    .table-responsive(ng-if="rtests.length > 0")
-        table.table
-            thead.thead-default
-                tr
-                    td #
-                    td ReportNo
-                    td Patient No
-                    td Collected
-                    td Tested
-            tbody(ng-repeat="test in rtests")
-                tr
-                    td {{$index + 1}}
-                    td {{test._id}}
-                    td {{test.echoCardiogramTest[0].patientNo}}
-                    td {{test.echoCardiogramTest[0].collected}}
-                    td {{test.echoCardiogramTest[0].tested}}                                      
-                    td.no_padding
-                        a.btn.btn-link(href="#", ng-click="getTest(test._id)")
-                            i.fa.fa-plus
-                tr(ng-show="test._id===dtest._id")
-                    td(colspan="6")
-                        table.col-md-12
-                            th
-                                td.text-warning Echo Cardiogram Test Details
-                                td.col-md-4.padding--right--50px.text-align--right
-                                    a.btn.btn-link(href="#", ng-click="dtest._id='null'")
-                                        i.fa.fa-minus
-                            tbody
-                                tr
-                                    td.col-md-3.text-info PatientNo
-                                    td.col-md-3.text-success {{test.echoCardiogramTest[0].patientNo}}  
-                                tr
-                                    td.col-md-3.text-info Tested Date
-                                    td.col-md-3.text-success {{test.echoCardiogramTest[0].tested}} 
-                                tr
-                                    td.col-md-3.text-info Volume
-                                    td.col-md-3.text-success {{test.echoCardiogramTest[0].aorta}}
-                                tr
-                                    td.col-md-3.text-info RBC 
-                                    td.col-md-3.text-success {{test.echoCardiogramTest[0].leftAtrium}} (cells/mcl) 
-                                tr
-                                    td.col-md-3.text-info WBC 
-                                    td.col-md-3.text-success {{test.echoCardiogramTest[0].ivsd}} (cells/mcl)
-                                tr
-                                    td.col-md-3.text-info Platelets
-                                    td.col-md-3.text-success {{test.echoCardiogramTest[0].lvpwd}} (cells/mcl)
-                                tr
-                                    td.col-md-3.text-info Hemoglobin 
-                                    td.col-md-3.text-success {{test.echoCardiogramTest[0].lvdd}} (gm/dl)
-                                tr
-                                    td.col-md-3.text-info Hematocrit 
-                                    td.col-md-3.text-success {{test.echoCardiogramTest[0].lvsd}} (%)
-                                tr
-                                    td.col-md-3.text-info Plasma Glugose Level
-                                    td.col-md-3.text-success {{test.echoCardiogramTest[0].lvdv}}
-                                tr
-                                    td.col-md-3.text-info Total Cholestrol Level
-                                    td.col-md-3.text-success {{test.echoCardiogramTest[0].lvsv}}
-                                tr
-                                    td.col-md-3.text-info LDL Cholesterol Level
-                                    td.col-md-3.text-success {{test.echoCardiogramTest[0].delta}}
-                                tr
-                                    td.col-md-3.text-info HDL Cholesterol Level
-                                    td.col-md-3.text-success {{test.echoCardiogramTest[0].eWave}}
-                                tr
-                                    td.col-md-3.text-info HDL Cholesterol Level
-                                    td.col-md-3.text-success {{test.echoCardiogramTest[0].aWave}}
-                                tr
-                                    td.col-md-3.text-info HDL Cholesterol Level
-                                    td.col-md-3.text-success {{test.echoCardiogramTest[0].eARatio}}
-                                tr
-                                    td.col-md-3.text-info HDL Cholesterol Level
-                                    td.col-md-3.text-success {{test.echoCardiogramTest[0].edt}}
-                                tr
-                                    td.col-md-3.text-info HDL Cholesterol Level
-                                    td.col-md-3.text-success {{test.echoCardiogramTest[0].ef}}
-                                tr
-                                    td.col-md-3.text-info HDL Cholesterol Level
-                                    td.col-md-3.text-success {{test.echoCardiogramTest[0].bsa}}
-                                tr
-                                    td.col-md-3.text-info HDL Cholesterol Level
-                                    td.col-md-3.text-success {{test.echoCardiogramTest[0].height}}
-                                tr
-                                    td.col-md-3.text-info Generated Time
-                                    td.col-md-3.text-success {{test.time}}
+//- .col-md-12.padding--top--10px.padding--bottom--10px
+//-     h3.text-info.col-md-offset-4 Urine Test Details               
+//-     .table-responsive(ng-if="rtests.length > 0")
+//-         table.table
+//-             thead.thead-default
+//-                 tr
+//-                     td #
+//-                     td ReportNo
+//-                     td Patient No
+//-                     td Collected
+//-                     td Tested
+//-             tbody(ng-repeat="test in rtests")
+//-                 tr
+//-                     td {{$index + 1}}
+//-                     td {{test._id}}
+//-                     td {{test.urineTest[0].patientNo}}
+//-                     td {{test.urineTest[0].collected}}
+//-                     td {{test.urineTest[0].tested}}                                      
+//-                     td.no_padding
+//-                         a.btn.btn-link(href="#", ng-click="getTest(test._id)")
+//-                             i.fa.fa-plus
+//-                 tr(ng-show="test._id===dtest._id")
+//-                     td(colspan="6")
+//-                         table.col-md-12
+//-                             th
+//-                                 td.text-warning Urine Test Details
+//-                                 td.col-md-4.padding--right--50px.text-align--right
+//-                                     a.btn.btn-link(href="#", ng-click="dtest._id='null'")
+//-                                         i.fa.fa-minus
+//-                             tbody
+//-                                 tr
+//-                                     td.col-md-3.text-info PatientNo
+//-                                     td.col-md-3.text-success {{test.urineTest[0].patientNo}} 
+//-                                 tr
+//-                                     td.col-md-3.text-info Collected Date
+//-                                     td.col-md-3.text-success {{test.urineTest[0].collected}} 
+//-                                 tr
+//-                                     td.col-md-3.text-info Tested Date
+//-                                     td.col-md-3.text-success {{test.urineTest[0].tested}} 
+//-                                 tr
+//-                                     td.col-md-3.text-info Volume
+//-                                     td.col-md-3.text-success {{test.urineTest[0].volume}} (ml)
+//-                                 tr
+//-                                     td.col-md-3.text-info Color
+//-                                     td.col-md-3.text-success {{test.urineTest[0].color}} 
+//-                                 tr
+//-                                     td.col-md-3.text-info Clarity 
+//-                                     td.col-md-3.text-success {{test.urineTest[0].clarity}}
+//-                                 tr
+//-                                     td.col-md-3.text-info pH
+//-                                     td.col-md-3.text-success {{test.urineTest[0].pH}}
+//-                                 tr
+//-                                     td.col-md-3.text-info Specific Gravity 
+//-                                     td.col-md-3.text-success {{test.urineTest[0].specificGravity}}
+//-                                 tr
+//-                                     td.col-md-3.text-info Protein 
+//-                                     td.col-md-3.text-success {{test.urineTest[0].protein}}
+//-                                 tr
+//-                                     td.col-md-3.text-info Glucose
+//-                                     td.col-md-3.text-success {{test.urineTest[0].glucose}}
+//-                                 tr
+//-                                     td.col-md-3.text-info Ketone
+//-                                     td.col-md-3.text-success {{test.urineTest[0].ketones}}
+//-                                 tr
+//-                                     td.col-md-3.text-info Red Blood Cells
+//-                                     td.col-md-3.text-success {{test.urineTest[0].redBloodCells}}
+//-                                 tr
+//-                                     td.col-md-3.text-info White Blood Cells
+//-                                     td.col-md-3.text-success {{test.urineTest[0].whiteBloodcells}}
+//-                                 tr
+//-                                     td.col-md-3.text-info Generated Time
+//-                                     td.col-md-3.text-success {{test.time}}
 
-    .row
-        .col-md-3.col-sm-5.col-xs-12.loader.archive(ng-show="loading")
-        .col-md-3.col-sm-5.col-xs-12.archive(ng-class="loading ? 'div-loading' : 'div-loaded'", style="box-shadow: none !important;")
-            canvas.chart.chart-doughnut#doughnut(chart-data="data", chart-labels="labels", chart-colors="colors", chart-options="options")
+//- .col-md-12.padding--top--10px.padding--bottom--10px
+//-     h3.text-info.col-md-offset-4 Stool Test Details               
+//-     .table-responsive(ng-if="rtests.length > 0")
+//-         table.table
+//-             thead.thead-default
+//-                 tr
+//-                     td #
+//-                     td ReportNo
+//-                     td Patient No
+//-                     td Collected
+//-                     td Tested
+//-             tbody(ng-repeat="test in rtests")
+//-                 tr
+//-                     td {{$index + 1}}
+//-                     td {{test._id}}
+//-                     td {{test.stoolTest[0].patientNo}}
+//-                     td {{test.stoolTest[0].collected}}
+//-                     td {{test.stoolTest[0].tested}}                                      
+//-                     td.no_padding
+//-                         a.btn.btn-link(href="#", ng-click="getTest(test._id)")
+//-                             i.fa.fa-plus
+//-                 tr(ng-show="test._id===dtest._id")
+//-                     td(colspan="6")
+//-                         table.col-md-12
+//-                             th
+//-                                 td.text-warning Stool Test Details
+//-                                 td.col-md-4.padding--right--50px.text-align--right
+//-                                     a.btn.btn-link(href="#", ng-click="dtest._id='null'")
+//-                                         i.fa.fa-minus
+//-                             tbody
+//-                                 tr
+//-                                     td.col-md-3.text-info PatientNo
+//-                                     td.col-md-3.text-success {{test.stoolTest[0].patientNo}} 
+//-                                 tr
+//-                                     td.col-md-3.text-info Collected Date
+//-                                     td.col-md-3.text-success {{test.stoolTest[0].collected}} 
+//-                                 tr
+//-                                     td.col-md-3.text-info Tested Date
+//-                                     td.col-md-3.text-success {{test.stoolTest[0].tested}} 
+//-                                 tr
+//-                                     td.col-md-3.text-info Volume
+//-                                     td.col-md-3.text-success {{test.stoolTest[0].volume}} (g)
+//-                                 tr
+//-                                     td.col-md-3.text-info Penta Chloro Phenol
+//-                                     td.col-md-3.text-success {{test.stoolTest[0].pentachlorophenol}}
+//-                                 tr
+//-                                     td.col-md-3.text-info phthalates
+//-                                     td.col-md-3.text-success {{test.stoolTest[0].phthalates}}
+//-                                 tr
+//-                                     td.col-md-3.text-info Hemoglobin 
+//-                                     td.col-md-3.text-success {{test.stoolTest[0].redBloodCells}}
+//-                                 tr
+//-                                     td.col-md-3.text-info Hematocrit 
+//-                                     td.col-md-3.text-success {{test.stoolTest[0].whiteBloodcells}}
+//-                                 tr
+//-                                     td.col-md-3.text-info Plasma Glugose Level
+//-                                     td.col-md-3.text-success {{test.stoolTest[0].additives.sodiumMetaBiSulphite}}
+//-                                 tr
+//-                                     td.col-md-3.text-info Total Cholestrol Level
+//-                                     td.col-md-3.text-success {{test.stoolTest[0].additives.sodiumBenzoate}}
+//-                                 tr
+//-                                     td.col-md-3.text-info LDL Cholesterol Level
+//-                                     td.col-md-3.text-success {{test.stoolTest[0].additives.monoSodiumGlutamate}}
+//-                                 tr
+//-                                     td.col-md-3.text-info HDL Cholesterol Level
+//-                                     td.col-md-3.text-success {{test.stoolTest[0].environmentalChemicals.formaldehyde}}
+//-                                 tr
+//-                                     td.col-md-3.text-info HDL Cholesterol Level
+//-                                     td.col-md-3.text-success {{test.stoolTest[0].environmentalChemicals.dieselExhaustfumes}}
+//-                                 tr
+//-                                     td.col-md-3.text-info HDL Cholesterol Level
+//-                                     td.col-md-3.text-success {{test.stoolTest[0].environmentalChemicals.naturalGas}}
+//-                                 tr
+//-                                     td.col-md-3.text-info Generated Time
+//-                                     td.col-md-3.text-success {{test.time}}
+
+//- .col-md-12.padding--top--10px.padding--bottom--10px
+//-     h3.text-info.col-md-offset-4 Sputum Test Details               
+//-     .table-responsive(ng-if="rtests.length > 0")
+//-         table.table
+//-             thead.thead-default
+//-                 tr
+//-                     td #
+//-                     td ReportNo
+//-                     td Patient No
+//-                     td Collected
+//-                     td Tested
+//-             tbody(ng-repeat="test in rtests")
+//-                 tr
+//-                     td {{$index + 1}}
+//-                     td {{test._id}}
+//-                     td {{test.sputumTest[0].patientNo}}
+//-                     td {{test.sputumTest[0].collected}}
+//-                     td {{test.sputumTest[0].tested}}                                      
+//-                     td.no_padding
+//-                         a.btn.btn-link(href="#", ng-click="getTest(test._id)")
+//-                             i.fa.fa-plus
+//-                 tr(ng-show="test._id===dtest._id")
+//-                     td(colspan="6")
+//-                         table.col-md-12
+//-                             th
+//-                                 td.text-warning Sputum Test Details
+//-                                 td.col-md-4.padding--right--50px.text-align--right
+//-                                     a.btn.btn-link(href="#", ng-click="dtest._id='null'")
+//-                                         i.fa.fa-minus
+//-                             tbody
+//-                                 tr
+//-                                     td.col-md-3.text-info PatientNo
+//-                                     td.col-md-3.text-success {{test.sputumTest[0].patientNo}} 
+//-                                 tr
+//-                                     td.col-md-3.text-info Collected Date
+//-                                     td.col-md-3.text-success {{test.sputumTest[0].collected}} 
+//-                                 tr
+//-                                     td.col-md-3.text-info Tested Date
+//-                                     td.col-md-3.text-success {{test.sputumTest[0].tested}} 
+//-                                 tr
+//-                                     td.col-md-3.text-info Volume
+//-                                     td.col-md-3.text-success {{test.sputumTest[0].volume}} (ml)
+//-                                 tr
+//-                                     td.col-md-3.text-info RBC 
+//-                                     td.col-md-3.text-success {{test.sputumTest[0].race}} 
+//-                                 tr
+//-                                     td.col-md-3.text-info WBC 
+//-                                     td.col-md-3.text-success {{test.sputumTest[0].respiratorySymtoms}}
+//-                                 tr
+//-                                     td.col-md-3.text-info Platelets
+//-                                     td.col-md-3.text-success {{test.sputumTest[0].tuberculinSkinTestInduration}}
+//-                                 tr
+//-                                     td.col-md-3.text-info Hemoglobin 
+//-                                     td.col-md-3.text-success {{test.sputumTest[0].spontaneousSputumProduction}}
+//-                                 tr
+//-                                     td.col-md-3.text-info Hematocrit 
+//-                                     td.col-md-3.text-success {{test.sputumTest[0].hivSerology}}
+//-                                 tr
+//-                                     td.col-md-3.text-info Plasma Glugose Level
+//-                                     td.col-md-3.text-success {{test.sputumTest[0].redBloodCells}}
+//-                                 tr
+//-                                     td.col-md-3.text-info Total Cholestrol Level
+//-                                     td.col-md-3.text-success {{test.sputumTest[0].whiteBloodCells}}
+//-                                 tr
+//-                                     td.col-md-3.text-info Generated Time
+//-                                     td.col-md-3.text-success {{test.time}}
+
+//- .col-md-12.padding--top--10px.padding--bottom--10px
+//-     h3.text-info.col-md-offset-4 Cardiogram Test Details               
+//-     .table-responsive(ng-if="rtests.length > 0")
+//-         table.table
+//-             thead.thead-default
+//-                 tr
+//-                     td #
+//-                     td ReportNo
+//-                     td Patient No
+//-                     td Collected
+//-                     td Tested
+//-             tbody(ng-repeat="test in rtests")
+//-                 tr
+//-                     td {{$index + 1}}
+//-                     td {{test._id}}
+//-                     td {{test.echoCardiogramTest[0].patientNo}}
+//-                     td {{test.echoCardiogramTest[0].collected}}
+//-                     td {{test.echoCardiogramTest[0].tested}}                                      
+//-                     td.no_padding
+//-                         a.btn.btn-link(href="#", ng-click="getTest(test._id)")
+//-                             i.fa.fa-plus
+//-                 tr(ng-show="test._id===dtest._id")
+//-                     td(colspan="6")
+//-                         table.col-md-12
+//-                             th
+//-                                 td.text-warning Echo Cardiogram Test Details
+//-                                 td.col-md-4.padding--right--50px.text-align--right
+//-                                     a.btn.btn-link(href="#", ng-click="dtest._id='null'")
+//-                                         i.fa.fa-minus
+//-                             tbody
+//-                                 tr
+//-                                     td.col-md-3.text-info PatientNo
+//-                                     td.col-md-3.text-success {{test.echoCardiogramTest[0].patientNo}}  
+//-                                 tr
+//-                                     td.col-md-3.text-info Tested Date
+//-                                     td.col-md-3.text-success {{test.echoCardiogramTest[0].tested}} 
+//-                                 tr
+//-                                     td.col-md-3.text-info Volume
+//-                                     td.col-md-3.text-success {{test.echoCardiogramTest[0].aorta}}
+//-                                 tr
+//-                                     td.col-md-3.text-info RBC 
+//-                                     td.col-md-3.text-success {{test.echoCardiogramTest[0].leftAtrium}} (cells/mcl) 
+//-                                 tr
+//-                                     td.col-md-3.text-info WBC 
+//-                                     td.col-md-3.text-success {{test.echoCardiogramTest[0].ivsd}} (cells/mcl)
+//-                                 tr
+//-                                     td.col-md-3.text-info Platelets
+//-                                     td.col-md-3.text-success {{test.echoCardiogramTest[0].lvpwd}} (cells/mcl)
+//-                                 tr
+//-                                     td.col-md-3.text-info Hemoglobin 
+//-                                     td.col-md-3.text-success {{test.echoCardiogramTest[0].lvdd}} (gm/dl)
+//-                                 tr
+//-                                     td.col-md-3.text-info Hematocrit 
+//-                                     td.col-md-3.text-success {{test.echoCardiogramTest[0].lvsd}} (%)
+//-                                 tr
+//-                                     td.col-md-3.text-info Plasma Glugose Level
+//-                                     td.col-md-3.text-success {{test.echoCardiogramTest[0].lvdv}}
+//-                                 tr
+//-                                     td.col-md-3.text-info Total Cholestrol Level
+//-                                     td.col-md-3.text-success {{test.echoCardiogramTest[0].lvsv}}
+//-                                 tr
+//-                                     td.col-md-3.text-info LDL Cholesterol Level
+//-                                     td.col-md-3.text-success {{test.echoCardiogramTest[0].delta}}
+//-                                 tr
+//-                                     td.col-md-3.text-info HDL Cholesterol Level
+//-                                     td.col-md-3.text-success {{test.echoCardiogramTest[0].eWave}}
+//-                                 tr
+//-                                     td.col-md-3.text-info HDL Cholesterol Level
+//-                                     td.col-md-3.text-success {{test.echoCardiogramTest[0].aWave}}
+//-                                 tr
+//-                                     td.col-md-3.text-info HDL Cholesterol Level
+//-                                     td.col-md-3.text-success {{test.echoCardiogramTest[0].eARatio}}
+//-                                 tr
+//-                                     td.col-md-3.text-info HDL Cholesterol Level
+//-                                     td.col-md-3.text-success {{test.echoCardiogramTest[0].edt}}
+//-                                 tr
+//-                                     td.col-md-3.text-info HDL Cholesterol Level
+//-                                     td.col-md-3.text-success {{test.echoCardiogramTest[0].ef}}
+//-                                 tr
+//-                                     td.col-md-3.text-info HDL Cholesterol Level
+//-                                     td.col-md-3.text-success {{test.echoCardiogramTest[0].bsa}}
+//-                                 tr
+//-                                     td.col-md-3.text-info HDL Cholesterol Level
+//-                                     td.col-md-3.text-success {{test.echoCardiogramTest[0].height}}
+//-                                 tr
+//-                                     td.col-md-3.text-info Generated Time
+//-                                     td.col-md-3.text-success {{test.time}}
+
+//-     .row
+//-         .col-md-3.col-sm-5.col-xs-12.loader.archive(ng-show="loading")
+//-         .col-md-3.col-sm-5.col-xs-12.archive(ng-class="loading ? 'div-loading' : 'div-loaded'", style="box-shadow: none !important;")
+//-             canvas.chart.chart-doughnut#doughnut(chart-data="data", chart-labels="labels", chart-colors="colors", chart-options="options")

@@ -26,22 +26,22 @@ br
 
 
 .col-md-12.padding--top--10px
-    form(role="form", ng-submit="addTest(ctest)", ng-show="partialForm=='addBloodTestForm'")
+    form(role="form", ng-submit="addTest(ctest,'blood')", ng-show="partialForm=='addBloodTestForm'")
         h3.text-success.text-center Add Blood Test
         .form-group.col-md-12.col-sm-12.col-xs-12.no_padding.margin-top--10px
                 a.col-md-1.col-md-offset-10.btn-danger.btn(ng-click="partialForm='null'") Close
         .form-group.col-md-12.col-sm-12.col-xs-12.no_padding.margin-top--10px
             .form-group.col-md-3.col-sm-12.col-xs-12
                 label.content-label 
-                    | Patient No
-                input.form-control.input-sm(type="text",placeholder="Patient Number", ng-model="ctest.bloodTest.patientNo",required)
+                    | Patient ID
+                input.form-control.input-sm(type="text",placeholder="Patient Number", ng-model="ctest.patientID",required)
         .form-group.col-md-4.col-sm-6.col-xs-12
             label.content-label 
                 | Period
             div.dropdown
                 a.dropdown-toggle#dLabel(role="button" data-toggle="dropdown" data-target=".dropdown" href="#")
                     div.input-group
-                        input.form-control.input-sm#date(type="text", name="date", ng-model="ctest.bloodTest.collected", placeholder="Collected Time")
+                        input.form-control.input-sm#date1(type="text", name="date1", ng-model="ctest.bloodTest.collected", placeholder="Collected Time")
                         span.input-group-addon
                             i.glyphicon.glyphicon-calendar
                 ul.dropdown-menu(role="menu" aria-labelledby="dLabel")
@@ -49,14 +49,14 @@ br
         .form-group.col-md-4.col-sm-6.col-xs-12
             label.content-label 
                 | &nbsp;
-            div.dropdown
-                a.dropdown-toggle#dLabel2(role="button" data-toggle="dropdown" data-target=".dropdown" href="#")
+            div.dropdown2
+                a.dropdown-toggle#dLabel(role="button" data-toggle="dropdown" data-target=".dropdown2" href="#")
                     div.input-group
                         input.form-control.input-sm#date(type="text", name="date", ng-model="ctest.bloodTest.tested", placeholder="Tested Time")
                         span.input-group-addon
                             i.glyphicon.glyphicon-calendar
-                ul.dropdown-menu(role="menu" aria-labelledby="dLabel2")
-                    datetimepicker(ng-model="ctest.bloodTest.tested", data-datetimepicker-config="{ dropdownSelector: '.dropdown-toggle' }")
+                ul.dropdown-menu(role="menu2" aria-labelledby="dLabel")
+                    datetimepicker(ng-model="ctest.bloodTest.tested", data-datetimepicker-config="{ dropdownSelector: '.dropdown-toggle1' }")
         .form-group.col-md-12.col-sm-12.col-xs-12.no_padding.margin-top--10px
             .form-group.col-md-4.col-sm-6.col-xs-12
                 label.content-label 
@@ -109,10 +109,10 @@ br
                 select.form-control.input-sm(ng-model="ctest.bloodTest.hDLCholesterolLevel")
                             option(ng-repeat="t in hDLCholesterolLevelList") {{t}}
             .form-group.col-md-12.col-sm-12.col-xs-12.no_padding.margin-top--10px
-                  button.col-md-2.col-md-offset-3.btn.btn-info.btn-default(type="submit") Add
+                  button.col-md-2.col-md-offset-5.btn.btn-info.btn-default(type="submit") Add
 
 .col-md-12
-    form(role="form", ng-submit="addTest(ctest)", ng-show="partialForm=='addUrineTestForm'",name="urineForm")
+    form(role="form", ng-submit="addTest(ctest, 'urine')", ng-show="partialForm=='addUrineTestForm'",name="urineForm")
         h3.text-success.text-center Add Urine Test
         .form-group.col-md-12.col-sm-12.col-xs-12.no_padding.margin-top--10px
                 a.col-md-1.col-md-offset-10.btn-danger.btn(ng-click="partialForm='null'") Close
@@ -120,7 +120,7 @@ br
             .form-group.col-md-3.col-sm-12.col-xs-12
                 label.content-label 
                     | Patient No
-                input.form-control.input-sm(type="text",placeholder="Patient Number", ng-model="ctest.urineTest.patientNo",required)
+                input.form-control.input-sm(type="text",placeholder="Patient Number", ng-model="ctest.patientID",required)
         .form-group.col-md-4.col-sm-6.col-xs-12
             label.content-label 
                 | Period
@@ -135,14 +135,14 @@ br
         .form-group.col-md-4.col-sm-6.col-xs-12
             label.content-label 
                 | &nbsp;
-            div.dropdown
-                a.dropdown-toggle#dLabel2(role="button" data-toggle="dropdown" data-target=".dropdown" href="#")
+            div.dropdown2
+                a.dropdown-toggle#dLabel2(role="button" data-toggle="dropdown" data-target=".dropdown2" href="#")
                     div.input-group
                         input.form-control.input-sm#date(type="text", name="date", ng-model="ctest.urineTest.tested", placeholder="Tested Time")
                         span.input-group-addon
                             i.glyphicon.glyphicon-calendar
                 ul.dropdown-menu(role="menu" aria-labelledby="dLabel2")
-                    datetimepicker(ng-model="ctest.urineTest.tested", data-datetimepicker-config="{ dropdownSelector: '.dropdown-toggle' }")
+                    datetimepicker(ng-model="ctest.urineTest.tested", data-datetimepicker-config="{ dropdownSelector: '.dropdown-toggle2' }")
         .form-group.col-md-12.col-sm-12.col-xs-12.no_padding.margin-top--10px
             .form-group.col-md-4
                 label.content-label 
@@ -194,10 +194,10 @@ br
                 select.form-control.input-sm(ng-model="ctest.urineTest.clarity")
                             option(ng-repeat="t in clarityList") {{t}}
            .form-group.col-md-12.col-sm-12.col-xs-12.no_padding.margin-top--10px
-                button.col-md-2.col-md-offset-3.btn.btn-info.btn-default(type="submit") Add
+                button.col-md-2.col-md-offset-5.btn.btn-info.btn-default(type="submit") Add
                 
 .col-md-12
-    form(role="form", ng-submit="addTest(ctest)", ng-show="partialForm=='addStoolTestForm'",name="stoolForm")
+    form(role="form", ng-submit="addTest(ctest, 'stool')", ng-show="partialForm=='addStoolTestForm'",name="stoolForm")
         h3.text-success.text-center Add Stool Test
         .form-group.col-md-12.col-sm-12.col-xs-12.no_padding.margin-top--10px
                 a.col-md-1.col-md-offset-10.btn-danger.btn(ng-click="partialForm='null'") Close
@@ -205,7 +205,7 @@ br
             .form-group.col-md-3.col-sm-12.col-xs-12
                 label.content-label 
                     | Patient No
-                input.form-control.input-sm(type="text",placeholder="Patient Number", ng-model="ctest.stoolTest.patientNo",required)
+                input.form-control.input-sm(type="text",placeholder="Patient Number", ng-model="ctest.patientID",required)
         .form-group.col-md-4.col-sm-6.col-xs-12
             label.content-label 
                 | Period
@@ -220,14 +220,14 @@ br
         .form-group.col-md-4.col-sm-6.col-xs-12
             label.content-label 
                 | &nbsp;
-            div.dropdown
-                a.dropdown-toggle#dLabel2(role="button" data-toggle="dropdown" data-target=".dropdown" href="#")
+            div.dropdown2
+                a.dropdown-toggle#dLabel2(role="button" data-toggle="dropdown" data-target=".dropdown2" href="#")
                     div.input-group
                         input.form-control.input-sm#date(type="text", name="date", ng-model="ctest.stoolTest.tested", placeholder="Tested Time")
                         span.input-group-addon
                             i.glyphicon.glyphicon-calendar
                 ul.dropdown-menu(role="menu" aria-labelledby="dLabel2")
-                    datetimepicker(ng-model="ctest.stoolTest.tested", data-datetimepicker-config="{ dropdownSelector: '.dropdown-toggle' }")
+                    datetimepicker(ng-model="ctest.stoolTest.tested", data-datetimepicker-config="{ dropdownSelector: '.dropdown-toggle2' }")
         .form-group.col-md-12.col-sm-12.col-xs-12.no_padding.margin-top--10px
             .form-group.col-md-4
                 label.content-label 
@@ -276,10 +276,10 @@ br
                     | Natural Gas
                 input.form-control(type="number", ng-model="ctest.environmentalChemicals.naturalGas",ng-pattern='/^[0-9]{1,7}$/')
         .form-group.col-md-12.col-sm-12.col-xs-12.no_padding.margin-top--10px
-            button.col-md-2.col-md-offset-3.btn.btn-info.btn-default(type="submit") Add
+            button.col-md-2.col-md-offset-5.btn.btn-info.btn-default(type="submit") Add
             
 .col-md-12
-    form(role="form", ng-submit="addTest(ctest)", ng-show="partialForm=='addSputumTestForm'",name="sputumForm")
+    form(role="form", ng-submit="addTest(ctest, 'sputum')", ng-show="partialForm=='addSputumTestForm'",name="sputumForm")
         h3.text-success.text-center Add Sputum Test
         .form-group.col-md-12.col-sm-12.col-xs-12.no_padding.margin-top--10px
                 a.col-md-1.col-md-offset-10.btn-danger.btn(ng-click="partialForm='null'") Close
@@ -287,7 +287,7 @@ br
             .form-group.col-md-3.col-sm-12.col-xs-12
                 label.content-label 
                     | Patient No
-                input.form-control.input-sm(type="text",placeholder="Patient Number", ng-model="ctest.sputumTest.patientNo",required)
+                input.form-control.input-sm(type="text",placeholder="Patient Number", ng-model="ctest.patientID",required)
         .form-group.col-md-4.col-sm-6.col-xs-12
             label.content-label 
                 | Period
@@ -302,14 +302,14 @@ br
         .form-group.col-md-4.col-sm-6.col-xs-12
             label.content-label 
                 | &nbsp;
-            div.dropdown
-                a.dropdown-toggle#dLabel2(role="button" data-toggle="dropdown" data-target=".dropdown" href="#")
+            div.dropdown2
+                a.dropdown-toggle#dLabel2(role="button" data-toggle="dropdown" data-target=".dropdown2" href="#")
                     div.input-group
                         input.form-control.input-sm#date(type="text", name="date", ng-model="ctest.sputumTest.tested", placeholder="Tested Time")
                         span.input-group-addon
                             i.glyphicon.glyphicon-calendar
                 ul.dropdown-menu(role="menu" aria-labelledby="dLabel2")
-                    datetimepicker(ng-model="ctest.sputumTest.tested", data-datetimepicker-config="{ dropdownSelector: '.dropdown-toggle' }")
+                    datetimepicker(ng-model="ctest.sputumTest.tested", data-datetimepicker-config="{ dropdownSelector: '.dropdown-toggle2' }")
         .form-group.col-md-12.col-sm-12.col-xs-12.no_padding.margin-top--10px
             .form-group.col-md-4
                 label.content-label 
@@ -348,10 +348,10 @@ br
                 select.form-control.input-sm(ng-model="ctest.sputumTest.race")
                                 option(ng-repeat="t in respiratorySymtomsList") {{t}}
         .form-group.col-md-12.col-sm-12.col-xs-12.no_padding.margin-top--10px
-            button.col-md-2.col-md-offset-3.btn.btn-info.btn-default(type="submit") Add
+            button.col-md-2.col-md-offset-5.btn.btn-info.btn-default(type="submit") Add
             
 .col-md-12
-    form(role="form", ng-submit="addTest(ctest)", ng-show="partialForm=='addMRITestForm'",enctype="multipart/form-data")
+    form(role="form", ng-submit="addTest(ctest, 'mri')", ng-show="partialForm=='addMRITestForm'",enctype="multipart/form-data")
         h3.text-success.text-center Add MRI Test
         .form-group.col-md-12.col-sm-12.col-xs-12.no_padding.margin-top--10px
                 a.col-md-1.col-md-offset-10.btn-danger.btn(ng-click="partialForm='null'") Close
@@ -359,13 +359,25 @@ br
             .form-group.col-md-3.col-sm-12.col-xs-12
                 label.content-label 
                     | Patient No
-                input.form-control.input-sm(type="text",placeholder="Patient Number", ng-model="ctest.mriTest.patientNo",required)
+                input.form-control.input-sm(type="text",placeholder="Patient Number", ng-model="ctest.patientID",required)
+        
+        .form-group.col-md-4.col-sm-6.col-xs-12
+            label.content-label 
+                | &nbsp;
+            div.dropdown
+                a.dropdown-toggle#dLabel2(role="button" data-toggle="dropdown" data-target=".dropdown" href="#")
+                    div.input-group
+                        input.form-control.input-sm#date(type="text", name="date", ng-model="ctest.mriTest.tested", placeholder="Tested Time")
+                        span.input-group-addon
+                            i.glyphicon.glyphicon-calendar
+                ul.dropdown-menu(role="menu" aria-labelledby="dLabel2")
+                    datetimepicker(ng-model="ctest.sputumTest.tested", data-datetimepicker-config="{ dropdownSelector: '.dropdown-toggle' }")
         .form-group.col-md-12.col-sm-12.col-xs-12.no_padding.margin-top--10px
             .form-group.col-md-4
                 label.content-label 
                     | Top Site
                 input.btn.btn-info(type='file', ng-file-select='onFileSelect($files)',ng-model="ctest.mriTest.top")
-                input.form-control.input-sm(type="text",ng-model="ctest.mriTest.top",required)
+                //input.form-control.input-sm(type="text",ng-model="ctest.mriTest.top",required)
             .form-group.col-md-4
                 label.content-label 
                     | Bottom Site
@@ -390,7 +402,7 @@ br
             button.col-md-2.col-md-offset-5.btn.btn-info.btn-default(type="submit") Add
 
 .col-md-12
-    form(role="form", ng-submit="addTest(ctest)", ng-show="partialForm=='addCardiogramTestForm'",name="cardioForm")
+    form(role="form", ng-submit="addTest(ctest, 'cardiogram')", ng-show="partialForm=='addCardiogramTestForm'",name="cardioForm")
         h3.text-success.text-center Add Echo Cardiogram Test
         .form-group.col-md-12.col-sm-12.col-xs-12.no_padding.margin-top--10px
                 a.col-md-1.col-md-offset-10.btn-danger.btn(ng-click="partialForm='null'") Close
@@ -398,7 +410,7 @@ br
             .form-group.col-md-3.col-sm-12.col-xs-12
                 label.content-label 
                     | Patient No
-                input.form-control.input-sm(type="text",placeholder="Patient Number", ng-model="ctest.echoCardiogramTest.patientNo",required)
+                input.form-control.input-sm(type="text",placeholder="Patient Number", ng-model="ctest.patientID",required)
         .form-group.col-md-4.col-sm-6.col-xs-12
             label.content-label 
                 | Tested Time
@@ -476,5 +488,5 @@ br
                     | LVM / Height2
                 input.form-control(type="number", placeholder="(g/m2)", ng-model="ctest.echoCardiogramTest.height",ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/")
         .form-group.col-md-12.col-sm-12.col-xs-12.no_padding.margin-top--10px
-            button.col-md-2.col-md-offset-3.btn.btn-info.btn-default(type="submit") Add
+            button.col-md-2.col-md-offset-5.btn.btn-info.btn-default(type="submit") Add
             

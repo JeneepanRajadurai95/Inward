@@ -18,9 +18,9 @@ angular.module('test.service', []).factory('TestService', [
                 return deferred.promise;
             },
 
-            getTest: function(patientNo) {
+            getTest: function(patientID) {
                 let deferred = $q.defer();
-                $http.get('/api/tests/' + patientNo).then((results) => {
+                $http.get('/api/tests/' + patientID).then((results) => {
                     deferred.resolve(results.data);
                 }, (err) => {
                     deferred.reject(err);
@@ -29,11 +29,11 @@ angular.module('test.service', []).factory('TestService', [
                 return deferred.promise;
             },
 
-            addTest: function(newTest) {
+            addTest: function(newTest, type) {
                 let deferred = $q.defer();
                 $http({
                     method: 'POST',
-                    url: '/api/tests',
+                    url: '/api/tests?type=' + type,
                     data: $.param(newTest),
                     headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
                 }).then((results) => {

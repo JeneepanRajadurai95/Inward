@@ -19,16 +19,16 @@ angular.module('test.controller', []).controller('TestController', [
             });
         }
 
-        $scope.getTest = function(patientNo) {
-            TestService.getTest(patientNo).then((test) => {
+        $scope.getTest = function(patientID) {
+            TestService.getTest(patientID).then((test) => {
                 $scope.dtest = test;
             }, (err) => {
                 console.log(err);
             });
         };
 
-        $scope.addTest = function(ctest) {
-            TestService.addTest(ctest).then((newTest) => {
+        $scope.addTest = function(ctest, type) {
+            TestService.addTest(ctest, type).then((newTest) => {
                 $scope.rtests.push(newTest);
                 $scope.ctest = {};
             }, (err) => {
