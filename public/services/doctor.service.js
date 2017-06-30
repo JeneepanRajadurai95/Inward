@@ -32,6 +32,44 @@ angular.module('doctor.service', []).factory('DoctorService', [
                 });
 
                 return deferred.promise;
+            },
+
+            getDoctor: function(doctorID) {
+                let defer = $q.defer();
+                $http.get('/api/doctors/' + doctorID).then((results) => {
+                    defer.resolve(results.data);
+                }, (err) => {
+                    defer.reject(err);
+                });
+
+                return defer.promise;
+            },
+
+            scheduleAppointment: function(appointment) {
+                let defer = $q.defer();
+                $http({
+                    method: 'POST',
+                    url: '/api/doctors/schedule',
+                    data: $.param(appointment),
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+                }).then(result => {
+                    defer.resolve(result.data);
+
+                }, err => {
+                    defer.reject(err);
+                });
+                return defer.promise;
+            },
+
+            getScheduledEvents: function() {
+                let deferred = $q.defer();
+                $http.get('/api/doctors/schedules').then((results) => {
+                    deferred.resolve(results.data);
+                }, (err) => {
+                    deferred.reject(err);
+                });
+
+                return deferred.promise;
             }
         }
     }

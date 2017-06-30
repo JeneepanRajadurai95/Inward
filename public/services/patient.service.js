@@ -40,6 +40,68 @@ angular.module('patient.service', []).factory('PatientService', [
                     deferred.reject(err);
                 });
                 return deferred.promise;
+            },
+
+            iTransferPatient: function(tpatient) {
+                let deferred = $q.defer();
+                $http({
+                    method: 'PUT',
+                    url: '/api/patients/' + tpatient.patientID + '/transfer',
+                    data: $.param(tpatient),
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+                }).then((results) => {
+                    deferred.resolve(results.data);
+                }, (err) => {
+                    deferred.reject(err);
+                });
+                return deferred.promise;
+            },
+
+            eTransferPatient: function(tpatient) {
+                // let deferred = $q.defer();
+                // $http({
+                //     method: 'POST',
+                //     url: '/api/patients/' + tpatient.patientID + '/transfer',
+                //     data: $.param(tpatient),
+                //     headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+                // }).then((results) => {
+                //     deferred.resolve(results.data);
+                // }, (err) => {
+                //     deferred.reject(err);
+                // });
+                // return deferred.promise;
+
+                // TODO
+            },
+
+            dischargePatient: function(dcpatient) {
+                let deferred = $q.defer();
+                $http({
+                    method: 'PUT',
+                    url: '/api/patients/' + dcpatient.patientID + '/discharge',
+                    data: $.param(dcpatient),
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+                }).then((results) => {
+                    deferred.resolve(results.data);
+                }, (err) => {
+                    deferred.reject(err);
+                });
+                return deferred.promise;
+            },
+
+            addAllergy: function(patient) {
+                let deferred = $q.defer();
+                $http({
+                    method: 'PUT',
+                    url: '/api/patients/' + patient.patientID + '/allergy',
+                    data: $.param(patient),
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+                }).then((results) => {
+                    deferred.resolve(results.data);
+                }, (err) => {
+                    deferred.reject(err);
+                });
+                return deferred.promise;
             }
         }
     }

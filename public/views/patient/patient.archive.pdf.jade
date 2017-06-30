@@ -27,3 +27,113 @@
         span.col-md-5.col-sm-12.col-xs-12.pdf-span-sm
             b Admitted : &nbsp;
             | &nbsp; {{dpatient.Inward.admittedDateTime | date:'yyyy-MM-dd HH:mm:ss Z'}}
+        .col-md-12.col-sm-12.col-xs-12.no_padding.margin-top--20px
+            h4.col-md-12.col-sm-12.col-xs-12.archive-heading.no_padding
+                | Personal
+            span.col-md-4.col-sm-12.col-xs-12.pdf-span-sm.padding-bottom--5px
+                b First name : &nbsp;
+                | {{dpatient.Name.firstName}}
+            span.col-md-4.col-sm-12.col-xs-12.pdf-span-sm.padding-bottom--5px
+                b Last name : &nbsp;
+                | {{dpatient.Name.lastName}}
+            span.col-md-4.col-sm-12.col-xs-12.pdf-span-sm.padding-bottom--5px
+                b D.O.B : &nbsp;
+                | {{dpatient.DOB}}
+            span.col-md-12.col-sm-12.col-xs-12.pdf-span-sm.padding-bottom--5px
+                b Married Status : &nbsp;
+                | {{dpatient.MarriedStatus}}
+            span.col-md-12.col-sm-12.col-xs-12.pdf-span-sm.padding-bottom--5px
+                b Employement Status : &nbsp;
+                | {{dpatient.EmployementStatus}}
+            span.col-md-12.col-sm-12.col-xs-12.pdf-span-sm.padding-bottom--5px
+                b Address : &nbsp;
+                | {{dpatient.ContactInfo.Address.AddressLine}} {{dpatient.ContactInfo.Address.Zip}} {{dpatient.ContactInfo.Address.City}} {{dpatient.ContactInfo.Address.Country}}
+            span.col-md-3.col-sm-12.col-xs-12.pdf-span-sm.padding-bottom--5px
+                b Mobile : &nbsp;
+                | {{dpatient.ContactInfo.Phone.Mobile}}
+            span.col-md-3.col-sm-12.col-xs-12.pdf-span-sm.padding-bottom--5px
+                b Home : &nbsp;
+                | {{dpatient.ContactInfo.Phone.Home}}
+            span.col-md-3.col-sm-12.col-xs-12.pdf-span-sm.padding-bottom--5px
+                b Office : &nbsp;
+                | {{dpatient.ContactInfo.Phone.Office}}
+        .col-md-12.col-sm-12.col-xs-12.no_padding.margin-top--20px
+            .col-md-12.col-sm-12.col-xs-12.no_padding(ng-if="dpatient.allergies.length > 0")
+                h4.col-md-12.col-sm-12.col-xs-12.archive-heading.no_padding
+                    | Allergies
+                .col-md-12.col-sm-12.col-xs-12.no_padding(ng-repeat="allergy in dpatient.allergies")
+                    span.col-md-12.col-sm-12.col-xs-12.pdf-span-sm.padding-bottom--5px
+                        b {{allergy.name}} : &nbsp;
+                        | {{allergy.remarks}} | {{allergy.status}}
+            h4.col-md-12.col-sm-12.col-xs-12.archive-heading.no_padding
+            | Inward Admissions
+            .col-md-12.col-sm-12.col-xs-12.no_padding(ng-repeat="history in dpatient.Inward.history")
+                span.col-md-3.col-sm-12.col-xs-12.pdf-span-sm.padding-bottom--5px
+                    b BHT : &nbsp;
+                    | {{history.bhtNumber}}
+                span.col-md-2.col-sm-12.col-xs-12.pdf-span-sm.padding-bottom--5px
+                    b Ward : &nbsp;
+                    | {{history.wardNumber}}
+                span.col-md-2.col-sm-12.col-xs-12.pdf-span-sm.padding-bottom--5px
+                    b Bed : &nbsp;
+                    | {{history.bedNumber}}
+                span.col-md-5.col-sm-12.col-xs-12.pdf-span-sm.padding-bottom--5px
+                    b Admitted : &nbsp;
+                    | &nbsp; {{history.admittedDateTime | date:'yyyy-MM-dd HH:mm:ss Z'}}
+                span.col-md-12.col-sm-12.col-xs-12.pdf-span-sm.padding-bottom--5px
+                    b Disease : &nbsp;
+                    | &nbsp; {{history.disease.diseaseType}} : {{history.disease.explanation}}
+                span.col-md-12.col-sm-12.col-xs-12.pdf-span-sm.padding-bottom--5px
+                    b Transfer
+                    | &nbsp; {{history.transfer.transferType}} | {{history.transfer.date}}
+                span.col-md-4.col-sm-12.col-xs-12.pdf-span-sm.padding-bottom--5px
+                    | Reason : &nbsp;
+                    | &nbsp; {{history.transfer.reason}}
+                span.col-md-4.col-sm-12.col-xs-12.pdf-span-sm.padding-bottom--5px
+                    | Remarks : &nbsp;
+                    | &nbsp; {{history.transfer.remarks}}
+                span.col-md-4.col-sm-12.col-xs-12.pdf-span-sm.padding-bottom--5px
+                    | Treatment : &nbsp;
+                    | &nbsp; {{history.transfer.treatmentSuggested}}
+                span.col-md-12.col-sm-12.col-xs-12.pdf-span-sm.padding-bottom--5px
+                    b Discharge
+                    | &nbsp; {{history.discharge.bool}} | {{history.discharge.date}}
+                span.col-md-4.col-sm-12.col-xs-12.pdf-span-sm.padding-bottom--5px
+                    | Outcomes : &nbsp;
+                    | &nbsp; {{history.discharge.outcomes}}
+                span.col-md-4.col-sm-12.col-xs-12.pdf-span-sm.padding-bottom--5px
+                    | Remarks : &nbsp;
+                    | &nbsp; {{history.discharge.remarks}}
+                span.col-md-4.col-sm-12.col-xs-12.pdf-span-sm.padding-bottom--5px
+                    | Diagnosis : &nbsp;
+                    | &nbsp; {{history.discharge.diagnosis}}
+        .col-md-12.col-sm-12.col-xs-12.no_padding.margin-top--20px
+            h4.col-md-12.col-sm-12.col-xs-12.archive-heading.no_padding
+                | Guardian
+            span.col-md-4.col-sm-12.col-xs-12.pdf-span-sm.padding-bottom--5px
+                b First name : &nbsp;
+                | {{dpatient.ResponsibleParty.firstName}}
+            span.col-md-4.col-sm-12.col-xs-12.pdf-span-sm.padding-bottom--5px
+                b Last name : &nbsp;
+                | {{dpatient.ResponsibleParty.lastName}}
+            span.col-md-4.col-sm-12.col-xs-12.pdf-span-sm.padding-bottom--5px
+                b Age : &nbsp;
+                | {{dpatient.ResponsibleParty.Age}}
+            span.col-md-12.col-sm-12.col-xs-12.pdf-span-sm.padding-bottom--5px
+                b Married Status : &nbsp;
+                | {{dpatient.ResponsibleParty.MarriedStatus}}
+            span.col-md-12.col-sm-12.col-xs-12.pdf-span-sm.padding-bottom--5px
+                b Employement Status : &nbsp;
+                | {{dpatient.ResponsibleParty.EmployementStatus}}
+            span.col-md-12.col-sm-12.col-xs-12.pdf-span-sm.padding-bottom--5px
+                b Address : &nbsp;
+                | {{dpatient.ResponsibleParty.ContactInfo.Address.AddressLine}} {{dpatient.ResponsibleParty.ContactInfo.Address.Zip}} {{dpatient.ResponsibleParty.ContactInfo.Address.City}} {{dpatient.ResponsibleParty.ContactInfo.Address.Country}}
+            span.col-md-3.col-sm-12.col-xs-12.pdf-span-sm.padding-bottom--5px
+                b Mobile : &nbsp;
+                | {{dpatient.ResponsibleParty.ContactInfo.Phone.Mobile}}
+            span.col-md-3.col-sm-12.col-xs-12.pdf-span-sm.padding-bottom--5px
+                b Home : &nbsp;
+                | {{dpatient.ResponsibleParty.ContactInfo.Phone.Home}}
+            span.col-md-3.col-sm-12.col-xs-12.pdf-span-sm.padding-bottom--5px
+                b Office : &nbsp;
+                | {{dpatient.ResponsibleParty.ContactInfo.Phone.Office}}

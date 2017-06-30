@@ -63,6 +63,21 @@ angular.module('ward.service', []).factory('WardService', [
                     deferred.reject(err);
                 });
                 return deferred.promise;
+            },
+
+            assignMaintenance: function(newMaintainer) {
+                let deferred = $q.defer();
+                $http({
+                    method: 'POST',
+                    url: '/api/wards/' + newMaintainer.ward + '/maintenance',
+                    data: $.param(newMaintainer),
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+                }).then((results) => {
+                    deferred.resolve(results.data);
+                }, (err) => {
+                    deferred.reject(err);
+                });
+                return deferred.promise;
             }
         }
     }

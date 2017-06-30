@@ -26,6 +26,18 @@ Router.get('/:serial', (req, res) => {
     });
 });
 
+Router.put('/:serial', (req, res) => {
+    let drug = req.body;
+    DrugModel.findOneAndUpdate({ 'serial': req.params.serial }, {
+        $inc: { "quantity": drug.quantity }
+    }).then(results => {
+        res.json(results);
+    }, err => {
+        console.error(err);
+        res.sendStatus(500);
+    });
+});
+
 Router.post('/', (req, res) => {
     let newDrug = new DrugModel(req.body);
     newDrug.save().then((drug) => {
