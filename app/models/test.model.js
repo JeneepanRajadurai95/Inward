@@ -15,7 +15,7 @@ const TestSchema = mongoose.Schema({
             type: String,
             //ref : 'Patient'
         },
-        reportNo: Number,
+        reportNo: String,
         volume: Number, //ml
         collected: { type: Date, default: Date.now },
         tested: { type: Date, default: Date.now },
@@ -34,7 +34,7 @@ const TestSchema = mongoose.Schema({
             type: String,
             //ref : 'Patient'
         },
-        reportNo: Number,
+        reportNo: String,
         volume: Number, //ml
         collected: { type: Date, default: Date.now },
         tested: { type: Date, default: Date.now },
@@ -53,7 +53,7 @@ const TestSchema = mongoose.Schema({
             type: String,
             //ref : 'Patient'
         },
-        reportNo: Number,
+        reportNo: String,
         volume: Number, //gram
         collected: { type: Date, default: Date.now },
         tested: { type: Date, default: Date.now },
@@ -77,7 +77,7 @@ const TestSchema = mongoose.Schema({
             type: String,
             //ref : 'Patient'
         },
-        reportNo: Number,
+        reportNo: String,
         volume: Number,
         collected: { type: Date, default: Date.now },
         tested: { type: Date, default: Date.now },
@@ -89,12 +89,19 @@ const TestSchema = mongoose.Schema({
         redBloodCells: Number,
         whiteBloodCells: Number
     }],
-    // mriScan: [{
-
-    // }],
-    // xTray: [{
-
-    // }],
+    mriTest: [{
+        patientNo: {
+            type: String,
+            //ref : 'Patient'
+        },
+        reportNo: String,
+        top: { data: Buffer, contentType: String },
+        bottom: { data: Buffer, contentType: String },
+        front: { data: Buffer, contentType: String },
+        back: { data: Buffer, contentType: String },
+        left: { data: Buffer, contentType: String },
+        right: { data: Buffer, contentType: String }
+    }],
     echoCardiogramTest: [{
         patientNo: {
             type: String,

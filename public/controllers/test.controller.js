@@ -47,6 +47,8 @@ angular.module('test.controller', []).controller('TestController', [
         $scope.hivSerologyList = ["positive", "negative"];
         $scope.respiratorySymtomsList = ["yes", "no", "unknown"];
 
+
+
         initializeTests();
     }
 ]);
