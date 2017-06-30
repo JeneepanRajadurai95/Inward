@@ -32,13 +32,16 @@ const patientSchema = mongoose.Schema({
     },
     Sex: {
         type: String,
+        enum: ['Male', 'Female'],
         required: true
     },
     MarriedStatus: {
-        type: String
+        type: String,
+        enum: ['Single', 'Married', 'Divorced']
     },
     EmployementStatus: {
-        type: String
+        type: String,
+        enum: ['Working', 'Retired', 'None']
     },
     ContactInfo: {
         Address: {
@@ -47,8 +50,10 @@ const patientSchema = mongoose.Schema({
                 required: true
             },
             Zip: {
-                type: Number
-                    // required: true
+                type: Number,
+                min: [4, 'Not valid ZIP'],
+                max: 6,
+                required: true
             },
             City: {
                 type: String,
@@ -62,6 +67,12 @@ const patientSchema = mongoose.Schema({
         Phone: {
             Home: {
                 type: Number,
+                validate: {
+                    validator: function(v) {
+                        return /\d{10}/.test(v);
+                    },
+                    message: '{VALUE} is not a valid phone number!'
+                },
                 required: true
             },
             Mobile: {
@@ -73,6 +84,18 @@ const patientSchema = mongoose.Schema({
             }
         }
     },
+    allergies: [{
+        name: {
+            type: String
+        },
+        remarks: {
+            type: String
+        },
+        status: {
+            type: String,
+            enum: ['Current', 'Past']
+        }
+    }],
     Inward: {
         bhtNumber: {
             type: String,
@@ -90,6 +113,14 @@ const patientSchema = mongoose.Schema({
             type: Date,
             default: Date.now()
         },
+        disease: {
+            diseaseType: {
+                type: String
+            },
+            explanation: {
+                type: String
+            }
+        },
         history: [{
             bhtNumber: {
                 type: String
@@ -102,8 +133,58 @@ const patientSchema = mongoose.Schema({
             },
             admittedDateTime: {
                 type: Date
+            },
+            disease: {
+                diseaseType: {
+                    type: String
+                },
+                explanation: {
+                    type: String
+                }
+            },
+            transfer: {
+                transferType: {
+                    type: String
+                },
+                reason: {
+                    type: String
+                },
+                remarks: {
+                    type: String
+                },
+                treatmentSuggested: {
+                    type: String
+                },
+                date: {
+                    type: Date
+                }
+            },
+            discharge: {
+                bool: {
+                    type: String,
+                    enum: ['True', 'False']
+                },
+                remarks: {
+                    type: String
+                },
+                outcomes: {
+                    type: String
+                },
+                referedTo: {
+                    type: String
+                },
+                diagnosis: {
+                    type: String
+                },
+                date: {
+                    type: Date
+                }
             }
         }]
+    },
+    discharged: {
+        type: String,
+        enum: ['True', 'False']
     },
     ResponsibleParty: {
         Name: {
@@ -124,13 +205,16 @@ const patientSchema = mongoose.Schema({
         },
         Sex: {
             type: String,
+            enum: ['Male', 'Female'],
             required: true
         },
         MarriedStatus: {
-            type: String
+            type: String,
+            enum: ['Single', 'Married', 'Divorced']
         },
         EmployementStatus: {
-            type: String
+            type: String,
+            enum: ['Working', 'Retired', 'None']
         },
         ContactInfo: {
             Address: {
@@ -139,7 +223,10 @@ const patientSchema = mongoose.Schema({
                     required: true
                 },
                 Zip: {
-                    type: Number
+                    type: Number,
+                    min: [4, 'Not valid ZIP'],
+                    max: 6,
+                    required: true
                 },
                 City: {
                     type: String,
@@ -179,11 +266,16 @@ patientSchema.pre('save', function(next) {
                 return next(error);
             }
             doc.Inward.bhtNumber = "BHT-" + bhtCounter.seq;
+            let d = {
+                "diseaseType": doc.Inward.disease.diseaseType,
+                "explanation": doc.Inward.disease.explanation
+            };
             let h = {
                 "bhtNumber": doc.Inward.bhtNumber,
                 "wardNumber": doc.Inward.wardNumber,
                 "bedNumber": doc.Inward.bedNumber,
-                "admittedDateTime": doc.Inward.admittedDateTime
+                "admittedDateTime": doc.Inward.admittedDateTime,
+                "disease": d
             };
             doc.Inward.history.push(h);
             next();

@@ -3,6 +3,9 @@
 'use strict';
 
 angular.module('inwardApp', [
+    'angular-growl',
+    'ui.select',
+    'ngSanitize',
     'mwl.calendar',
     'angular-svg-round-progressbar',
     'chart.js',
@@ -28,7 +31,7 @@ angular.module('inwardApp', [
     'ward.controller',
     'ward.service',
     'startFrom.filter'
-]).run(['$rootScope', '$route', function($rootScope, $route) {
+]).run(['$rootScope', '$route', 'growl', function($rootScope, $route, growl) {
     $rootScope.loggedinUser = '';
     $rootScope.goBack = function() {
         window.history.back();
@@ -36,4 +39,44 @@ angular.module('inwardApp', [
     $rootScope.refresh = function() {
         $route.reload();
     };
+
+    $rootScope.growl = function(type, message) {
+        var config = {};
+        switch (type) {
+            case "success":
+                growl.success(message, config);
+                break;
+            case "info":
+                growl.info(message, config);
+                break;
+            case "warning":
+                growl.warning(message, config);
+                break;
+            default:
+                growl.error(message, config);
+        }
+    };
+
+    $rootScope.futureDateBeforeRender = function($dates) {
+        const todaySinceMidnight = new Date();
+        todaySinceMidnight.setUTCHours(0, 0, 0, 0);
+        $dates.filter(function(date) {
+            return date.utcDateValue > todaySinceMidnight.getTime();
+        }).forEach(function(date) {
+            date.selectable = false;
+        });
+    };
+
+    $rootScope.pastDateBeforeRender = function($dates) {
+        const todaySinceMidnight = new Date();
+        todaySinceMidnight.setUTCHours(0, 0, 0, 0);
+        $dates.filter(function(date) {
+            return date.utcDateValue < todaySinceMidnight.getTime();
+        }).forEach(function(date) {
+            date.selectable = false;
+        });
+    };
+
+}]).config(['growlProvider', function(growlProvider) {
+    growlProvider.globalTimeToLive(3000);
 }]);

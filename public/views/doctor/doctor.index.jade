@@ -1,48 +1,42 @@
-.col-md-8
-    h2 Doctor Details
-    div.table-responsive
+.col-md-12.col-sm-12.col-xs-12.dashboard-group
+    span.dashboard-title Dashboard | Doctor
+
+.col-md-12.col-sm-12.col-xs-12.margin-bottom--10px
+    span.col-md-2.col-sm-4.col-xs-12.top-selection
+        button.btn.btn-default.btn-circle.btn-green(ng-click="partialForm='addDoctorsForm'", name="addDoctorsForm")
+            i.fa.fa-plus
+        span.top-selection--inner  Doctor
+    span.col-md-2.col-sm-4.col-xs-12.top-selection
+        button.btn.btn-default.btn-circle.btn-green(ng-click="partialForm='addScheduleForm'", name="addScheduleForm")
+            i.fa.fa-plus
+        span.top-selection--inner Schedule
+    //- span.col-md-2.col-sm-4.col-xs-12.top-selection
+    //-     button.btn.btn-default.btn-circle.btn-green(ng-click="partialForm='scheduleDetails'", name="scheduleDetails")
+    //-         i.fa.fa-plus
+    //-     span.top-selection--inner Calender
+
+include doctor.add.jade
+include doctor.schedule.jade
+
+.col-md-12.padding--top--20px
+     .table-responsive
         table.table.table-hover.table-striped
-            thead
+            thead.thead-default
                 tr
+                    td #
                     td Name
-                    td Gender
-                    td Address
-                    td Phone
-                    td Department
-                    td Designation
+                    td Professional
+                    td
             tbody
-                tr(ng-repeat="doctor in rdoctors")
-                    td {{doctor.name}}
-                    td {{doctor.gender}}
-                    td {{doctor.address}}
-                    td {{doctor.phone}}
-                    td {{doctor.department}}
-                    td {{doctor.designation}}
-.col-md-4
-    br
-    h2 Add Doctors
-    form(role="form", ng-submit="addDoctor(cdoctor)")
-        .form-group
-            input.form-control(type="text", placeholder="Name", ng-model="cdoctor.name")
-        .form-group
-            span Male
-            &nbsp; &nbsp; &nbsp;
-            input(type="radio", value="Male", ng-model="cdoctor.gender")
-            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-            span Female
-            &nbsp; &nbsp; &nbsp;
-            input(type="radio", value="Female", ng-model="cdoctor.gender")
-        .from-group
-            input.form-control(type="text", placeholder="Address", ng-model="cdoctor.address")
-        &nbsp;
-        .form-group
-            input.form-control(type="number", placeholder="Phone", ng-model="cdoctor.phone")
-        .form-group
-            input.form-control(type="text", placeholder="Department", ng-model="cdoctor.department")
-        .form-group
-            input.form-control(type="text", placeholder="Designation", ng-model="cdoctor.designation")
-        button.btn.btn-default(type="submit") Add
+                tr(ng-repeat-start="doctor in rdoctors", ng-init="doctor.expanded = false" , ng-click="doctor.expanded = !doctor.expanded")
+                    td {{$index + 1}}
+                    td Dr. {{doctor.Name.Title}} {{doctor.Name.Firstname}}
+                    td {{doctor.HealthCare.Type}}
+                    td
+                        small(ng-bind="doctor.expanded ? 'Close' : 'View'")
+                tr.no_hover(ng-if="doctor.expanded" ng-repeat-end)
+                        td.padding-top--20px(colspan="4")
+                            include doctor.info.jade
+
 .col-md-10.col-md-offset-1.col-sm-10.col-sm-offset-1.col-xs-10.col-xs-offset-1
-    mwl-calendar(view="calendarView", view-date="viewDate", events="events", view-title="calendarTitle", on-event-click="eventClicked(calendarEvent)", 
-        on-event-times-changed="calendarEvent.startsAt = calendarNewEventStart; calendarEvent.endsAt = calendarNewEventEnd",cell-is-open="true")
+    mwl-calendar(view="calendarView", view-date="viewDate", events="events",cell-is-open="true")

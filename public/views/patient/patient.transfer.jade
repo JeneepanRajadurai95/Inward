@@ -1,0 +1,138 @@
+.col-md-12.col-sm-12.col-xs-12(name="addTransferForm")
+    div.col-md-12.col-sm-12.col-xs-12(ng-show="partialForm=='addTransferForm'")
+        span.col-md-12.col-sm-12.col-xs-12.text-align--right.margin-bottom--10px(ng-click="partialForm='null';clearAll();", name="closeTransferForm")
+            label.btn.btn-default.btn-circle.close-btn
+                i.fa.fa-times
+        ul.nav-tabs.form-group.col-md-12.col-sm-12.col-xs-12(style="list-style: none !important;")
+            li(ng-class="tabIsSet(1) ? 'activeTab' : 'tab'" ng-click="tabSet(1)")
+                span Internal Transfer
+            li(ng-class="tabIsSet(2) ? 'activeTab' : 'tab'" ng-click="tabSet(2)")
+                span External Transfer   
+        div.col-md-12.col-sm-12.col-xs-12.no_padding
+            form.col-md-12.col-sm-12.col-xs-12.no_padding.padding-top--20px(role="form", ng-submit="iTransferPatient();" ng-show="tabIsSet(1)")
+                h5.col-md-12.col-sm-12.col-xs-12.content-heading 
+                        | Internal Transfer
+                    .form-group.col-md-6.col-sm-12.col-xs-12 
+                        label.content-label 
+                            | Patient ID
+                            span.red *
+                        ui-select(ng-model="selected.transfer", ng-required="true", theme="bootstrap" ng-disabled="archiveController")
+                            ui-select-match(placeholder="Patient ID")
+                                span(ng-bind="$select.selected.ID")
+                            ui-select-choices(repeat="item in (rpatients | filter: $select.search) track by item.ID")
+                                span(ng-bind="item.ID")
+                            ui-select-no-choice
+                                | We couldn't find one
+                h5.col-md-12.col-sm-12.col-xs-12.content-heading 
+                        | Transfer Ward Selection
+                    .form-group.col-md-6.col-sm-12.col-xs-12
+                        label.content-label 
+                            | Ward Selection
+                            span.red *
+                        select.form-control.input-sm(placeholder="Ward Selection", ng-model="tpatient.Inward.wardNumber", ng-change="getGreenBeds(tpatient.Inward.wardNumber)", required)
+                            option(ng-repeat="w in availableWards", value="{{w.wardNumber}}") {{w.name}}
+                    .form-group.col-md-6.col-sm-12.col-xs-12
+                        label.content-label 
+                            | Bed Selection
+                            span.red *
+                        select.form-control.input-sm(placeholder="Bed Selection", ng-model="tpatient.Inward.bedNumber", ng-disabled="availableBedsDisabled", required)
+                            option(ng-repeat="b in availableBeds.beds", value="{{b.bedNumber}}") {{b.bedNumber}}
+                    .form-group.col-md-6.col-sm-12.col-xs-12
+                        label.content-label 
+                            | Reason
+                            span.red *
+                        input.form-control.input-sm(type="text", placeholder="Reason", ng-model="tpatient.reason", required)
+                    .form-group.col-md-6.col-sm-12.col-xs-12
+                        label.content-label 
+                            | Treatment Suggested
+                            span.red *
+                        input.form-control.input-sm(type="text", placeholder="Treatment Suggested", ng-model="tpatient.treatmentSuggested", required)
+                    .form-group.col-md-4.col-sm-12.col-xs-12
+                        label.content-label 
+                            | Transfer Date
+                            span.red *
+                        div.dropdown
+                            a.dropdown-toggle#dLabel(role="button" data-toggle="dropdown" data-target=".dropdown" href="#")
+                                div.input-group
+                                    input.form-control.input-sm#date(type="text", name="date", ng-model="tpatient.transferDate", placeholder="Transfer Date", required)
+                                    span.input-group-addon
+                                        i.glyphicon.glyphicon-calendar
+                            ul.dropdown-menu(role="menu" aria-labelledby="dLabel")
+                                datetimepicker(ng-model="tpatient.transferDate", data-datetimepicker-config="{ dropdownSelector: '.dropdown-toggle' }", data-before-render="$parent.pastDateBeforeRender($dates)")
+                    .form-group.col-md-8.col-sm-12.col-xs-12
+                        label.content-label 
+                            | Remarks
+                        input.form-control.input-sm(type="text", placeholder="Remarks", ng-model="tpatient.remarks", required)
+                    .form-group.col-md-12.col-sm-12.col-xs-12
+                        button.btn.btn-success.btn-sm(type="submit") Transfer
+            form.col-md-12.col-sm-12.col-xs-12.no_padding.padding-top--20px(role="form", ng-submit="eTransferPatient();", ng-show="tabIsSet(2)")
+                h5.col-md-12.col-sm-12.col-xs-12.content-heading 
+                        | External Transfer
+                    .form-group.col-md-6.col-sm-12.col-xs-12 
+                        label.content-label 
+                            | Patient ID
+                            span.red *
+                        ui-select(ng-model="selected.transfer", ng-required="true", theme="bootstrap" ng-disabled="archiveController")
+                            ui-select-match(placeholder="Patient ID")
+                                span(ng-bind="$select.selected.ID")
+                            ui-select-choices(repeat="item in (rpatients | filter: $select.search) track by item.ID")
+                                span(ng-bind="item.ID")
+                            ui-select-no-choice
+                                | We couldn't find one
+                h5.col-md-12.col-sm-12.col-xs-12.content-heading 
+                        | Transfer
+                    .form-group.col-md-6.col-sm-12.col-xs-12
+                        label.content-label 
+                            | Transfer from
+                            span.red *
+                        select.form-control.input-sm(placeholder="Ward Selection", ng-model="tpatient.Inward.wardNumber", ng-change="getGreenBeds(tpatient.Inward.wardNumber)", required)
+                            option(ng-repeat="w in availableWards", value="{{w.wardNumber}}") {{w.name}}
+                    .form-group.col-md-6.col-sm-12.col-xs-12
+                        label.content-label 
+                            | Transfer To
+                            span.red *
+                        select.form-control.input-sm(placeholder="Bed Selection", ng-model="tpatient.Inward.bedNumber", ng-disabled="availableBedsDisabled", required)
+                            option(ng-repeat="b in availableBeds.beds", value="{{b.bedNumber}}") {{b.bedNumber}}
+                    .form-group.col-md-6.col-sm-12.col-xs-12
+                        label.content-label 
+                            | Reason
+                            span.red *
+                        input.form-control.input-sm(type="text", placeholder="Reason", ng-model="tpatient.reason", required)
+                    .form-group.col-md-6.col-sm-12.col-xs-12
+                        label.content-label 
+                            | Treatment Suggested
+                            span.red *
+                        input.form-control.input-sm(type="text", placeholder="Treatment Suggested", ng-model="tpatient.treatmentSuggested", required)
+                    .form-group.col-md-6.col-sm-12.col-xs-12
+                        label.content-label 
+                            | Name of Guardian
+                            span.red *
+                        input.form-control.input-sm(type="text", placeholder="Guardian's' Name", ng-model="tpatient.guardian.name", required)
+                    .form-group.col-md-6.col-sm-12.col-xs-12
+                        label.content-label 
+                            | Address of Guardian
+                            span.red *
+                        input.form-control.input-sm(type="text", placeholder="Guardian's' Address", ng-model="tpatient.guardian.address", required)
+                    .form-group.col-md-6.col-sm-12.col-xs-12
+                        label.content-label 
+                            | Phone of Guardian
+                            span.red *
+                        input.form-control.input-sm(type="number", placeholder="Guardian's' Phone", ng-model="tpatient.guardian.phone", required)
+                    .form-group.col-md-4.col-sm-12.col-xs-12
+                        label.content-label 
+                            | Transfer Date
+                            span.red *
+                        div.dropdown
+                            a.dropdown-toggle#dLabel(role="button" data-toggle="dropdown" data-target=".dropdown" href="#")
+                                div.input-group
+                                    input.form-control.input-sm#date(type="text", name="date", ng-model="tpatient.transferDate", placeholder="Transfer Date", required)
+                                    span.input-group-addon
+                                        i.glyphicon.glyphicon-calendar
+                            ul.dropdown-menu(role="menu" aria-labelledby="dLabel")
+                                datetimepicker(ng-model="tpatient.transferDate", data-datetimepicker-config="{ dropdownSelector: '.dropdown-toggle' }", data-before-render="$parent.pastDateBeforeRender($dates)")
+                    .form-group.col-md-8.col-sm-12.col-xs-12
+                        label.content-label 
+                            | Remarks
+                        input.form-control.input-sm(type="text", placeholder="Remarks", ng-model="tpatient.remarks", required)
+                    .form-group.col-md-12.col-sm-12.col-xs-12
+                        button.btn.btn-success.btn-sm(type="submit") Transfer

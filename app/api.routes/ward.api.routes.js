@@ -8,6 +8,7 @@ const Router = express.Router();
 const mongoose = require('mongoose');
 const WardModel = mongoose.model('Ward');
 const BedModel = mongoose.model('Bed');
+const MaintenanceModel = mongoose.model('Maintenance');
 
 Router.get('/', (req, res) => {
     WardModel.find().exec().then((wards) => {
@@ -66,5 +67,18 @@ Router.post('/:id/beds', (req, res) => {
         res.sendStatus(500);
     });
 });
+
+Router.post('/:id/maintenance', (req, res) => {
+    let newMaintainer = new MaintenanceModel(req.body);
+    const wardNumber = req.params.id;
+    newMaintainer.ward = wardNumber;
+    newMaintainer.save().then(result => {
+        res.json(result);
+    }).catch(err => {
+        console.error(err);
+        res.sendStatus(500);
+    });
+});
+
 
 module.exports = Router;

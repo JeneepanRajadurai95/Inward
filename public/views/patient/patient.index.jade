@@ -7,9 +7,13 @@
             i.fa.fa-plus
         span.top-selection--inner  Patient
     span.col-md-2.col-sm-4.col-xs-12.top-selection
-        button.btn.btn-default.btn-circle.btn-green(ng-click="", name="transferPatientForm")
+        button.btn.btn-default.btn-circle.btn-green(ng-click="partialForm='addTransferForm'", name="addTransferForm")
             i.fa.fa-plus
         span.top-selection--inner Transfer Patient
+    span.col-md-2.col-sm-4.col-xs-12.top-selection(style="padding: 0px !important; margin-right:20px !important;")
+        button.btn.btn-default.btn-circle.btn-green(ng-click="partialForm='addDischargeForm'", name="addDischargeForm")
+            i.fa.fa-plus
+        span.top-selection--inner Discharge Patient
     span.col-md-2.col-sm-4.col-xs-12.no_padding.margin-bottom--10px
         div.btn-group(style="width: 100%;")
             button.btn.btn-default.btn-sm.dropdown-toggle(type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width: 100%;")
@@ -25,12 +29,14 @@
                 span.btn.fa.fa-search
 
 include patient.add.jade
+include patient.transfer.jade
+include patient.discharge.jade
 
 .col-md-12.col-sm-12.col-xs-12.padding--top--10px.padding-bottom--10px.padding-top--10px(ng-show="tableLoading")
   include ./../shared/table-laoding.jade  
 .col-md-12.col-sm-12.col-xs-12.padding--top--10px.padding-bottom--10px.padding-top--10px(ng-class="tableLoading ? 'table-loading' : 'table-loaded'")
     .col-md-12.col-sm-12.col-xs-12.no-padding-left(ng-if="rpatients.length <= 0")
-        h4.montserrat No Patients Data Available                
+        h4.montserrat None Available                
     .col-md-12.col-sm-12.col-xs-12.no_padding(ng-if="rpatients.length>0")
         .table-responsive
             table.table.table-striped.table-hover
@@ -53,6 +59,7 @@ include patient.add.jade
                             span.fa.fa-caret-up(ng-show="sortType == 'admittedDate' && sortReverse")
                         th
                 tbody
+                    //- , ng-class="(patient.discharged == 'True') ? 'discharged' : ''"
                     tr.pointer(ng-repeat-start="patient in rpatients | orderBy:sortBy:sortReverse | filter:searchPatient | StartFromFilter:currentPage*pageSize | limitTo:pageSize ", ng-init="patient.expanded = false", ng-click="patient.expanded = !patient.expanded")
                         td {{patient.Inward.bhtNumber}}
                         td {{patient.ID}}

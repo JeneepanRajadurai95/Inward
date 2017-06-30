@@ -1,0 +1,40 @@
+.col-md-12.col-sm-12.col-xs-12(name="addAllergyForm")
+    div.col-md-12.col-sm-12.col-xs-12(ng-show="partialForm=='addAllergyForm'")
+        span.col-md-12.col-sm-12.col-xs-12.text-align--right.margin-bottom--10px(ng-click="partialForm='null';clearAll();", name="closeAllergyForm")
+            label.btn.btn-default.btn-circle.close-btn
+                i.fa.fa-times  
+        form.col-md-12.col-sm-12.col-xs-12.no_padding.padding-top--20px(role="form", ng-submit="addAllergy();")
+            h5.col-md-12.col-sm-12.col-xs-12.content-heading 
+                    | Allergy
+                .form-group.col-md-6.col-sm-12.col-xs-12 
+                    label.content-label 
+                        | Patient ID
+                        span.red *
+                    ui-select(ng-model="selected.allergy", ng-required="true", theme="bootstrap", ng-disabled="archiveController")
+                        ui-select-match(placeholder="Patient ID")
+                            span(ng-bind="$select.selected.ID")
+                        ui-select-choices(repeat="item in (rpatients | filter: $select.search) track by item.ID")
+                            span(ng-bind="item.ID")
+                        ui-select-no-choice
+                            | We couldn't find one
+                .form-group.col-md-6.col-sm-12.col-xs-12
+                    label.content-label 
+                        | Allergy
+                        span.red *
+                    input.form-control.input-sm(type="text", placeholder="Allergy", ng-model="allergy.name", required)
+                .form-group.col-md-6.col-sm-12.col-xs-12
+                    label.content-label 
+                        | Remarks
+                        span.red *
+                    input.form-control.input-sm(type="text", placeholder="Remarks", ng-model="allergy.remarks", required)
+                .form-group.col-md-12.col-sm-12.col-xs-12
+                        label.col-md-3.col-sm-6.col-xs-12.content-label 
+                            | Status
+                        label.radio-inline
+                            input(type="radio", ng-model="allergy.status", value="Current")
+                            span.radio-span  Current
+                        label.radio-inline
+                            input(type="radio", ng-model="allergy.status", value="Past")
+                            span.radio-span  Past
+                .form-group.col-md-12.col-sm-12.col-xs-12
+                    button.btn.btn-success.btn-sm(type="submit") Add Allergy

@@ -43,7 +43,23 @@ angular.module('drug.service', []).factory('DrugService', [
                 });
 
                 return deferred.promise;
+            },
+            updateDrug: function(newDrug) {
+                let deferred = $q.defer();
+                $http({
+                    method: 'PUT',
+                    url: '/api/drugs/' + newDrug.serial,
+                    data: $.param(newDrug),
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+                }).then((results) => {
+                    deferred.resolve(results.data);
+                }, (err) => {
+                    deferred.reject(err);
+                });
+
+                return deferred.promise;
             }
+
         }
     }
 ]);

@@ -1,0 +1,49 @@
+.col-md-12.col-sm-12.col-xs-12(name="addDischargeForm")
+    div.col-md-12.col-sm-12.col-xs-12(ng-show="partialForm=='addDischargeForm'")
+        span.col-md-12.col-sm-12.col-xs-12.text-align--right(ng-click="partialForm='null';clearAll();", name="closeDischargeForm")
+            label.btn.btn-default.btn-circle.close-btn
+                i.fa.fa-times   
+        form.col-md-12.col-sm-12.col-xs-12.no_padding(role="form", ng-submit="dischargePatient();")
+            h5.col-md-12.col-sm-12.col-xs-12.content-heading 
+                    | Patient Discharge
+                .form-group.col-md-6.col-sm-12.col-xs-12 
+                    label.content-label 
+                        | Patient ID
+                        span.red *
+                    ui-select(ng-model="selected.discharge", ng-required="true", theme="bootstrap", ng-disabled="archiveController")
+                        ui-select-match(placeholder="Patient ID")
+                            span(ng-bind="$select.selected.ID")
+                        ui-select-choices(repeat="item in (rpatients | filter: $select.search) track by item.ID")
+                            span(ng-bind="item.ID")
+                        ui-select-no-choice
+                            | We couldn't find one
+                .form-group.col-md-4.col-sm-12.col-xs-12
+                    label.content-label 
+                        | Discharge Date & Time
+                        span.red *
+                    div.dropdown
+                        a.dropdown-toggle#dLabel(role="button" data-toggle="dropdown" data-target=".dropdown" href="#")
+                            div.input-group
+                                input.form-control.input-sm#date(type="text", name="date", ng-model="dcpatient.dischargeDate", placeholder="Discharge Date", required)
+                                span.input-group-addon
+                                    i.glyphicon.glyphicon-calendar
+                        ul.dropdown-menu(role="menu" aria-labelledby="dLabel")
+                            datetimepicker(ng-model="dcpatient.dischargeDate", data-datetimepicker-config="{ dropdownSelector: '.dropdown-toggle' }", data-before-render="$parent.pastDateBeforeRender($dates)")
+                .form-group.col-md-6.col-sm-12.col-xs-12
+                    label.content-label 
+                        | Remarks
+                    input.form-control.input-sm(type="text", placeholder="Remarks", ng-model="dcpatient.remarks", required)
+                .form-group.col-md-6.col-sm-12.col-xs-12
+                    label.content-label 
+                        | Outcomes
+                    input.form-control.input-sm(type="text", placeholder="Outcomes", ng-model="dcpatient.outcomes", required)
+                .form-group.col-md-6.col-sm-12.col-xs-12
+                    label.content-label 
+                        | Refered To
+                    input.form-control.input-sm(type="text", placeholder="Refered To", ng-model="dcpatient.referedTo", required)
+                .form-group.col-md-6.col-sm-12.col-xs-12
+                    label.content-label 
+                        | Discharge Diagnosis
+                    input.form-control.input-sm(type="text", placeholder="Discharge Diagnosis", ng-model="dcpatient.diagnosis", required)     
+                .form-group.col-md-12.col-sm-12.col-xs-12
+                    button.btn.btn-success.btn-sm(type="submit") Discharge
