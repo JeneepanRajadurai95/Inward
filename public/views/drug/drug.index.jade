@@ -2,16 +2,66 @@
     button.btn.btn-success(ng-click="partialForm='addDrugForm'") 
         | Add Drug
 
-.col-md-12.padding--top--10px
-    form(role="form", ng-submit="addDrug(cdrug)", ng-show="partialForm=='addDrugForm'")
+
+.col-md-8.padding--top--10px
+    form(role="form", ng-submit="addDrug()", ng-show="partialForm=='addDrugForm'")
         .form-group
+            label
+                | Serial Number
+                span
             input.form-control(type="text", placeholder="Enter Serial #", ng-model="cdrug.serial")
         .form-group
-            input.form-control(type="text", placeholder="Enter Name", ng-model="cdrug.name")
+            label
+                | Generic Name
+                span
+            input.form-control(type="text", placeholder="Enter Generic Name", ng-model="cdrug.name",pattern="^[a-zA-Z]+$",required)
         .form-group
-            input.form-control(type="text", placeholder="Enter Manufacture Date", ng-model="cdrug.mfd")
+            label
+                | Brand Name
+                span
+            input.form-control(type="text", placeholder="Enter Brand Name", ng-model="cdrug.bname",pattern="^[a-zA-Z]+$",required)
         .form-group
-            input.form-control(type="text", placeholder="Enter Expiry Date", ng-model="cdrug.exp")
+            label
+                | Quantity
+                span
+            input.form-control(type="Number", placeholder="Enter Quantity", ng-model="cdrug.quantity",required)
+         .form-group
+            label
+                | Vayel
+                span
+            input.form-control(type="text", placeholder="Enter Vayel", ng-model="cdrug.vial",required)
+        .form-group
+            label
+                | Root
+                span
+            input.form-control(type="text", placeholder="Enter Root", ng-model="cdrug.root",required)
+        .dropdown.form-group.dropdown-start-parent
+            label
+                | Manufacture Date
+                span    
+            a#dropdownStart.dropdown-toggle(role='button', data-toggle='dropdown', data-target='.dropdown-start-parent', href='#')
+                .input-group.date
+                    input.form-control(type='text', data-ng-model='cdrug.mfd',required)
+                    |             
+                    span.input-group-addon
+                        i.glyphicon.glyphicon-calendar
+                |     
+            ul.dropdown-menu(role='menu', aria-labelledby='dLabel')
+                datetimepicker(data-ng-model='cdrug.mfd', data-datetimepicker-config="{ dropdownSelector: '#dropdownStart', renderOn: 'end-date-changed' }", data-on-set-time='startDateOnSetTime()', data-before-render='startDateBeforeRender($dates)')
+        .dropdown.form-group.dropdown-end-parent
+            label
+                | Expiry Date
+                span    
+            a#dropdownEnd.dropdown-toggle(role='button', data-toggle='dropdown', data-target='.dropdown-end-parent', href='#')
+                .input-group.date
+                    input.form-control(type='text', data-ng-model='cdrug.exp',required)
+                    |             
+                    span.input-group-addon
+                        i.glyphicon.glyphicon-calendar
+                |     
+            ul.dropdown-menu(role='menu', aria-labelledby='dLabel')
+                datetimepicker(data-ng-model='cdrug.exp', data-datetimepicker-config="{ dropdownSelector: '#dropdownEnd', renderOn: 'start-date-changed' }", data-on-set-time='endDateOnSetTime()', data-before-render='endDateBeforeRender($view, $dates, $leftDate, $upDate, $rightDate)')
+
         button.btn.btn-default(type="submit") Add
         a.btn(ng-click="partialForm='null'") Cancel
         
@@ -26,7 +76,7 @@
                     td MFD
                     td EXP
                     td
-            tbody(ng-repeat="drug in rdrugs")
+            tbody.pointer(ng-repeat="drug in rdrugs")
                 tr
                     td {{$index + 1}}
                     td {{drug.serial}}
@@ -35,10 +85,23 @@
                     td {{drug.exp}}                                        
                     td.no_padding
                         a.btn.btn-link(href="#", ng-click="getDrug(drug.serial)")
-                            i.fa.fa-plus
+                             i.fa.fa-plus                            
                 tr(ng-show="drug.serial==ddrug.serial")
                     td(colspan="6") 
                         .col-md-12.padding--right--50px.text-align--right
                             a.btn.btn-link(href="#", ng-click="ddrug.serial='null'")
-                                i.fa.fa-minus
+                                 i.fa.fa-minus                                
                         h1 Drug Details
+                         
+                        | index No          :   {{$index + 1}}    <br>                          
+                        | Serial No         :   {{drug.serial}}   <br>                   
+                        | Generic Name      :   {{drug.name}}     <br>                       
+                        | Brand Name        :   {{drug.bname}}    <br>                      
+                        | Quantity          :   {{drug.quantity}}  <br>                                                                        
+                        | Vayal             :   {{drug.vial}}     <br>                      
+                        | Root              :   {{drug.root}}     <br>                       
+                        | Manufacture_Date  :   {{drug.mfd}}      <br>                     
+                        | Expire_Date       :   {{drug.exp}}      <br>
+                                             
+                            
+S
