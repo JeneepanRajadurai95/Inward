@@ -1,0 +1,166 @@
+.col-md-8.padding--top--10px.add-form--box
+            form(role="form", ng-submit="addDoctor(cdoctor)", ng-show="partialForm=='addDoctorsForm'")
+                .form-group.col-md-12
+                    .form.group.col-md-2
+                        h5.montserrat Title 
+                        div.btn-group
+                            label.no-padding--left.width--100
+                                input(type="radio", ng-model="cdoctor.Name.Title", value="Mr")
+                                span.montserrat.light.size-12  Mr.
+                            label.no-padding--left.width--100
+                                input(type="radio", ng-model="cdoctor.Name.Title", value="Mrs")
+                                span.montserrat.light.size-12  Mrs.
+                    .form.group.col-md-2
+                        div.grp--padding
+                            label.no-padding--left.width--100
+                                input(type="radio", ng-model="cdoctor.Name.Title", value="Miss")
+                                span.montserrat.light.size-12  Miss.
+                            //- label.no-padding--left.width--100
+                            //-     input(type="radio", ng-model="cdoctor.Name.Title", value="Mrs")
+                            //-     span.montserrat.light.size-12  Mrs.
+                    .form-group.col-md-4
+                        div.form--box
+                            input.form-control.input-sm(type="text", placeholder="First Name", ng-model="cdoctor.Name.Firstname", required)
+                    .form-group.col-md-4
+                        div.form--box
+                            input.form-control.input-sm(type="text", placeholder="Last Name", ng-model="cdoctor.Name.Lastname", required)
+                .form-group.col-md-12
+                    .form.group.col-md-2
+                        h5.montserrat Health Care Professional
+                        div.btn-group
+                            label.no-padding--left.width--100
+                                input(type="radio", ng-model="cdoctor.HealthCare.Type", value="Dentist")
+                                span.montserrat.light.size-12  Dentist
+                            label.no-padding--left.width--100
+                                input(type="radio", ng-model="cdoctor.HealthCare.Type", value="Pharm")
+                                span.montserrat.light.size-12  Pharm
+                    .form.group.col-md-2
+                        div.grp--padding--2
+                            label.no-padding--left.width--100
+                                input(type="radio", ng-model="cdoctor.HealthCare.Type", value="Nursing")
+                                span.montserrat.light.size-12  Nursing
+                            label.no-padding--left.width--100
+                                input(type="radio", ng-model="cdoctor.HealthCare.Type", value="PHD")
+                                span.montserrat.light.size-12  PHD
+                    .form.group.col-md-2
+                        div.grp--padding--2
+                            label.no-padding--left.width--100
+                                input(type="radio", ng-model="cdoctor.HealthCare.Type", value="ProSport")
+                                span.montserrat.light.size-12  Sport
+                            label.no-padding--left.width--100
+                                input(type="radio", ng-model="cdoctor.HealthCare.Type", value="LAC")
+                                span.montserrat.light.size-12  LAC
+                    .form.group.col-md-2
+                        div.grp--padding--2
+                            label.no-padding--left.width--100
+                                input(type="radio", ng-model="cdoctor.HealthCare.Type", value="OD Distributor")
+                                span.montserrat.light.size-12  OD Dist
+                            label.no-padding--left.width--100
+                                input(type="radio", ng-model="cdoctor.HealthCare.Type", value="ND")
+                                span.montserrat.light.size-12  ND
+                    .form.group.col-md-2
+                        div.grp--padding--2
+                            label.no-padding--left.width--100
+                                input(type="radio", ng-model="cdoctor.HealthCare.Type", value="DC")
+                                span.montserrat.light.size-12  DC
+                    .form.group.col-md-3
+                        label.no-padding--left.width--100
+                            div.grp--padding--type
+                                div.form-box
+                                    input.form-control-2(type="text", ng-model="cdoctor.HealthCare.Type", placeholder="Others")
+                .form-group.col-md-12
+                    .form.group.col-md-3
+                        h5.montserrat Specialty Type
+                        div.btn-group
+                            label.no-padding--left.width--100
+                                input(type="radio", ng-model="cdoctor.HealthCare.SpecialType", value="Autism")
+                                span.montserrat.light.size-12  Autism
+                            label.no-padding--left.width--100
+                                input(type="radio", ng-model="cdoctor.HealthCare.SpecialType", value="Cardiology")
+                                span.montserrat.light.size-12  Cardiology
+                            label.no-padding--left.width--100
+                                input(type="radio", ng-model="cdoctor.HealthCare.SpecialType", value="Dermatology")
+                                span.montserrat.light.size-12  Dermatology
+                     .form.group.col-md-3
+                        div.grp--padding--2
+                            label.no-padding--left.width--100
+                                input(type="radio", ng-model="cdoctor.HealthCare.SpecialType", value="Endocrinology")
+                                span.montserrat.light.size-12  Endocrinology
+                            label.no-padding--left.width--100
+                                input(type="radio", ng-model="cdoctor.HealthCare.SpecialType", value="Geriatric")
+                                span.montserrat.light.size-12  Geriatric
+                            label.no-padding--left.width--100
+                                input(type="radio", ng-model="cdoctor.HealthCare.SpecialType", value="Immunology")
+                                span.montserrat.light.size-12  Immunology
+                     .form.group.col-md-3
+                        div.grp--padding--2
+                            label.no-padding--left.width--100
+                                input(type="radio", ng-model="cdoctor.HealthCare.SpecialType", value="Mentalhealth")
+                                span.montserrat.light.size-12  Mental health
+                            label.no-padding--left.width--100
+                                input(type="radio", ng-model="cdoctor.HealthCare.SpecialType", value="Obstetrics")
+                                span.montserrat.light.size-12  Obstetrics
+                            label.no-padding--left.width--100
+                                input(type="radio", ng-model="cdoctor.HealthCare.SpecialType", value="Oncology")
+                                span.montserrat.light.size-12  Oncology
+                     .form.group.col-md-3
+                            div.grp--padding--2
+                                label.no-padding--left.width--100
+                                    input(type="radio", ng-model="cdoctor.HealthCare.SpecialType", value="Surgery")
+                                    span.montserrat.light.size-12  Surgery
+                                label.no-padding--left.width--100
+                                    input(type="radio", ng-model="cdoctor.HealthCare.SpecialType", value="Othopedics")
+                                    span.montserrat.light.size-12  Othopedics
+                                label.no-padding--left.width--100
+                                    div.form-box
+                                        input.form-control-2(type="text", ng-model="cdoctor.HealthCare.SpecialType", placeholder="Others")
+                .form-group.col-md-12
+                    .form.group.col-md-6
+                        h5.montserrat Billing Address
+                        div.form-box
+                            input.form-control.input-sm(type="text", ng-model="cdoctor.ContactInfo.Address.AddressLine", placeholder="Address" , required)
+                    .form.group.col-md-4
+                        div.grp--padding
+                            input.form-control.input-sm(type="text", ng-model="cdoctor.ContactInfo.Address.City", placeholder="City", required)
+                    .form-group.col-md-2
+                        div.grp--padding
+                            input.form-control.input-sm(type="text", ng-model="cdoctor.ContactInfo.Address.Zip", placeholder="Zip")
+                    .form-group.col-md-4
+                        div.form-contact-box
+                            input.form-control.input-sm(type="text", ng-model="cdoctor.ContactInfo.Address.State", placeholder="State" ,required)
+                     .form-group.col-md-4
+                        div.form-contact-box
+                            input.form-control.input-sm(type="text", ng-model="cdoctor.ContactInfo.Address.State", placeholder="State" ,required)
+                    .form-group.col-md-4
+                        div.form-contact-box
+                            input.form-control.input-sm(type="text", ng-model="cdoctor.ContactInfo.Phone.Mobile", placeholder="Phone" ,required)
+                .form-group.col-md-12
+                    .form.group.col-md-2
+                        h5.montserrat General
+                        div.btn-group
+                            label.no-padding--left.width--100
+                                input(type="radio", ng-model="cdoctor.Gender", value="Male")
+                                span.montserrat.light.size-12  Male
+                            label.no-padding--left.width--100
+                                input(type="radio", ng-model="cdoctor.Gender", value="Female")
+                                span.montserrat.light.size-12  Female
+                    .form-group.col-md-2
+                        div.grp--padding--general
+                            input.form-control.input-sm(type="text", ng-model="cdoctor.Age", placeholder="Age" ,required)
+                    .form-group.col-md-2
+                        div.grp--padding--general
+                            input.form-control.input-sm(type="text", ng-model="cdoctor.Status", placeholder="Status")
+                    .form-group.col-md-3
+                        div.grp--padding--general
+                            input.form-control.input-sm(type="text", ng-model="cdoctor.Department", placeholder="Department")
+                    .form-group.col-md-3
+                        div.grp--padding--general
+                            input.form-control.input-sm(type="text", ng-model="cdoctor.Designation", placeholder="Designation")
+                .form-group.col-md-12
+                    .form-group-add
+                        button.btn.btn-add-doctor(type="submit") Add 
+                        a.btn(ng-click="partialForm='null'") Cancel
+                //- .form-group
+                //-     button.btn.btn-Cancel(ng-click="partialForm='null'")
+                //-         i.fa.fa-times
+                            

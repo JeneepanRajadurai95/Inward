@@ -1,20 +1,35 @@
-.col-md-12.col-sm-12.col-xs-12.margin-bottom--10px
+.col-md-12.col-sm-12.col-xs-12
     span.col-md-2.col-sm-4.col-xs-12.top-selection
-        button.btn.btn-default(ng-click="archivePDF=true")
-            i.fa.fa-file-pdf-o
-        span.top-selection--inner  PDF
-    span.col-md-2.col-sm-4.col-xs-12.top-selection
-        button.btn.btn-default(ng-click="$parent.refresh();")
+        button.btn.btn-default.btn-circle(ng-click="$parent.refresh();")
             i.fa.fa-refresh
         span.top-selection--inner  Refresh
+    span.col-md-2.col-sm-4.col-xs-12.top-selection
+        button.btn.btn-default.btn-circle.btn-green(ng-click="partialForm='addTransferForm'", name="addTransferForm")
+            i.fa.fa-plus
+        span.top-selection--inner Transfer Patient
+    span.col-md-2.col-sm-4.col-xs-12.top-selection(style="padding: 0px !important; margin-right:20px !important;")
+        button.btn.btn-default.btn-circle.btn-green(ng-click="partialForm='addDischargeForm'", name="addDischargeForm")
+            i.fa.fa-plus
+        span.top-selection--inner Discharge Patient
+    span.col-md-2.col-sm-4.col-xs-12.top-selection
+        button.btn.btn-default.btn-circle.btn-green(ng-click="partialForm='addAllergyForm'", name="addAllergyForm")
+            i.fa.fa-plus
+        span.top-selection--inner Allergy
+    span.col-md-2.col-sm-4.col-xs-12.top-selection
+        button.btn.btn-default.btn-circle(ng-click="archivePDF=true")
+            i.fa.fa-file-pdf-o
+        span.top-selection--inner  PDF
 
 include patient.archive.pdf.jade
+include patient.allergy.jade
+include patient.transfer.jade
+include patient.discharge.jade
 
 .col-md-12.col-sm-12.col-xs-12
     .row
         .col-md-4.col-sm-12.col-xs-12.loader.archive(ng-show="loading")
         .col-md-4.col-sm-12.col-xs-12.archive(ng-class="loading ? 'div-loading' : 'div-loaded'")
-            h4.col-md-12.col-sm-12-col-xs-12.archive-title
+            h4.col-md-12.col-sm-12.col-xs-12.archive-title
                 | {{dpatient.Name.firstName}} {{dpatient.Name.lastName}}
             hr
             span.col-md-12.col-sm-12.col-xs-12.archive-body
@@ -29,7 +44,7 @@ include patient.archive.pdf.jade
                     | &nbsp; {{dpatient.Inward.bhtNumber}}
                 small.col-md-12.col-sm-12.col-xs-12.padding
                     b Ward # :
-                    | &nbsp; {{dpatient.Inward.wardNumer}}
+                    | &nbsp; {{dpatient.Inward.wardNumber}}
                 small.col-md-12.col-sm-12.col-xs-12.padding
                     b Bed # :
                     | &nbsp; {{dpatient.Inward.bedNumber}}
@@ -46,7 +61,7 @@ include patient.archive.pdf.jade
     .row
         .col-md-4.col-sm-12.col-xs-12.loader.archive(ng-show="loading")
         .col-md-4.col-sm-12.col-xs-12.archive(ng-class="loading ? 'div-loading' : 'div-loaded'")
-            h4.col-md-12.col-sm-12-col-xs-12.archive-heading
+            h4.col-md-12.col-sm-12.col-xs-12.archive-heading
                 | Personal Details
             hr
             .col-md-12.col-sm-12.col-xs-12.archive-body
@@ -78,11 +93,11 @@ include patient.archive.pdf.jade
                         | &nbsp; Office &nbsp;&nbsp;: {{dpatient.ContactInfo.Phone.Office}}
         .col-md-4.col-sm-12.col-xs-12.loader.archive(ng-show="loading")
         .col-md-4.col-sm-12.col-xs-12.archive(ng-class="loading ? 'div-loading' : 'div-loaded'")
-            h4.col-md-12.col-sm-12-col-xs-12.archive-heading
+            h4.col-md-12.col-sm-12.col-xs-12.archive-heading
                 | Guardian Details
             hr
             .col-md-12.col-sm-12.col-xs-12.archive-body
-                h4.col-md-12.col-sm-12-col-xs-12.montserrat.no_margin.gap
+                h4.col-md-12.col-sm-12.col-xs-12.montserrat.no_margin.gap
                     | {{dpatient.ResponsibleParty.Name.firstName}} {{dpatient.ResponsibleParty.Name.lastName}}
                 .col-md-12.col-sm-12.col-xs-12.gap
                     span.col-md-12.col-sm-12.col-xs-12.padding
@@ -110,6 +125,21 @@ include patient.archive.pdf.jade
                     span.col.md-12.col-sm-12.col-xs-12.padding
                         i.fa.fa-briefcase
                         | &nbsp; Office &nbsp;&nbsp;: {{dpatient.ResponsibleParty.ContactInfo.Phone.Office}}
+        .col-md-3.col-sm-12.col-xs-12.loader.archive(ng-show="loading")
+        .col-md-3.col-sm-12.col-xs-12.archive(ng-class="loading ? 'div-loading' : 'div-loaded'")
+            .col-md-12.col-sm-12.col-xs-12.archive-body
+                h4.col-md-12.col-sm-12.col-xs-12.montserrat.no_margin.gap
+                    | Disease
+                .col-md-12.col-sm-12.col-xs-12.gap
+                    span.col-md-12.col-sm-12.col-xs-12.padding(ng-repeat="h in dpatient.Inward.history")
+                        b.montserrat {{h.disease.diseaseType}} : 
+                        | &nbsp; {{h.disease.explanation}}
+                h4.col-md-12.col-sm-12-col-xs-12.montserrat.no_margin.gap
+                    | Allergies
+                .col-md-12.col-sm-12.col-xs-12.gap
+                    span.col-md-12.col-sm-12.col-xs-12.padding(ng-repeat="allergy in dpatient.allergies")
+                        b.montserrat {{allergy.name}} : 
+                        | &nbsp; {{allergy.status}}
     .row
         .col-md-3.col-sm-5.col-xs-12.loader.archive(ng-show="loading")
         .col-md-3.col-sm-5.col-xs-12.archive(ng-class="loading ? 'div-loading' : 'div-loaded'", style="box-shadow: none !important;")

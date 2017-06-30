@@ -32,13 +32,16 @@ const patientSchema = mongoose.Schema({
     },
     Sex: {
         type: String,
+        enum: ['Male', 'Female'],
         required: true
     },
     MarriedStatus: {
-        type: String
+        type: String,
+        enum: ['Single', 'Married', 'Divorced']
     },
     EmployementStatus: {
-        type: String
+        type: String,
+        enum: ['Working', 'Retired', 'None']
     },
     ContactInfo: {
         Address: {
@@ -47,8 +50,10 @@ const patientSchema = mongoose.Schema({
                 required: true
             },
             Zip: {
-                type: Number
-                    // required: true
+                type: Number,
+                min: [4, 'Not valid ZIP'],
+                max: 6,
+                required: true
             },
             City: {
                 type: String,
@@ -62,6 +67,12 @@ const patientSchema = mongoose.Schema({
         Phone: {
             Home: {
                 type: Number,
+                validate: {
+                    validator: function(v) {
+                        return /\d{10}/.test(v);
+                    },
+                    message: '{VALUE} is not a valid phone number!'
+                },
                 required: true
             },
             Mobile: {
@@ -73,6 +84,18 @@ const patientSchema = mongoose.Schema({
             }
         }
     },
+    allergies: [{
+        name: {
+            type: String
+        },
+        remarks: {
+            type: String
+        },
+        status: {
+            type: String,
+            enum: ['Current', 'Past']
+        }
+    }],
     Inward: {
         bhtNumber: {
             type: String,
@@ -92,8 +115,7 @@ const patientSchema = mongoose.Schema({
         },
         disease: {
             diseaseType: {
-                type: String,
-                required: true
+                type: String
             },
             explanation: {
                 type: String
@@ -114,14 +136,55 @@ const patientSchema = mongoose.Schema({
             },
             disease: {
                 diseaseType: {
-                    type: String,
-                    required: true
+                    type: String
                 },
                 explanation: {
                     type: String
                 }
             },
+            transfer: {
+                transferType: {
+                    type: String
+                },
+                reason: {
+                    type: String
+                },
+                remarks: {
+                    type: String
+                },
+                treatmentSuggested: {
+                    type: String
+                },
+                date: {
+                    type: Date
+                }
+            },
+            discharge: {
+                bool: {
+                    type: String,
+                    enum: ['True', 'False']
+                },
+                remarks: {
+                    type: String
+                },
+                outcomes: {
+                    type: String
+                },
+                referedTo: {
+                    type: String
+                },
+                diagnosis: {
+                    type: String
+                },
+                date: {
+                    type: Date
+                }
+            }
         }]
+    },
+    discharged: {
+        type: String,
+        enum: ['True', 'False']
     },
     ResponsibleParty: {
         Name: {
@@ -142,13 +205,16 @@ const patientSchema = mongoose.Schema({
         },
         Sex: {
             type: String,
+            enum: ['Male', 'Female'],
             required: true
         },
         MarriedStatus: {
-            type: String
+            type: String,
+            enum: ['Single', 'Married', 'Divorced']
         },
         EmployementStatus: {
-            type: String
+            type: String,
+            enum: ['Working', 'Retired', 'None']
         },
         ContactInfo: {
             Address: {
@@ -157,7 +223,10 @@ const patientSchema = mongoose.Schema({
                     required: true
                 },
                 Zip: {
-                    type: Number
+                    type: Number,
+                    min: [4, 'Not valid ZIP'],
+                    max: 6,
+                    required: true
                 },
                 City: {
                     type: String,

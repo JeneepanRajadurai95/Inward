@@ -18,10 +18,13 @@ html
         link(rel='stylesheet', href="../css/loading-bar.css", media="all")
         link(rel='stylesheet', href="bower/v-accordion/dist/v-accordion.css")
         link(rel='stylesheet', href="bower/angular-bootstrap-calendar/dist/css/angular-bootstrap-calendar.min.css")
+        link(rel='stylesheet', href="bower/angular-ui-select/dist/select.css")
+        link(rel='stylesheet', href="bower/angular-growl-v2/build/angular-growl.css")
 
         script(src="bower/angular/angular.min.js")
         script(src="bower/angular-route/angular-route.min.js")
         script(src="bower/angular-animate/angular-animate.js")
+        script(src="bower/angular-sanitize/angular-sanitize.js")
         script(src="bower/AngularSlideables/angularSlideables.js")
         
         link(rel='stylesheet', href="https://fonts.googleapis.com/css?family=Roboto")
@@ -29,6 +32,7 @@ html
         link(rel="stylesheet", href="https://fonts.googleapis.com/icon?family=Material+Icons")      
         
     body(ng-app="inwardApp", ng-controller="AppController")
+        div(growl)
         nav.navbar.navbar-inverse.navbar-fixed-top
             div.container-fluid
                 div.navbar-header
@@ -96,6 +100,8 @@ html
         script(src="bower/progressbar.js/dist/progressbar.js")
         script(src="bower/angular-svg-round-progressbar/build/roundProgress.js")
         script(src="bower/angular-bootstrap-calendar/dist/js/angular-bootstrap-calendar-tpls.min.js")
+        script(src="bower/angular-ui-select/dist/select.js")
+        script(src="bower/angular-growl-v2/build/angular-growl.js")   
 
         script(src="../js/filters/startFrom.filter.js")
         

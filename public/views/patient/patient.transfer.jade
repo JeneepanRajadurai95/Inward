@@ -1,13 +1,13 @@
-.col-md-12.col-sm-12.col-xs-12.margin-bottom--30px.card(name="addTransferForm")
-    div.col-md-12.col-sm-12.col-xs-12(ng-show="partialForm=='addTransferForm'", name="addTransferForm")
-        span.col-md-12.col-sm-12.col-xs-12.text-align--right.padding-top--10px.form-group(ng-click="partialForm='null';clearAll();", name="closeTransferForm")
-            label.btn.btn-default.btn-circle
+.col-md-12.col-sm-12.col-xs-12(name="addTransferForm")
+    div.col-md-12.col-sm-12.col-xs-12(ng-show="partialForm=='addTransferForm'")
+        span.col-md-12.col-sm-12.col-xs-12.text-align--right.margin-bottom--10px(ng-click="partialForm='null';clearAll();", name="closeTransferForm")
+            label.btn.btn-default.btn-circle.close-btn
                 i.fa.fa-times
-        ul.nav.nav-tabs.form-group.col-md-12.col-sm-12.col-xs-12
-            li(ng-class="tabIsSet(1) ? 'activeTab' : 'tab'")
-                span(ng-click="tabSet(1)") Internal Transfer
-            li(ng-class="tabIsSet(2) ? 'activeTab' : 'tab'")
-                span(ng-click="tabSet(2)") External Transfer   
+        ul.nav-tabs.form-group.col-md-12.col-sm-12.col-xs-12(style="list-style: none !important;")
+            li(ng-class="tabIsSet(1) ? 'activeTab' : 'tab'" ng-click="tabSet(1)")
+                span Internal Transfer
+            li(ng-class="tabIsSet(2) ? 'activeTab' : 'tab'" ng-click="tabSet(2)")
+                span External Transfer   
         div.col-md-12.col-sm-12.col-xs-12.no_padding
             form.col-md-12.col-sm-12.col-xs-12.no_padding.padding-top--20px(role="form", ng-submit="iTransferPatient();" ng-show="tabIsSet(1)")
                 h5.col-md-12.col-sm-12.col-xs-12.content-heading 
@@ -16,8 +16,13 @@
                         label.content-label 
                             | Patient ID
                             span.red *
-                        select.form-control.input-sm(ng-model="tpatient.patientID", required)
-                            option(ng-repeat="t in titles") {{t}}
+                        ui-select(ng-model="selected.transfer", ng-required="true", theme="bootstrap" ng-disabled="archiveController")
+                            ui-select-match(placeholder="Patient ID")
+                                span(ng-bind="$select.selected.ID")
+                            ui-select-choices(repeat="item in (rpatients | filter: $select.search) track by item.ID")
+                                span(ng-bind="item.ID")
+                            ui-select-no-choice
+                                | We couldn't find one
                 h5.col-md-12.col-sm-12.col-xs-12.content-heading 
                         | Transfer Ward Selection
                     .form-group.col-md-6.col-sm-12.col-xs-12
@@ -53,7 +58,7 @@
                                     span.input-group-addon
                                         i.glyphicon.glyphicon-calendar
                             ul.dropdown-menu(role="menu" aria-labelledby="dLabel")
-                                datetimepicker(ng-model="tpatient.transferDate", data-datetimepicker-config="{ dropdownSelector: '.dropdown-toggle' }")
+                                datetimepicker(ng-model="tpatient.transferDate", data-datetimepicker-config="{ dropdownSelector: '.dropdown-toggle' }", data-before-render="$parent.pastDateBeforeRender($dates)")
                     .form-group.col-md-8.col-sm-12.col-xs-12
                         label.content-label 
                             | Remarks
@@ -67,8 +72,13 @@
                         label.content-label 
                             | Patient ID
                             span.red *
-                        select.form-control.input-sm(ng-model="tpatient.patientID", required)
-                            option(ng-repeat="t in titles") {{t}}
+                        ui-select(ng-model="selected.transfer", ng-required="true", theme="bootstrap" ng-disabled="archiveController")
+                            ui-select-match(placeholder="Patient ID")
+                                span(ng-bind="$select.selected.ID")
+                            ui-select-choices(repeat="item in (rpatients | filter: $select.search) track by item.ID")
+                                span(ng-bind="item.ID")
+                            ui-select-no-choice
+                                | We couldn't find one
                 h5.col-md-12.col-sm-12.col-xs-12.content-heading 
                         | Transfer
                     .form-group.col-md-6.col-sm-12.col-xs-12
@@ -119,7 +129,7 @@
                                     span.input-group-addon
                                         i.glyphicon.glyphicon-calendar
                             ul.dropdown-menu(role="menu" aria-labelledby="dLabel")
-                                datetimepicker(ng-model="tpatient.transferDate", data-datetimepicker-config="{ dropdownSelector: '.dropdown-toggle' }")
+                                datetimepicker(ng-model="tpatient.transferDate", data-datetimepicker-config="{ dropdownSelector: '.dropdown-toggle' }", data-before-render="$parent.pastDateBeforeRender($dates)")
                     .form-group.col-md-8.col-sm-12.col-xs-12
                         label.content-label 
                             | Remarks

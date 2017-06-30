@@ -210,6 +210,10 @@ a {
     padding-top: 30px !important;
 }
 
+.padding-bottom--5px {
+    padding-bottom: 5px !important;
+}
+
 .padding-bottom--10px {
     padding-bottom: 10px !important;
 }
@@ -228,6 +232,10 @@ a {
 
 .margin-top--10px {
     margin-top: 10px !important;
+}
+
+.margin-top--20px {
+    margin-top: 20px !important;
 }
 
 .margin-bottom--10px {
@@ -644,7 +652,10 @@ span.radio-span {
     font-weight: normal !important;
 }
 
-div[name="addPatientForm"] {
+div[name="addPatientForm"],
+div[name="addTransferForm"],
+div[name="addDischargeForm"],
+div[name="addAllergyForm"] {
     transition: 0.5s ease;
     -webkit-transition: 0.5s ease;
     -moz-transition: 0.5s ease;
@@ -991,4 +1002,52 @@ i.fa.fa-heart.bed.color--green {
 .nav-tabs>li {
     padding: 10px !important;
     cursor: pointer !important;
+}
+
+.datetimepicker {
+    width: 100% !important;
+}
+
+.angucomplete-holder>input,
+.angucomplete-holder {
+    width: 100% !important;
+}
+
+.angucomplete-dropdown {
+    border-color: #ececec;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 2px;
+    width: 100% !important;
+    padding: 6px;
+    cursor: pointer;
+    z-index: 9999;
+    position: absolute;
+    top: 35px;
+    margin-top: -6px;
+    background-color: #ffffff;
+}
+
+.ui-select-bootstrap .ui-select-match-text span {
+    position: relative !important;
+    top: 4px;
+}
+
+.ui-select-bootstrap .ui-select-match-text {
+    position: relative !important;
+    top: -5px;
+}
+
+.ui-select-bootstrap>.ui-select-match>.btn {
+    height: 30px !important;
+}
+
+.close-btn {
+    width: 100% !important;
+    border: none !important;
+    background: rgba(225, 225, 225, 0.5) !important;
+}
+
+.discharged {
+    background-color: #FFCCBC !important;
 }

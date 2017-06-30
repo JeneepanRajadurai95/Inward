@@ -13,18 +13,53 @@ angular.module('patient.controller', []).controller('PatientController', [
 
         $(function() {
 
+            $('button[name="addTransferForm"]').on('click', function() {
+                $('div[name="addDischargeForm"]').removeClass('margin-top--10px margin-bottom--30px card');
+                $('div[name="addAllergyForm"]').removeClass('margin-top--10px margin-bottom--30px card');
+                $('div[name="addPatientForm"]').removeClass('margin-top--10px margin-bottom--30px card');
+
+                $('div[name="addTransferForm"]').addClass('margin-top--10px margin-bottom--30px card');
+            });
+
+            $('span[name="closeTransferForm"]').on('click', function() {
+                $('div[name="addTransferForm"]').removeClass('margin-top--10px margin-bottom--30px card');
+            });
+
+            $('button[name="addDischargeForm"]').on('click', function() {
+                $('div[name="addTransferForm"]').removeClass('margin-top--10px margin-bottom--30px card');
+                $('div[name="addAllergyForm"]').removeClass('margin-top--10px margin-bottom--30px card');
+                $('div[name="addPatientForm"]').removeClass('margin-top--10px margin-bottom--30px card');
+
+                $('div[name="addDischargeForm"]').addClass('margin-top--10px margin-bottom--30px card');
+            });
+
+            $('span[name="closeDischargeForm"]').on('click', function() {
+                $('div[name="addDischargeForm"]').removeClass('margin-top--10px margin-bottom--30px card');
+            });
+
+            $('button[name="addAllergyForm"]').on('click', function() {
+                $('div[name="addTransferForm"]').removeClass('margin-top--10px margin-bottom--30px card');
+                $('div[name="addDischargeForm"]').removeClass('margin-top--10px margin-bottom--30px card');
+                $('div[name="addPatientForm"]').removeClass('margin-top--10px margin-bottom--30px card');
+
+                $('div[name="addAllergyForm"]').addClass('margin-top--10px margin-bottom--30px card');
+            });
+
+            $('span[name="closeAllergyForm"]').on('click', function() {
+                $('div[name="addAllergyForm"]').removeClass('margin-top--10px margin-bottom--30px card');
+            });
+
             $('button[name="addPatientForm"]').on('click', function() {
-                let instance = $(this);
-                $('div[name="addPatientForm"]').addClass('margin-top--10px');
-                $('div[name="addPatientForm"]').addClass('margin-bottom--30px');
-                $('div[name="addPatientForm"]').addClass('card');
+                $('div[name="addTransferForm"]').removeClass('margin-top--10px margin-bottom--30px card');
+                $('div[name="addDischargeForm"]').removeClass('margin-top--10px margin-bottom--30px card');
+                $('div[name="addAllergyForm"]').removeClass('margin-top--10px margin-bottom--30px card');
+
+                $('div[name="addPatientForm"]').addClass('margin-top--10px margin-bottom--30px card');
             });
 
             $('span[name="closePatientForm"]').on('click', function() {
                 let instance = $(this);
-                $('div[name="addPatientForm"]').removeClass('margin-top--10px');
-                $('div[name="addPatientForm"]').removeClass('margin-bottom--30px');
-                $('div[name="addPatientForm"]').removeClass('card');
+                $('div[name="addPatientForm"]').removeClass('margin-top--10px margin-bottom--30px card');
 
                 for (var i = step; i > 0; i--) {
                     let instance = $('.step-content .step-content-foot label[name="prev"]');
@@ -108,6 +143,16 @@ angular.module('patient.controller', []).controller('PatientController', [
             });
         });
 
+        /**
+         * 
+         * Create Patient : cpatient
+         * Detail Patient : dpatient
+         * Discharge Patient : dcpatient
+         * Read Patient : rpatient
+         * Transfer Patient : tpatient
+         * 
+         */
+
         $scope.sortType = 'bht';
         $scope.sortReverse = false;
         $scope.searchPatient = '';
@@ -121,6 +166,8 @@ angular.module('patient.controller', []).controller('PatientController', [
         $scope.cpatient = {};
         $scope.dpatient = {};
         $scope.tpatient = {};
+        $scope.dcpatient = {};
+        $scope.allergy = {};
         $scope.titles = ["Master", "Mr.", "Miss.", "Mrs."];
 
         $scope.diseaseList = ["Dengue", "Maleriya", "Fever", "HIV", "AIDS", "Cancer"]
@@ -128,6 +175,7 @@ angular.module('patient.controller', []).controller('PatientController', [
         $scope.availableBeds = {};
         $scope.availableWards = {};
         $scope.availableBedsDisabled = true;
+        $scope.selected = { transfer: '', discharge: '', allergy: '' };
 
         $scope.tableLoading = true;
 
@@ -159,8 +207,10 @@ angular.module('patient.controller', []).controller('PatientController', [
             PatientService.addPatient(cpatient).then((newPatient) => {
                 $scope.rpatients.push(newPatient);
                 $scope.cpatient = {};
+                $rootScope.growl("success", 'Patient ' + newPatient.ID + ' Added Successfully');
             }, (err) => {
                 console.log(err);
+                $rootScope.growl("error", 'Something went wrong');
             });
         };
 
@@ -171,10 +221,6 @@ angular.module('patient.controller', []).controller('PatientController', [
             }, (err) => {
                 console.error(err);
             });
-        };
-
-        $scope.transferPatient = function() {
-
         };
 
         $scope.numberOfPages = function() {
@@ -188,19 +234,56 @@ angular.module('patient.controller', []).controller('PatientController', [
         $scope.clearAll = function() {
             $scope.cpatient = {};
             $scope.tpatient = {};
+            $scope.selected = { transfer: '', discharge: '', allergy: '' };
+        };
+
+        $scope.iTransferPatient = function() {
+            $scope.tpatient.patientID = $scope.selected.transfer.ID;
+            PatientService.iTransferPatient($scope.tpatient).then(results => {
+                $rootScope.growl("success", 'Patient ' + $scope.tpatient.patientID + ' Transfered Successfully');
+                $scope.clearAll();
+            }, err => {
+                console.log(err);
+                $rootScope.growl("error", 'Something went wrong');
+            });
+        };
+
+        $scope.eTransferPatient = function() {
+            $scope.tpatient.patientID = $scope.selected.transfer.ID;
+            PatientService.eTransferPatient($scope.tpatient).then(results => {
+                $rootScope.growl("success", 'Patient ' + $scope.tpatient.patientID + ' Transfered Successfully');
+                $scope.clearAll();
+            }, err => {
+                console.log(err);
+                $rootScope.growl("error", 'Something went wrong');
+            });
+        };
+
+        $scope.dischargePatient = function() {
+            $scope.dcpatient.patientID = $scope.selected.discharge.ID;
+            PatientService.dischargePatient($scope.dcpatient).then(results => {
+                $rootScope.growl("success", 'Requested for Patient ' + $scope.dcpatient.patientID + ' Discharge');
+                $scope.clearAll();
+            }, (err) => {
+                console.log(err);
+                $rootScope.growl("error", 'Something went wrong');
+            });
+        };
+
+        $scope.addAllergy = function() {
+            $scope.allergy.patientID = $scope.selected.allergy.ID;
+            PatientService.addAllergy($scope.allergy).then(results => {
+                $rootScope.growl("success", 'Allergy added to Patient ' + '');
+            }, err => {
+                console.error(err);
+                $rootScope.growl("error", 'Something went wrong');
+            });
         };
 
         //Tab Functions
-
         $scope.tab = 1;
-
-        $scope.tabSet = function(newTab) {
-            $scope.tab = newTab;
-        };
-
-        $scope.tabIsSet = function(tabNumber) {
-            return ($scope.tab === tabNumber);
-        };
+        $scope.tabSet = function(newTab) { $scope.tab = newTab; };
+        $scope.tabIsSet = function(tabNumber) { return ($scope.tab === tabNumber); };
 
         initializeDocument();
     }
